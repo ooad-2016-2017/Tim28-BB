@@ -15,18 +15,18 @@ Užurbani način života koji danas svi vodimo donosi nam mnogo stresa pri plani
 
 - Korisnik kreira vlastiti račun. Prilikom kreiranja računa potrebno je da unese lične podatke (ime, prezime, datum rođenja), e-mail adresu i password.
 - Korisniku je omogućeno kreiranje vlastitog plana za proizvoljno odabrani dan, ocjena prioriteta tog plana te odluka o tome želi li ga podijeliti sa drugim korisnicima.
-- Korisniku ima mogućnost vođenja privatnog *dnevnika* za svaki dan.
+- Korisniku ima mogućnost vođenja privatnog i/ili javnog *dnevnika* za svaki dan.
 - Korisnik ima mogućnost pretrage drugih ljudi i muzike, te kreiranje vlastite muzičke kolekcije.
-- Korisniku je omogućeno da svaki dan ažurira svoj ** koji će vidjeti i ostali korisnici.
+- Korisniku je omogućeno da svaki dan ažurira svoj *status* koji će vidjeti i ostali korisnici.
 - Omogućena je i interakcije između više korisnika, odnosno svakom orisniku je omogućen detaljan uvid u (javne) planove i (muzičke) kolekcije ljudi od interesa.
-- Korisnik ima mogućnost pretrage drugih korisnika sličnih muzičkih interesa
+- Korisnik ima mogućnost pretrage drugih korisnika sličnih muzičkih interesa.
 - Korisnik ima mogućnost da zakaže *sastanak* sa korisnikom od interesa (nakon uvida u njegov raspored obaveza).
 
 ## Funckionalnosti
 
 - Kreiranje vlastitog računa
 - Kreiranje vlastitog plana obaveza
-- Mogućnost podjele obaveza na obaveze višeg i nižeg prioriteta, te na privatne i jave
+- Mogućnost podjele obaveza na obaveze višeg i nižeg prioriteta, te na privatne i javne
 - Mogućnost vođenja vlastitog (privatnog ili javnog) dnevnika
 - Mogućnost pretrage drugih korisnika
 - Mogućnost praćenja korisnika od interesa (interakcija)
