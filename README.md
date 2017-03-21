@@ -38,5 +38,5 @@ Užurbani način života koji danas svi vodimo donosi nam mnogo stresa pri plani
 
 Korisnik usluga - Osoba koja kreira vlastiti račun i ima mogućnost unosa obaveza, interesovanja, te interakciju sa drugim korisnicima.
 
-Admin - Osoba koja održava bazu podataka, cenzuriše određene sadržaje i ažurira muzičke sadržaje.
+Admin - Osoba koja održava bazu podataka, cenzuriše određene sadržaje i ažurira kolekciju muzike.
 
