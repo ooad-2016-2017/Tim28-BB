@@ -1,0 +1,23 @@
+Analiza dijagrama klasa sistema planB koristeci SOLID principe
+
+1. Princip pojedinacne odgovornosti:
+KLASA BI TREBALA IMATI SAMO JEDAN RAZLOG ZA PROMJENU.
+Komentar: Dizajnirani dijagram klasa poštuje princip pojedinacne odgovornosti. Klase su odvojene i svaka od klasa ima svoje zadatke. Takoder, može se primijetiti da ne postoje klase koje imaju više razlicitih namjena, pri cemu te namjene nemaju zajednickih elemenata. Eventualno kršenje ovog principa bi mogla izazvati kontejnerska klasa SistemPlanB, ali je to klasa koje se bavi iskljucivo pretragom korisnika, tako da ne ovisi o promjenama ostalih objekata.
+
+2. Otvoreno - zatvoren princip:
+ENTITETI SOFTVERA (KLASE, MODULI, FUNKCIJE) TREBALI BI BITI OTVORENI ZA NADOGRADNJU, ALI ZATOVRENI ZA MODIFIKACIJU.
+Komentar: Ono što bi moglo dovesti do kršenja ovog principa, izmedu ostalog, jeste i pojava da se neka operacija (metoda) ponaša razlicito za instance razlicitih klasa, no u kreiranom dijagramu klasa za sistem planB takva opasnost ne prijeti, pa se može reci da je i ovaj princip zadovoljen.
+
+3. Liskov princip zamjene:
+SVAKI PROTOTIP TREBA BITI ZAMJENJIV OSNOVNIM
+Komentar: Dizajnirani dijagram klasa poštuje i Liskov princip zamjene. Primjer nasljedivanja se susrece kod klase Stavka, iz koje se nasljeduju klase Obaveza i klasa DnevnikStavka, pri cemu i Obaveza i DnevnikStavka mogu biti zamijenjeni Stavkom, odnosno i obaveza i stavka dnevnika predstavljaju stavku.
+
+4. Princip inverzije ovisnosti:
+MODULI VISOKOG NIVOA NE BI TREBALI OVISITI OD MODULA NISKOG NIVOA. OBA BI TREBALA DA OVISE OD APSTRAKCIJA.
+MODULI NE BI TREBALI OD DETALJA. DETALJI BI TREBALI BITI OVISNI OD APSTRAKCIJA.
+Komentar: Po jednostavnijoj interpretaciji ovog principa, ne bi trebalo ovisiti od konkretnih klasa, s obzirom da cu te klase podložne pormjenama cešce nego apstraktne klase i interfejsi, te je stoga bolje ovisiti o apstrakcijama nego o stvarnim klasama. Ovaj princip se provjerava pratici strelice na UML dijagramu i provjeravanje da li je cilj strelice interfejs ili jedna apstraktna klasa. U ovom slucaju to nije (cij strelica je konkretna klasa Stavka). Dakle, u kreiranom dijagramu bi bolje rješenje moglo biti definisanje klase Stavka kao apstraktne klase. Sa druge strane, klasa Stavka nema metoda, ne racunajuci getere i setere, tako da se radi o konkretnoj klasi koja se nece mnogo mijenjati, pa je ovisnost i o takvoj klasi donkle sigurna.
+
+5. Princip izoliranja interfejsa:
+KLIJENTI NE TREBA DA OVISE O METODAMA KOJE NECE UPOTREBLJAVATI.
+Komentar: U kreiranom dijagramu, ne postoji nijedan interfejs. Sa druge strane, ne postoje ni "debele" klase sa metodama koje se nece koristiti, kao ni pojave da jedna klasa koristi samo dio funkcionalnosti neke druge klase, umjesto da koristi interfejs koji sadrži te funkcionalnosti, pa je i ovaj princip ispoštovan.
+
