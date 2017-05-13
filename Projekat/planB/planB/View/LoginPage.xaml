@@ -1,0 +1,99 @@
+﻿<Page
+    x:Class="planB.View.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:planB.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style TargetType="TextBox" x:Key="LoginTextBox">
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="BorderBrush" Value="Green"></Setter>
+        </Style>
+        <Style TargetType="TextBox" x:Key="_LoginTextBox">
+            <Setter Property="Width" Value="150"></Setter>
+            <Setter Property="BorderBrush" Value="Green"></Setter>
+        </Style>
+        <FontFamily x:Key="TitleFont">/Assets/Gabriola-Regular.ttf #GABRIOLA</FontFamily>
+    </Page.Resources>
+
+    <RelativePanel>
+        <RelativePanel.Background>
+            <ImageBrush ImageSource="/Assets/BackGround.jpg"></ImageBrush>
+        </RelativePanel.Background>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LoginPanel.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="LoginPanelMobile.Visibility" Value="Visible"></Setter>
+                        <Setter Target="Title.FontSize" Value="25"></Setter>
+                        <Setter Target="firstName.Style" Value="{StaticResource _LoginTextBox}"></Setter>
+                        <Setter Target="lastName.Style" Value="{StaticResource _LoginTextBox}"></Setter>
+                        <Setter Target="birthDate.Width" Value="150"></Setter>
+                        <Setter Target="jmbg.Style" Value="{StaticResource _LoginTextBox}"></Setter>
+                        <Setter Target="email.Style" Value="{StaticResource _LoginTextBox}"></Setter>
+                        <Setter Target="userName.Style" Value="{StaticResource _LoginTextBox}"></Setter>
+                        <Setter Target="password.Style" Value="{StaticResource _LoginTextBox}"></Setter>
+                        <Setter Target="_password.Style" Value="{StaticResource _LoginTextBox}"></Setter>
+                        <Setter Target="PodaciPanel.Margin" Value="0, 0, 0, 0"></Setter>
+                        <Setter Target="TitlePanel.Padding" Value="20, 5, 20, 0"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="600"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="LoginPanel.Visibility" Value="Visible"></Setter>
+                        <Setter Target="LoginPanelMobile.Visibility" Value="Collapsed"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <RelativePanel Name="LoginPanel" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="20, 20, 20, 0" Background="White" Opacity="0.75" Padding="25, 25, 25, 25">
+            <TextBox Name="korisnickoIme" PlaceholderText="Korisničko ime" Style="{StaticResource LoginTextBox}"></TextBox>
+            <PasswordBox Name="lozinka" Width="200"  PlaceholderText="Lozinka" RelativePanel.RightOf="korisnickoIme" Margin="20, 0, 0, 0" BorderBrush="Green"></PasswordBox>
+            <Button Name="LogIn" Width="100" RelativePanel.RightOf="lozinka" Margin="20, 0, 0, 0" Height="30" Content="Prijavite se" Background="Green" Foreground="White"></Button>
+            <HyperlinkButton Name="Register" RelativePanel.AlignRightWithPanel="True" Foreground="Green" Content="Kreirajte novi račun" Click="ShowRegisterPanel"></HyperlinkButton>
+        </RelativePanel>
+
+        <RelativePanel Name="LoginPanelMobile" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Background="White" Opacity="0.75" Padding="25, 25, 25, 25">
+            <StackPanel Orientation="Vertical">
+                <TextBox Name="_korisnickoIme" PlaceholderText="Korisničko ime" Style="{StaticResource LoginTextBox}"></TextBox>
+                <PasswordBox Name="_lozinka" Width="200"  PlaceholderText="Lozinka" Margin="0, 20, 0, 0" BorderBrush="Green"></PasswordBox>
+                <Button Name="_LogIn" Width="100" Margin="0, 20, 0, 0" Height="30" Content="Prijavite se" Background="Green" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
+                <HyperlinkButton Name="_Register" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green" Content="Kreirajte novi račun" Click="ShowRegisterPanel"></HyperlinkButton>
+            </StackPanel>
+        </RelativePanel>
+
+        <StackPanel Name="RegisterPanel" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Visibility="Collapsed">
+            <StackPanel Name="TitlePanel" Background="White" Opacity="0.85" Padding="50, 25, 50, 5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Name="Title" Text="Kreirajte novi račun." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource TitleFont}" Foreground="Green" FontSize="40"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Name="PodaciPanel" Orientation="Horizontal" Margin="0, 20, 0, 0">
+                <StackPanel Background="White" Opacity="0.85" Padding="20, 20, 20, 20">
+                    <TextBox Name="firstName" PlaceholderText="Ime" Style="{StaticResource LoginTextBox}" ></TextBox>
+                    <TextBox Name="lastName" PlaceholderText="Prezime" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}"></TextBox>
+                    <CalendarDatePicker Name="birthDate" PlaceholderText="Datum rodenja: " Margin="0,10,0,0" BorderBrush="Green" Width="200"></CalendarDatePicker>
+                    <TextBox Name="jmbg" Margin="0, 10, 0, 0" Style="{StaticResource LoginTextBox}" PlaceholderText="Maticni broj"></TextBox>
+                </StackPanel>
+                <StackPanel Background="White" Opacity="0.85" Padding="20, 20, 20, 20" Margin="10, 0, 0, 0">
+                    <TextBox Name="email" PlaceholderText="Email" Style="{StaticResource LoginTextBox}" ></TextBox>
+                    <TextBox Name ="userName" PlaceholderText="Korisnicko ime" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}"></TextBox>
+                    <TextBox Name="password" PlaceholderText="Lozinka" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}"></TextBox>
+                    <TextBox Name="_password" Margin="0, 10, 0, 0" Style="{StaticResource LoginTextBox}" PlaceholderText="Potvrdi lozinku"></TextBox>
+                </StackPanel>
+            </StackPanel>
+
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Registrujte se" Foreground="White" Background="Green" Width="200" Margin="0, 10, 0, 0"></Button>
+        </StackPanel>
+    </RelativePanel>
+</Page>

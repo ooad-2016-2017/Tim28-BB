@@ -5,4 +5,13 @@
     xmlns:local="using:planB"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <Style TargetType="Button" x:Name="ButtonStyle">
+            <Setter Property="Foreground" Value="Green"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0"/>
+        </Style>
+    </Application.Resources>
+
 </Application>

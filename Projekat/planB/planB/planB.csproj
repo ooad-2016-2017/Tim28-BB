@@ -89,6 +89,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\BackGround.jpg" />
+    <Content Include="Assets\Fonts\Handlee-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -98,18 +102,28 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\StavkaDnevnika.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\FrameForm.xaml.cs">
-      <DependentUpon>FrameForm.xaml</DependentUpon>
+    <Compile Include="View\DnevnikKorisnickaKontrola.xaml.cs">
+      <DependentUpon>DnevnikKorisnickaKontrola.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProfilPage.xaml.cs">
+      <DependentUpon>ProfilPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\KorisnickaKontrola1.xaml.cs">
       <DependentUpon>KorisnickaKontrola1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\NovostiForm.xaml.cs">
-      <DependentUpon>NovostiForm.xaml</DependentUpon>
+    <Compile Include="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PostavkeForm.xaml.cs">
-      <DependentUpon>PostavkeForm.xaml</DependentUpon>
+    <Compile Include="View\NovostiPage.xaml.cs">
+      <DependentUpon>NovostiPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PostavkePage.xaml.cs">
+      <DependentUpon>PostavkePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PregledProfilaKorisnikaPage.xaml.cs">
+      <DependentUpon>PregledProfilaKorisnikaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PrikazPjesmeForm.xaml.cs">
       <DependentUpon>PrikazPjesmeForm.xaml</DependentUpon>
@@ -117,8 +131,8 @@
     <Compile Include="View\ProfilForma.xaml.cs">
       <DependentUpon>ProfilForma.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UnosObavezeForm.xaml.cs">
-      <DependentUpon>UnosObavezeForm.xaml</DependentUpon>
+    <Compile Include="View\ObavezaPage.xaml.cs">
+      <DependentUpon>ObavezaPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +168,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\FrameForm.xaml">
+    <Page Include="View\DnevnikKorisnickaKontrola.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProfilPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,11 +180,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\NovostiForm.xaml">
+    <Page Include="View\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PostavkeForm.xaml">
+    <Page Include="View\NovostiPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PostavkePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PregledProfilaKorisnikaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,7 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\UnosObavezeForm.xaml">
+    <Page Include="View\ObavezaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,123 @@
+﻿<UserControl
+    x:Class="planB.View.DnevnikKorisnickaKontrola"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:planB.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:data="using:planB.Models"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="EL_Dnevnik" x:DataType="data:StavkaDnevnika">
+            <TextBlock Text="{x:Bind DatumToString}"></TextBlock>
+        </DataTemplate>
+        <FontFamily x:Key="MyCustomFont">Assets/Fonts/Handlee-Regular.ttf#Handlee</FontFamily>
+    </UserControl.Resources>
+
+    <Grid>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="tekstDnevnika.FontSize" Value="10"></Setter>
+                        <Setter Target="UnosDnevnikaTextBox.Margin" Value="10,10,10,10"></Setter>
+                        <Setter Target="UnosDnevnika.Margin" Value="0, 10, 0, 0"></Setter>
+                        <Setter Target="RadioButtonPrivate.Margin" Value="10, 0, 0, 0"></Setter>
+                        <Setter Target="RadioButtonPublic.Margin" Value="0, 0, 0, 0"></Setter>
+                        <Setter Target="AddButton.Margin" Value="0, 5, 0, 5"></Setter>
+                        <Setter Target="AddButton.Width" Value="100"></Setter>
+                        <Setter Target="AddButton.Height" Value="25"></Setter>
+                        <Setter Target="AddButton.FontSize" Value="10"></Setter>
+                        <Setter Target="RadioButtonPrivate.FontSize" Value="13"></Setter>
+                        <Setter Target="RadioButtonPublic.FontSize" Value="13"></Setter>
+                        <Setter Target="Date.FontSize" Value="13"></Setter>
+                        <Setter Target="Title.FontSize" Value="13"></Setter>
+                        <Setter Target="DateAndTitle.Orientation" Value="Horizontal"></Setter>
+                        <Setter Target="Title.Margin" Value="10, 0, 0, 0"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="600"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="tekstDnevnika.FontSize" Value="15"></Setter>
+                        <Setter Target="UnosDnevnikaTextBox.Margin" Value="40,40,40,40"></Setter>
+                        <Setter Target="UnosDnevnika.Margin" Value="0, 70, 0, 0"></Setter>
+                        <Setter Target="RadioButtonPrivate.Margin" Value="30, 0, 0, 0"></Setter>
+                        <Setter Target="RadioButtonPublic.Margin" Value="30, 0, 0, 0"></Setter>
+                        <Setter Target="AddButton.Margin" Value="0, 20, 0, 0"></Setter>
+                        <Setter Target="AddButton.Width" Value="170"></Setter>
+                        <Setter Target="AddButton.Height" Value="35"></Setter>
+                        <Setter Target="RadioButtonPrivate.FontSize" Value="18"></Setter>
+                        <Setter Target="RadioButtonPublic.FontSize" Value="18"></Setter>
+                        <Setter Target="Date.FontSize" Value="20"></Setter>
+                        <Setter Target="Title.FontSize" Value="29"></Setter>
+                        <Setter Target="DateAndTitle.Orientation" Value="Vertical"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="White" Opacity="1" Margin="20, 20, 20, 20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Button Content="Dodaj" HorizontalAlignment="Stretch" Height="35" Background="Green" Foreground="White" ></Button>
+            <ListView Margin="10, 10, 10, 10" ItemTemplate="{StaticResource EL_Dnevnik}"></ListView>
+        </StackPanel>
+        <Grid Grid.Column="1" Margin="20, 20, 20, 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="PregledDnevnika" Grid.Column="1" Grid.Row="0" Margin="0, 20, 0, 0" Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Name="DateAndTitle" Grid.Row="1" Grid.Column="1">
+                    <TextBlock Name="Date" Text="13.5.2017." FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee"></TextBlock>
+                    <TextBlock Name="Title" Text="Plan B" FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee"></TextBlock>
+                </StackPanel>
+                <ScrollViewer Grid.Row="2" Grid.Column="1">
+                    <TextBlock FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee" Name="tekstDnevnika" Width="Auto" Text="Užurbani način života koji danas svi vodimo donosi nam mnogo stresa pri planiranju svakodnevnih obaveza i slobodnog vremena. Problemi se javljaju o prilikom dogovaranja sastanaka sa prijateljima i nalaženja pogodnog termina. Sistem planB omogućava unošenje vlastitih obaveza u kalendar i interakciju sa drugim korisnicima ovog sistema. Prilikom unosa obaveze se mogu postaviti kao javne, koje su vidljive svim pratiocima datog korisnika, ili privatne. Pratioci mogu željeni termin koji je slobodan i poslati zahtjev korisniku za ugovaranje sastanka, koji može biti prihvaćen, odgođen ili odbijen. Osim dodavanja obaveza za određeni dan, korisniku je omogućeno i vođenje privatnog ili javnog dnevnika - bloga, te dijeljenje omiljene muzike. Dakle, osnovni ciljevi ovog sistema su interakcija među ljudima, lakše usklađivanje obaveza sa drugima i spajanje ljudi istih (u ovom slučaju, muzičkih) interesa. " TextWrapping="Wrap" />
+                </ScrollViewer>
+            </Grid>
+            <Grid  Name="UnosDnevnika" Grid.Row="0" Grid.Column="1" Background="White" Opacity="0.7" Margin="0,70, 0, 0" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="1.5*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox Name="UnosDnevnikaTextBox" TextWrapping="Wrap" BorderBrush="Green" Margin="40, 40, 40, 40" PlaceholderText="Unesite tekst..."></TextBox>
+                <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton Name="RadioButtonPrivate" Content="Privatni" Margin="30, 0, 0, 0"></RadioButton>
+                        <RadioButton Name="RadioButtonPublic" Content="Javni" Margin="30, 0, 0, 0"></RadioButton>
+                    </StackPanel>
+                    <Button Name="AddButton" Content="Dodaj" Width="170" HorizontalAlignment="Center" Margin="0, 20, 0, 0" Foreground="White" Background="Green" ></Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

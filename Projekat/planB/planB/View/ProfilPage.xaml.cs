@@ -25,6 +25,7 @@ namespace planB.View
         public FrameForm()
         {
             this.InitializeComponent();
+          
         }
     }
 }
