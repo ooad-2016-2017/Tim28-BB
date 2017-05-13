@@ -1,0 +1,114 @@
+﻿<Page
+    x:Class="planB.View.FrameForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:planB.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="VisualStatePhone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" MinWindowHeight="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Kalendar.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="KalendarPicker.Visibility" Value="Visible"></Setter>
+                        <Setter Target="unesiButton.FontSize" Value="12"></Setter>
+                        <Setter Target="dnevnikButton.FontSize" Value="12"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateTablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1000" MinWindowHeight="550"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="KalendarPicker.Visibility" Value="Collapsed"></Setter>
+                        <Setter Target="Kalendar.Visibility" Value="Visible"></Setter>
+                        <Setter Target="unesiButton.FontSize" Value="20"></Setter>
+                        <Setter Target="dnevnikButton.FontSize" Value="20"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="/Assets/pozadina.jpeg"/>
+        </Grid.Background>
+        <Grid Grid.Column="0">
+            <local:KorisnickaKontrola1></local:KorisnickaKontrola1>
+        </Grid>
+        <Grid Grid.Column="1" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <RelativePanel Grid.Row="0">
+                <Button Content="Pratim" Name="PratimButton" Margin="10" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
+                <Button Name="postavkeButton" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                    <Image Source="/Assets/sett2.png" Height="30" Width="30"></Image>
+                </Button>
+                <Button Content="Pratioci"  Name="PratiociButton" Margin="10" RelativePanel.RightOf="PratimButton" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
+                <TextBlock   Margin="10,10,10,10" Text="Ime Prezime" IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton" HorizontalAlignment="Left" Width="120" ></TextBlock>
+            </RelativePanel>
+            <Grid Grid.Row="1" Margin="0,10,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Source="/Assets/search.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,2,0"></Image>
+                <TextBox Grid.Column="1" Text="Pretraga..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green"></TextBox>
+            </Grid>
+            <TextBox Grid.Row ="2" Text="Ažuriraj status..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green" />
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <RelativePanel Grid.Column="0" Margin="10">
+                    <CalendarView Name="Kalendar" BorderBrush="Green" Margin="10,10,10,5"/>
+                    <CalendarDatePicker Name="KalendarPicker" RelativePanel.Below="Kalendar" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10"></CalendarDatePicker>
+                    <Grid RelativePanel.Below="KalendarPicker">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Name="dnevnikButton" Width="130" Foreground="White" Background="Green" Opacity="0.9" Content="Dnevnik" FontFamily="Calibri" FontSize="20" Margin="10,10,5,10" ></Button>
+                        <Button Grid.Column="1" Name="unesiButton" Content="Unesite obavezu" Foreground="White" VerticalAlignment="Stretch" Margin="5,10,10,10" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20"></Button>
+                    </Grid>
+                </RelativePanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical" Background="WhiteSmoke" Opacity="0.75" Margin="10">
+                    <TextBlock Margin="10" Text="Obaveze:" IsTextSelectionEnabled="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold"></TextBlock>
+                    <ListView Margin="10" Grid.Row="1" Name="lbxObaveze" Height="300" BorderBrush="Green" BorderThickness="0.0001" FontFamily="Calibri" FontSize="15" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <ListBoxItem Content="zsddkjjlskd.a"/>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                        <ListBoxItem Content="zsddkjjlskd.a"></ListBoxItem>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

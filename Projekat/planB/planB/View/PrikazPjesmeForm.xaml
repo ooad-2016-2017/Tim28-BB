@@ -1,0 +1,45 @@
+﻿<Page
+    x:Class="planB.View.PrikazPjesmeForm"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:planB.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="VisualStatePhone">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" MinWindowHeight="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="nazivPjesme.FontSize" Value="12"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="VisualStateTablet">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="750" MinWindowHeight="550"/>
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="nazivPjesme.FontSize" Value="20"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="/Assets/album.png" Margin="10"></Image>
+        <RelativePanel Grid.Column="1" Background="WhiteSmoke" Opacity="0.75">
+            <TextBlock Name="nazivPjesme" Text="Muzičar - Naziv pjesme" Margin="10" Foreground="Green" FontFamily="Segoe Print" FontSize="20" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" FontWeight="Bold"/>
+            <Button Name="playButton" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Image Source="/Assets/play3.png" Margin="10" Height="100" Width="100"></Image>
+            </Button>
+            <Button Name="dodajButton" Content="Dodaj u kolekciju" Background="Green" Foreground="White" FontFamily="Calibri" FontSize="20" RelativePanel.AlignBottomWithPanel="True" RelativePanel.Below="playButton" RelativePanel.AlignHorizontalCenterWithPanel="True"></Button>
+        </RelativePanel>
+    </Grid>
+</Page>
