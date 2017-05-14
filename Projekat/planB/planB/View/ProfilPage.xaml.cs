@@ -20,12 +20,26 @@ namespace planB.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class FrameForm : Page
+    public sealed partial class ProfilPage : Page
     {
-        public FrameForm()
+        public ProfilPage()
         {
             this.InitializeComponent();
-          
+            myFrame.Navigate(typeof(PregledObaveza));
+        }
+
+        private void PrikaziDnevnik(object sender, RoutedEventArgs e)
+        {
+            DnevnikUserControl.Visibility = Visibility.Visible;
+            KolekcijaUserControl.Visibility = Visibility.Collapsed;
+            myFrame.Visibility = Visibility.Collapsed;
+        }
+
+        private void PrikaziMuzickuKolekciju(object sender, RoutedEventArgs e)
+        {
+            KolekcijaUserControl.Visibility = Visibility.Visible;
+            DnevnikUserControl.Visibility = Visibility.Collapsed;
+            myFrame.Visibility = Visibility.Collapsed;
         }
     }
 }

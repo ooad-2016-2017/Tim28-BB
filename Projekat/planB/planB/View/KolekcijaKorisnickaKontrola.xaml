@@ -42,7 +42,13 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackPanel Name="Kolekcije" Background="White" Opacity="0.75" Padding="15, 15, 15, 15" Margin="50, 40, 50, 0">
+        <StackPanel Name="Kolekcije" Opacity="0.75" Padding="15, 15, 15, 15" Margin="50, 40, 50, 0">
+            <StackPanel.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="White" Offset="0.75"></GradientStop>
+                    <GradientStop Color="Green" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </StackPanel.Background>
             <ListView ScrollViewer.VerticalScrollBarVisibility="Disabled" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollMode="Enabled" ScrollViewer.VerticalScrollMode="Disabled" ItemsSource="{Binding kolekcija}" ItemTemplate="{StaticResource EL_MuzickaKolekcija}">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -51,7 +57,13 @@
                 </ListView.ItemsPanel>
             </ListView>
         </StackPanel>
-        <StackPanel Name="Pjesme" Background="White" Grid.Row="1" Opacity="0.75" Padding="15, 15, 15, 15" Margin="50, 50, 50, 30">
+        <StackPanel Name="Pjesme"  Grid.Row="1" Opacity="0.75" Padding="15, 15, 15, 15" Margin="50, 50, 50, 30">
+            <StackPanel.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="White" Offset="0.75"></GradientStop>
+                    <GradientStop Color="Green" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </StackPanel.Background>
             <ListView Name="searchResults" Margin="10,10,10,10" BorderBrush="Green" ItemsSource="{Binding pjesme}" ItemTemplate="{StaticResource EL_Pjesme}" ></ListView>
         </StackPanel>
     </Grid>

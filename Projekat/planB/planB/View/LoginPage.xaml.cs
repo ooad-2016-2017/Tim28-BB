@@ -26,5 +26,10 @@ namespace planB.View
         {
             this.InitializeComponent();
         }
+
+        private void ShowRegisterPanel(object sender, RoutedEventArgs e)
+        {
+            RegisterPanel.Visibility = Visibility.Visible;
+        }
     }
 }

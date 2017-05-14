@@ -130,8 +130,8 @@
     <Compile Include="View\PrikazPjesmeForm.xaml.cs">
       <DependentUpon>PrikazPjesmeForm.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ProfilForma.xaml.cs">
-      <DependentUpon>ProfilForma.xaml</DependentUpon>
+    <Compile Include="View\PregledObaveza.xaml.cs">
+      <DependentUpon>PregledObaveza.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ObavezaPage.xaml.cs">
       <DependentUpon>ObavezaPage.xaml</DependentUpon>
@@ -204,7 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ProfilForma.xaml">
+    <Page Include="View\PregledObaveza.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

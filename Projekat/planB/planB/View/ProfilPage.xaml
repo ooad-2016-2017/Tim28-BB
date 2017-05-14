@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="planB.View.FrameForm"
+    x:Class="planB.View.ProfilPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:planB.View"
@@ -47,7 +47,13 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/Assets/pozadina.jpeg"/>
         </Grid.Background>
-        <Grid Grid.Column="0" Margin="10" Background="WhiteSmoke" Opacity="0.75" >
+        <Grid Grid.Column="0" Margin="10" Opacity="0.75" >
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="White" Offset="0.8"></GradientStop>
+                    <GradientStop Color="Green" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </Grid.Background>
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
@@ -68,13 +74,13 @@
                 </Grid>
             </Button>
             <Button Grid.Row="2" Content="Novosti" Name="NovostiButton" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20" Foreground="White"></Button>
-            <Button Grid.Row="3" Name="KolekcijaButton"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
+            <Button Grid.Row="3" Name="KolekcijaButton" Click="PrikaziMuzickuKolekciju"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Moja muzička kolekcija" FontFamily="Calibri" FontSize="20"></TextBlock>
                     <Image Source="/Assets/note1.png" Height="20" Margin="3,0,0,0"></Image>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="4" Content="Dnevnik" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
+            <Button Grid.Row="4" Content="Dnevnik" Click="PrikaziDnevnik" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
         </Grid>
         <Grid Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>
@@ -98,8 +104,11 @@
                 <Image Grid.Column="0" Source="/Assets/search.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,2,0"></Image>
                 <TextBox Grid.Column="1" Text="Pretraga..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green"></TextBox>
             </Grid>
-            <Grid Name="DnevnikUserControl" Grid.Row="2" Visibility="Collapsed">
+            <Grid Name="DnevnikUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
                 <local:DnevnikKorisnickaKontrola></local:DnevnikKorisnickaKontrola>
+            </Grid>
+            <Grid Name="KolekcijaUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
+                <local:KolekcijaKorisnickaKontrola></local:KolekcijaKorisnickaKontrola>
             </Grid>
             <Frame Grid.Row="2" Name="myFrame" Margin="20, 10, 20, 20"></Frame>
         </Grid>

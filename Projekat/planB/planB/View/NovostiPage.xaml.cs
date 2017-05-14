@@ -20,9 +20,9 @@ namespace planB.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NovostiForm : Page
+    public sealed partial class NovostiPage : Page
     {
-        public NovostiForm()
+        public NovostiPage()
         {
             this.InitializeComponent();
         }
