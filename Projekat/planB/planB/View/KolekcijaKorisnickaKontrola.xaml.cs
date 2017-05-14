@@ -17,12 +17,11 @@ using Windows.UI.Xaml.Navigation;
 
 namespace planB.View
 {
-    public sealed partial class KorisnickaKontrola1 : UserControl
+    public sealed partial class KolekcijaKorisnickaKontrola : UserControl
     {
-        public KorisnickaKontrola1()
+        public KolekcijaKorisnickaKontrola()
         {
             this.InitializeComponent();
-            
         }
     }
 }

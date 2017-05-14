@@ -15,16 +15,27 @@
                         <AdaptiveTrigger MinWindowWidth="0" MinWindowHeight="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-
+                        <Setter Target="ProfilButton.FontSize" Value="12"></Setter>
+                        <Setter Target="DnevnikButton.FontSize" Value="12"></Setter>
+                        <Setter Target="KolekcijaButton.FontSize" Value="12"></Setter>
+                        <Setter Target="NovostiButton.FontSize" Value="12"></Setter>
+                        <Setter Target="PratimButton.FontSize" Value="12"></Setter>
+                        <Setter Target="PratiociButton.FontSize" Value="12"></Setter>
+                        <Setter Target="imeTbx.FontSize" Value="12"></Setter>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="VisualStateTablet">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000" MinWindowHeight="550"/>
+                        <AdaptiveTrigger MinWindowWidth="800" MinWindowHeight="550"/>
                     </VisualState.StateTriggers>
-
                     <VisualState.Setters>
-                       
+                        <Setter Target="ProfilButton.FontSize" Value="20"></Setter>
+                        <Setter Target="DnevnikButton.FontSize" Value="20"></Setter>
+                        <Setter Target="KolekcijaButton.FontSize" Value="20"></Setter>
+                        <Setter Target="NovostiButton.FontSize" Value="20"></Setter>
+                        <Setter Target="PratimButton.FontSize" Value="20"></Setter>
+                        <Setter Target="PratiociButton.FontSize" Value="20"></Setter>
+                        <Setter Target="imeTbx.FontSize" Value="20"></Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -36,8 +47,34 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="/Assets/pozadina.jpeg"/>
         </Grid.Background>
-        <Grid Grid.Column="0">
-            <local:KorisnickaKontrola1></local:KorisnickaKontrola1>
+        <Grid Grid.Column="0" Margin="10" Background="WhiteSmoke" Opacity="0.75" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="/Assets/user.jpg" Margin="7"></Image>
+            <Button Grid.Row="1" HorizontalAlignment="Stretch" Margin="40,0,40,0" Name="ProfilButton" Foreground="White" Background="Green" Opacity="0.9">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="5*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Source="/Assets/userMale.png" Height="20" Margin="0,0,3,0"></Image>
+                    <TextBlock Grid.Column="1" Text="Profil" FontFamily="Calibri" FontSize="20"></TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Row="2" Content="Novosti" Name="NovostiButton" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20" Foreground="White"></Button>
+            <Button Grid.Row="3" Name="KolekcijaButton"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Moja muzička kolekcija" FontFamily="Calibri" FontSize="20"></TextBlock>
+                    <Image Source="/Assets/note1.png" Height="20" Margin="3,0,0,0"></Image>
+                </StackPanel>
+            </Button>
+            <Button Grid.Row="4" Content="Dnevnik" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
         </Grid>
         <Grid Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>
@@ -45,13 +82,13 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="9*"></RowDefinition>
             </Grid.RowDefinitions>
-            <RelativePanel Grid.Row="0">
+            <RelativePanel Grid.Row="0" Background="WhiteSmoke" Opacity="0.75" Margin="10">
                 <Button Content="Pratim" Name="PratimButton" Margin="10" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
-                <Button Name="postavkeButton" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Button Name="postavkeButton" Margin="0,0,5,0" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
                     <Image Source="/Assets/sett2.png" Height="30" Width="30"></Image>
                 </Button>
                 <Button Content="Pratioci"  Name="PratiociButton" Margin="10" RelativePanel.RightOf="PratimButton" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
-                <TextBlock   Margin="10,10,10,10" Text="Ime Prezime" IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton" HorizontalAlignment="Left" Width="120" ></TextBlock>
+                <TextBlock Name="imeTbx" Margin="10,10,10,10" Text="Ime Prezime" IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton"></TextBlock>
             </RelativePanel>
             <Grid Grid.Row="1" Margin="0,10,10,10">
                 <Grid.ColumnDefinitions>

@@ -102,16 +102,18 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\MuzickaKolekcija.cs" />
+    <Compile Include="Models\Pjesma.cs" />
     <Compile Include="Models\StavkaDnevnika.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\DnevnikKorisnickaKontrola.xaml.cs">
       <DependentUpon>DnevnikKorisnickaKontrola.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\KolekcijaKorisnickaKontrola.xaml.cs">
+      <DependentUpon>KolekcijaKorisnickaKontrola.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ProfilPage.xaml.cs">
       <DependentUpon>ProfilPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\KorisnickaKontrola1.xaml.cs">
-      <DependentUpon>KorisnickaKontrola1.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -143,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\album.png" />
+    <Content Include="Assets\MuzickiFolder.png" />
     <Content Include="Assets\note1.png" />
     <Content Include="Assets\play3.png" />
     <Content Include="Assets\pozadina.jpeg" />
@@ -150,6 +153,7 @@
     <Content Include="Assets\search.png" />
     <Content Include="Assets\sett2.png" />
     <Content Include="Assets\user.jpg" />
+    <Content Include="Assets\userMale.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -172,11 +176,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ProfilPage.xaml">
+    <Page Include="View\KolekcijaKorisnickaKontrola.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\KorisnickaKontrola1.xaml">
+    <Page Include="View\ProfilPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
