@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace planB.Models
 {
-    public class StavkaDnevnika : Stavka, INotifyPropertyChanged
+    public class Obaveza : Stavka, INotifyPropertyChanged
     {
-        String naslov;
+        int prioritet;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public StavkaDnevnika() : base() { }
+        public Obaveza() : base() { }
 
-        public StavkaDnevnika(DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, String _naslov) :
+        public Obaveza(DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int _prioritet) :
             base(_datum, _sadrzaj, _vidljivost)
         {
-            naslov = _naslov;
+            prioritet = _prioritet;
         }
-
 
         private void NotifyPropertyChanged(String info)
         {
@@ -30,13 +29,13 @@ namespace planB.Models
             }
         }
 
-        public String Naslov
+        public int Prioritet
         {
-            get { return naslov; }
+            get { return prioritet; }
             set
             {
-                naslov = value;
-                NotifyPropertyChanged(nameof(Naslov));
+                prioritet = value;
+                NotifyPropertyChanged(nameof(Prioritet));
             }
         }
     }
