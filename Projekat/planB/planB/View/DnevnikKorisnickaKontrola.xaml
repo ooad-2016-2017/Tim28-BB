@@ -12,7 +12,7 @@
 
     <UserControl.Resources>
         <DataTemplate x:Key="EL_Dnevnik" x:DataType="data:StavkaDnevnika">
-            <TextBlock Text="{x:Bind DatumToString}"></TextBlock>
+            <TextBlock Text="hehe"></TextBlock>
         </DataTemplate>
         <FontFamily x:Key="MyCustomFont">Assets/Fonts/Handlee-Regular.ttf#Handlee</FontFamily>
     </UserControl.Resources>

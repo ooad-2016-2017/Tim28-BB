@@ -5,6 +5,7 @@
     xmlns:local="using:planB.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodel="using:planB.ViewModel"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -17,6 +18,7 @@
             <Setter Property="BorderBrush" Value="Green"></Setter>
         </Style>
         <FontFamily x:Key="TitleFont">/Assets/Gabriola-Regular.ttf #GABRIOLA</FontFamily>
+        
     </Page.Resources>
 
     <RelativePanel>
@@ -64,9 +66,9 @@
                     <GradientStop Color="Green" Offset="1"></GradientStop>
                 </LinearGradientBrush>
             </RelativePanel.Background>
-            <TextBox Name="korisnickoIme" PlaceholderText="Korisničko ime" Style="{StaticResource LoginTextBox}"></TextBox>
-            <PasswordBox Name="lozinka" Width="200"  PlaceholderText="Lozinka" RelativePanel.RightOf="korisnickoIme" Margin="20, 0, 0, 0" BorderBrush="Green"></PasswordBox>
-            <Button Name="LogIn" Width="100" RelativePanel.RightOf="lozinka" Margin="20, 0, 0, 0" Height="30" Content="Prijavite se" Background="Green" Foreground="White"></Button>
+            <TextBox Name="korisnickoIme" PlaceholderText="Korisničko ime" Style="{StaticResource LoginTextBox}" Text="{Binding KorisnickoIme, Mode=TwoWay}"></TextBox>
+            <PasswordBox Name="lozinka" Width="200" PlaceholderText="Lozinka" RelativePanel.RightOf="korisnickoIme" Margin="20, 0, 0, 0" BorderBrush="Green" Password="{Binding Lozinka, Mode=TwoWay}" ></PasswordBox>
+            <Button Name="LogIn" Width="100" RelativePanel.RightOf="lozinka" Margin="20, 0, 0, 0" Height="30" Content="Prijavite se" Background="Green" Foreground="White" Command="{Binding Path=LoginKorisnika, Mode=TwoWay}"></Button>
             <HyperlinkButton Name="Register" RelativePanel.AlignRightWithPanel="True" Foreground="Green" Content="Kreirajte novi račun" Click="ShowRegisterPanel"></HyperlinkButton>
         </RelativePanel>
 
@@ -78,19 +80,19 @@
                 </LinearGradientBrush>
             </RelativePanel.Background>
             <StackPanel Orientation="Vertical">
-                <TextBox Name="_korisnickoIme" PlaceholderText="Korisničko ime" Style="{StaticResource LoginTextBox}"></TextBox>
-                <PasswordBox Name="_lozinka" Width="200"  PlaceholderText="Lozinka" Margin="0, 20, 0, 0" BorderBrush="Green"></PasswordBox>
+                <TextBox Name="_korisnickoIme" PlaceholderText="Korisničko ime" Style="{StaticResource LoginTextBox}" Text="{Binding KorisnickoIme, Mode=TwoWay}"></TextBox>
+                <PasswordBox Name="_lozinka" Width="200"  PlaceholderText="Lozinka" Margin="0, 20, 0, 0" BorderBrush="Green" Password="{Binding Lozinka, Mode=TwoWay}"></PasswordBox>
                 <Button Name="_LogIn" Width="100" Margin="0, 20, 0, 0" Height="30" Content="Prijavite se" Background="Green" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"></Button>
                 <HyperlinkButton Name="_Register" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Green" Content="Kreirajte novi račun" Click="ShowRegisterPanel"></HyperlinkButton>
             </StackPanel>
         </RelativePanel>
 
-        <StackPanel Name="RegisterPanel" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Visibility="Collapsed">
+        <StackPanel Name="RegisterPanel" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Visibility="{Binding PodaciPanelVisibility, Mode=TwoWay}">
             <StackPanel Name="TitlePanel" Opacity="0.85" Padding="50, 25, 50, 5" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Name="Title" Text="Kreirajte novi račun." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource TitleFont}" Foreground="Green" FontSize="40"></TextBlock>
             </StackPanel>
 
-            <StackPanel Name="PodaciPanel" Orientation="Horizontal" Margin="0, 20, 0, 0">
+            <StackPanel Name="PodaciPanel" Orientation="Horizontal" Margin="0, 20, 0, 0" >
                 <StackPanel  Opacity="0.85" Padding="20, 20, 20, 20">
                     <StackPanel.Background>
                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
@@ -98,9 +100,9 @@
                             <GradientStop Color="Green" Offset="1"></GradientStop>
                         </LinearGradientBrush>
                     </StackPanel.Background>
-                    <TextBox Name="firstName" PlaceholderText="Ime" Style="{StaticResource LoginTextBox}" ></TextBox>
-                    <TextBox Name="lastName" PlaceholderText="Prezime" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}"></TextBox>
-                    <CalendarDatePicker Name="birthDate" PlaceholderText="Datum rodenja: " Margin="0,10,0,0" BorderBrush="Green" Width="200"></CalendarDatePicker>
+                    <TextBox Name="firstName" PlaceholderText="Ime" Style="{StaticResource LoginTextBox}" Text="{Binding rIme, Mode=TwoWay}" ></TextBox>
+                    <TextBox Name="lastName" PlaceholderText="Prezime" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}" Text="{Binding rPrezime, Mode=TwoWay}"></TextBox>
+                    <CalendarDatePicker Name="birthDate" PlaceholderText="Datum rodenja: " Margin="0,10,0,0" BorderBrush="Green" Width="200" Date="{Binding rDatumRodjenjaOffset, Mode=TwoWay}"></CalendarDatePicker>
                     <TextBox Name="jmbg" Margin="0, 10, 0, 0" Style="{StaticResource LoginTextBox}" PlaceholderText="Maticni broj"></TextBox>
                 </StackPanel>
                 <StackPanel Opacity="0.85" Padding="20, 20, 20, 20" Margin="10, 0, 0, 0">
@@ -110,14 +112,23 @@
                             <GradientStop Color="Green" Offset="1"></GradientStop>
                         </LinearGradientBrush>
                     </StackPanel.Background>
-                    <TextBox Name="email" PlaceholderText="Email" Style="{StaticResource LoginTextBox}" ></TextBox>
-                    <TextBox Name ="userName" PlaceholderText="Korisnicko ime" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}"></TextBox>
-                    <TextBox Name="password" PlaceholderText="Lozinka" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}"></TextBox>
-                    <TextBox Name="_password" Margin="0, 10, 0, 0" Style="{StaticResource LoginTextBox}" PlaceholderText="Potvrdi lozinku"></TextBox>
+                    <TextBox Name="email" PlaceholderText="Email" Style="{StaticResource LoginTextBox}" Text="{Binding rEmail, Mode=TwoWay}"></TextBox>
+                    <TextBox Name ="userName" PlaceholderText="Korisnicko ime" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}" Text="{Binding rKorisnickoIme, Mode=TwoWay}"></TextBox>
+                    <TextBox Name="password" PlaceholderText="Lozinka" Margin="0, 10,0,0" Style="{StaticResource LoginTextBox}" Text="{Binding rLozinka, Mode=TwoWay}"></TextBox>
+                    <TextBox Name="_password" Margin="0, 10, 0, 0" Style="{StaticResource LoginTextBox}" PlaceholderText="Potvrdi lozinku" Text="{Binding rLozinkaPotvrda, Mode=TwoWay}"></TextBox>
                 </StackPanel>
             </StackPanel>
-
-            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Registrujte se" Foreground="White" Background="Green" Width="200" Margin="0, 10, 0, 0"></Button>
+            <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Registrujte se" Foreground="White" Background="Green" Width="200" Margin="0, 10, 0, 0" Command="{Binding Path=RegistracijaKorisnika}"></Button>
+        </StackPanel>
+        <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Name="VerifikacijaPanel" Visibility="{Binding VerifikacijaPanelVisiblity}" Opacity="0.85">
+        <StackPanel.Background>
+            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                <GradientStop Color="White" Offset="0.75"></GradientStop>
+                <GradientStop Color="Green" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </StackPanel.Background>
+            <TextBox Style="{StaticResource LoginTextBox}" PlaceholderText="Verifikacijski kod" Text="{Binding rVerifikacijskiKod, Mode=TwoWay}"></TextBox>
+            <Button Content="Potvrdi" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 10, 0, 0" Background="Green" Opacity="0.85" Foreground="White" Command="{Binding Path=KrajRegistracije}"></Button>
         </StackPanel>
     </RelativePanel>
 </Page>

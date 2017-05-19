@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,8 @@ namespace planB.Models
 {
     public class Pjesma : INotifyPropertyChanged
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        int id;
         String izvodjac;
         String naziv;
 
@@ -16,10 +19,11 @@ namespace planB.Models
 
         public Pjesma() { }
         
-        public Pjesma (String _izvodjac, String _naziv)
+        public Pjesma (int _id, String _izvodjac, String _naziv)
         {
             izvodjac = _izvodjac;
             naziv = _naziv;
+            id = _id;
         }
 
         private void NotifyPropertyChanged(String info)
@@ -28,6 +32,17 @@ namespace planB.Models
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
+        }
+        
+        public int ID
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                NotifyPropertyChanged(nameof(ID));
+            }
+
         }
 
         public String Izvodjac

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using planB.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,11 +26,19 @@ namespace planB.View
         public LoginPage()
         {
             this.InitializeComponent();
+            //DataContext = new LoginViewModel();
         }
 
         private void ShowRegisterPanel(object sender, RoutedEventArgs e)
         {
             RegisterPanel.Visibility = Visibility.Visible;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //base.OnNavigatedTo(e);
+
+            DataContext = new LoginViewModel();
         }
     }
 }

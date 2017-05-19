@@ -11,12 +11,12 @@ namespace planB.Models
     {
         String naslov;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler _PropertyChanged;
 
         public StavkaDnevnika() : base() { }
 
-        public StavkaDnevnika(DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, String _naslov) :
-            base(_datum, _sadrzaj, _vidljivost)
+        public StavkaDnevnika(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, String _naslov) :
+            base(_id, _datum, _sadrzaj, _vidljivost)
         {
             naslov = _naslov;
         }
@@ -24,11 +24,12 @@ namespace planB.Models
 
         private void NotifyPropertyChanged(String info)
         {
-            if (PropertyChanged != null)
+            if (_PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
+                _PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
+
 
         public String Naslov
         {

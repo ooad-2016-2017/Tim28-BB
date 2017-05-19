@@ -11,21 +11,21 @@ namespace planB.Models
     {
         int prioritet;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler _PropertyChanged;
 
         public Obaveza() : base() { }
 
-        public Obaveza(DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int _prioritet) :
-            base(_datum, _sadrzaj, _vidljivost)
+        public Obaveza(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int _prioritet) :
+            base(_id, _datum, _sadrzaj, _vidljivost)
         {
             prioritet = _prioritet;
         }
 
         private void NotifyPropertyChanged(String info)
         {
-            if (PropertyChanged != null)
+            if (_PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(info));
+                _PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
         }
 
