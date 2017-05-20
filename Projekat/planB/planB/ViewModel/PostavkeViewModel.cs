@@ -17,11 +17,11 @@ namespace planB.ViewModel
         String prezimeTbx { get; set; }
         String staraLozinka { get; set; }
         String novaLozinka { get; set; }
-        public ICommand PromjenaDatuma { get; set; }
+        //public ICommand PromjenaDatuma { get; set; }
         public ICommand PotvrdiButton { get; set; }
         DateTime datum;
 
-        Korisnik korisnik;
+        Korisnik korisnik { get; set; }
 
         public PostavkeViewModel()
         {
@@ -31,7 +31,7 @@ namespace planB.ViewModel
             staraLozinka = korisnik.Lozinka;
             novaLozinka = "";
             datum = korisnik.DatumRodjenja;
-            PromjenaDatuma = new RelayCommand<object>(promjenaDatuma);
+            //PromjenaDatuma = new RelayCommand<object>(promjenaDatuma);
             PotvrdiButton = new RelayCommand<object>(potvrdiButton);
         }
         
@@ -55,10 +55,6 @@ namespace planB.ViewModel
             }
 
         }
-
-        private void promjenaDatuma(object obj)
-        {
-            //datum = new DateTime((obj as DatePicker).Date);
-        }
+        
     }
 }

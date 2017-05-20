@@ -11,9 +11,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace planB.ViewModel
 {
-    class ObavezaViewModel : INotifyPropertyChanged
+    class ObavezaViewModel //: INotifyPropertyChanged
     {
-        public MessageDialog Poruka { get; set; }
+        /*public MessageDialog Poruka { get; set; }
         public String TextObaveze { get; set; }
         public ICommand SpremiButton { get; set; }
         public String sliderVrijednost { get; set; }
@@ -92,6 +92,6 @@ namespace planB.ViewModel
                     await Poruka.ShowAsync();
                 }
             }
-        }
+        }*/
     }
 }
