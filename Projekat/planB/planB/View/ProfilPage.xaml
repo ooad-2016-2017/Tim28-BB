@@ -63,7 +63,7 @@
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
             <Image Grid.Row="0" Source="/Assets/user.jpg" Margin="7"></Image>
-            <Button Grid.Row="1" HorizontalAlignment="Stretch" Margin="40,0,40,0" Name="ProfilButton" Foreground="White" Background="Green" Opacity="0.9">
+            <Button Grid.Row="1" Click="PrikaziProfil" HorizontalAlignment="Stretch" Margin="40,0,40,0" Name="ProfilButton" Foreground="White" Background="Green" Opacity="0.9">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -73,7 +73,7 @@
                     <TextBlock Grid.Column="1" Text="Profil" FontFamily="Calibri" FontSize="20"></TextBlock>
                 </Grid>
             </Button>
-            <Button Grid.Row="2" Content="Novosti" Name="NovostiButton" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20" Foreground="White"></Button>
+            <Button Grid.Row="2" Click="PrikaziNovosti" Content="Novosti" Name="NovostiButton" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20" Foreground="White"></Button>
             <Button Grid.Row="3" Name="KolekcijaButton" Click="PrikaziMuzickuKolekciju"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Moja muzička kolekcija" FontFamily="Calibri" FontSize="20"></TextBlock>
@@ -86,15 +86,15 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="9*"></RowDefinition>
+                <RowDefinition Height="7*"></RowDefinition>
             </Grid.RowDefinitions>
             <RelativePanel Grid.Row="0" Background="WhiteSmoke" Opacity="0.75" Margin="10">
                 <Button Content="Pratim" Name="PratimButton" Margin="10" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
-                <Button Name="postavkeButton" Margin="0,0,5,0" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+                <Button Name="postavkeButton" Click="PrikaziPostavke" Margin="0,0,5,0" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
                     <Image Source="/Assets/sett2.png" Height="30" Width="30"></Image>
                 </Button>
                 <Button Content="Pratioci"  Name="PratiociButton" Margin="10" RelativePanel.RightOf="PratimButton" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
-                <TextBlock Name="imeTbx" Margin="10,10,10,10" Text="Ime Prezime" IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton"></TextBlock>
+                <TextBlock Name="imeTbx" Text="{Binding Naziv, Mode=TwoWay, FallbackValue=Ime Prezime}" Margin="10,10,10,10"  IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton"></TextBlock>
             </RelativePanel>
             <Grid Grid.Row="1" Margin="0,10,10,10">
                 <Grid.ColumnDefinitions>
@@ -102,10 +102,10 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Source="/Assets/search.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,2,0"></Image>
-                <TextBox Grid.Column="1" Text="Pretraga..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green"></TextBox>
+                <TextBox Grid.Column="1" Text="{Binding Pretraga, Mode=TwoWay}" PlaceholderText="Pretraga..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green"></TextBox>
             </Grid>
             <Grid Name="DnevnikUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
-                <local:DnevnikKorisnickaKontrola></local:DnevnikKorisnickaKontrola>
+                <local:DnevnikKorisnickaKontrola Visibility="{Binding DnevnikVisibility, Mode=TwoWay}"></local:DnevnikKorisnickaKontrola>
             </Grid>
             <Grid Name="KolekcijaUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
                 <local:KolekcijaKorisnickaKontrola></local:KolekcijaKorisnickaKontrola>

@@ -8,23 +8,29 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel Orientation="Horizontal">
-           <TextBlock Text="Datum: " Margin="10,10,0,10" Foreground="Green" FontFamily="Calibri" FontSize="20"></TextBlock>
-            <TextBlock Text="13.05.2017" Margin="10,10,0,10" Foreground="Green" FontFamily="Calibri" FontSize="20" FontStyle="Italic"></TextBlock>
-        </StackPanel>
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBox Margin="10,10,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Green" Opacity="0.75">
-                <TextBox.Background>
-                    <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
-                        <GradientStop Color="White" Offset="0.75"></GradientStop>
-                        <GradientStop Color="Green" Offset="1"></GradientStop>
-                    </LinearGradientBrush>
-                </TextBox.Background>
-            </TextBox>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="11*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Row="0">
+                    <TextBlock Text="Datum: " Margin="10,10,0,10" Foreground="Green" FontFamily="Calibri" FontSize="20"></TextBlock>
+                    <TextBlock Text="{Binding DatumText, Mode=TwoWay, FallbackValue=13.05.2017.}"  Margin="10,10,0,10" Foreground="Green" FontFamily="Calibri" FontSize="20" FontStyle="Italic"></TextBlock>
+                </StackPanel>
+                <TextBox Margin="10,10,10,10" Grid.Row="1" Text="{Binding TextObaveze, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Green" Opacity="0.75">
+                    <TextBox.Background>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                            <GradientStop Color="White" Offset="0.75"></GradientStop>
+                            <GradientStop Color="Green" Offset="1"></GradientStop>
+                        </LinearGradientBrush>
+                    </TextBox.Background>
+                </TextBox>
+            </Grid>
             <Grid Grid.Column="1" Opacity="0.75" Margin="10,10,10,10">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
@@ -39,8 +45,8 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="0" Orientation="Vertical" Margin="10" Background="WhiteSmoke" Opacity="0.75" BorderBrush="Green" BorderThickness="1">
                     <TextBlock Text="Vidljivost:" Margin="10" FontFamily="Calibri" FontSize="20" Foreground="Green"></TextBlock>
-                    <RadioButton Name="radioPrivatno" Margin="10" Content="Privatno" Foreground="Green" FontSize="20"></RadioButton>
-                    <RadioButton Name="radioJavno" Margin="10" Content="Javno" Foreground="Green" FontSize="20"></RadioButton>
+                    <RadioButton Name="radioPrivatno" IsChecked="{Binding privatnoChecked, Mode=TwoWay}" Tag="Privatno" Margin="10" Content="Privatno" Foreground="Green" FontSize="20"></RadioButton>
+                    <RadioButton Name="radioJavno"  IsChecked="{Binding javnoChecked, Mode=TwoWay}" Tag="Javno" Margin="10" Content="Javno" Foreground="Green" FontSize="20"></RadioButton>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10" Opacity="0.75" BorderBrush="Green" BorderThickness="1">
                     <StackPanel.Background>
@@ -50,9 +56,17 @@
                         </LinearGradientBrush>
                     </StackPanel.Background>
                    <TextBlock Text="Prioritet:" Margin="10" FontFamily="Calibri" FontSize="20" Foreground="Green"></TextBlock>
-                    <Slider Maximum="10" Foreground="Green" Margin="10,0,10,0"></Slider>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="8*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="{Binding sliderVrijednost, FallbackValue=0}" Name="sliderValue" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="20"/>
+                        <Slider Grid.Column="1" Name="slider" Maximum = "10" ValueChanged="sider_ValueChanged" VerticalAlignment="Top" Foreground="Green" Margin="0,0,10,0" HorizontalAlignment="Right" Width="150"></Slider>
+                    </Grid>
+                    
                 </StackPanel>
-                <Button Grid.Row="2" Background="Green" Foreground="White" HorizontalAlignment="Stretch" Margin="10">
+                <Button Grid.Row="2" Background="Green" Command="{Binding Path=SpremiButton}" Foreground="White" HorizontalAlignment="Stretch" Margin="10">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Spremi" Margin="5"></TextBlock>
                         <Image Height="20" Width="20" Source="/Assets/save4.png" Margin="5"></Image>

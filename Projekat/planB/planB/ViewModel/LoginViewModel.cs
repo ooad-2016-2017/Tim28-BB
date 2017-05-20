@@ -1,5 +1,6 @@
 ﻿using EASendMailRT;
 using planB.Models;
+using planB.View;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -10,6 +11,7 @@ using System.Windows.Input;
 using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace planB.ViewModel
 {
@@ -38,6 +40,7 @@ namespace planB.ViewModel
         public String rVerifikacijskiKod { get; set; }
         public ICommand RegistracijaKorisnika { get; set; }
         public ICommand KrajRegistracije { get; set; }
+        public static Korisnik korisnik { get; set; }
 
         private Visibility _podaciVis;
         public Visibility PodaciPanelVisibility
@@ -91,12 +94,17 @@ namespace planB.ViewModel
         {
             using (var DB = new PlanBDbContext())
             {
-                Korisnik korisnik = DB.Korisnici.Where(x => (x.KorisnickoIme == KorisnickoIme && x.Lozinka == Lozinka)).FirstOrDefault();
+                korisnik = DB.Korisnici.Where(x => (x.KorisnickoIme == KorisnickoIme && x.Lozinka == Lozinka)).FirstOrDefault();
                 if (korisnik == null)
                 {
                     Poruka = new MessageDialog("Ne postoji korisnik sa unesenim korisničkim imenom i lozinkom.");
                     await Poruka.ShowAsync();
                    
+                }
+
+                else
+                {
+                    ((Frame)Window.Current.Content).Navigate(typeof(ProfilPage));
                 }
 
             }

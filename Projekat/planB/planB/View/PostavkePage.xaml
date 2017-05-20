@@ -30,7 +30,7 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Ime:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Grid.Column="0" FontFamily="Calibri" FontSize="20" Foreground="Green"></TextBlock>
-                        <TextBox Name="imeTbx" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
+                        <TextBox Name="imeTbx" Text="{Binding imeTbx}" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -38,7 +38,7 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Prezime:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Grid.Column="0" FontFamily="Calibri" FontSize="20" Foreground="Green"></TextBlock>
-                        <TextBox Name="prezimeTbx" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
+                        <TextBox Name="prezimeTbx" Text="{Binding prezimeTbx}" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Ime:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Grid.Column="0" FontFamily="Calibri" FontSize="20" Foreground="Green"></TextBlock>
-                        <DatePicker Name="datePicker" BorderBrush="Green" VerticalAlignment="Center" Grid.Column="1" Margin="10"></DatePicker>
+                        <DatePicker Name="datePicker" BorderBrush="Green" DateChanged="{Binding Path=PromjenaDatuma, Mode=TwoWay}" VerticalAlignment="Center" Grid.Column="1" Margin="10"></DatePicker>
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="5" Background="WhiteSmoke" BorderBrush="Green" BorderThickness="1,1,1,1" Opacity="0.75">
@@ -57,7 +57,7 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Stara lozinka:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Grid.Column="0" FontFamily="Calibri" FontSize="20" Foreground="Green"></TextBlock>
-                        <TextBox Name="staraLozinka" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
+                        <TextBox Name="staraLozinka"  Text="{Binding staraLozinka}" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
                     </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -65,10 +65,10 @@
                             <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Nova lozinka:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10" Grid.Column="0" FontFamily="Calibri" FontSize="20" Foreground="Green"></TextBlock>
-                        <TextBox Name="novaLozinka" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
+                        <TextBox Name="novaLozinka" Text="{Binding novaLozinka}" VerticalAlignment="Center" Grid.Column="1" Margin="10"></TextBox>
                     </Grid>
-                    <Button Content="Potvrdi" Name="potvrdiButton" Background="Green" Foreground="White" HorizontalAlignment="Right" Margin="10"></Button>
                </StackPanel>
+                <Button Content="Potvrdi" Command="{Binding Path=PotvrdiButton, Mode=TwoWay}" Name="potvrdiButton" Background="Green" Foreground="White" HorizontalAlignment="Right" Margin="10"></Button>
             </StackPanel>
         </Grid>
         </Grid>

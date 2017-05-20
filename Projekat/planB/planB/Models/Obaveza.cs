@@ -21,6 +21,11 @@ namespace planB.Models
             prioritet = _prioritet;
         }
 
+        public override string ToString()
+        {
+            return Sadrzaj;
+        }
+
         private void NotifyPropertyChanged(String info)
         {
             if (_PropertyChanged != null)

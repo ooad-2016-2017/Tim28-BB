@@ -78,8 +78,8 @@
                     <GradientStop Color="Green" Offset="1"></GradientStop>
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <Button Content="Dodaj" HorizontalAlignment="Stretch" Height="35" Background="Green" Foreground="White" ></Button>
-            <ListView Margin="10, 10, 10, 10" ItemTemplate="{StaticResource EL_Dnevnik}"></ListView>
+            <Button Content="Dodaj" HorizontalAlignment="Stretch" Height="35" Background="Green" Foreground="White" Command="{Binding Path=DodajDnevnik, Mode=TwoWay}"></Button>
+            <ListView Margin="0,10,10,10" ItemTemplate="{StaticResource EL_Dnevnik}" SelectedIndex="{Binding Path=PromjenaIndexa, Mode=TwoWay}" ItemsSource="{Binding lbxDnevnik, Mode=TwoWay}" HorizontalAlignment="Right" Width="73"></ListView>
         </StackPanel>
         <Grid Grid.Column="1" Margin="20, 20, 20, 20">
             <Grid.ColumnDefinitions>
@@ -91,7 +91,7 @@
                 <RowDefinition Height="9*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Visibility="Visible" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="PregledDnevnika" Grid.Column="1" Grid.Row="0" Margin="0, 20, 0, 0">
+            <Grid Visibility="{Binding PregledVisibility, Mode=TwoWay, FallbackValue=Visible}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Name="PregledDnevnika" Grid.Column="1" Grid.Row="0" Margin="0, 20, 0, 0">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                         <GradientStop Color="White" Offset="0.75"></GradientStop>
@@ -109,14 +109,14 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <StackPanel Name="DateAndTitle" Grid.Row="1" Grid.Column="1">
-                    <TextBlock Name="Date" Text="13.5.2017." FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee"></TextBlock>
+                    <TextBlock Name="Date" Text="{Binding DatumText}" FontSize="20" FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee"></TextBlock>
                     <TextBlock Name="Title" Text="Plan B" FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee"></TextBlock>
                 </StackPanel>
                 <ScrollViewer Grid.Row="2" Grid.Column="1">
-                    <TextBlock FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee" Name="tekstDnevnika" Width="Auto" Text="Užurbani način života koji danas svi vodimo donosi nam mnogo stresa pri planiranju svakodnevnih obaveza i slobodnog vremena. Problemi se javljaju o prilikom dogovaranja sastanaka sa prijateljima i nalaženja pogodnog termina. Sistem planB omogućava unošenje vlastitih obaveza u kalendar i interakciju sa drugim korisnicima ovog sistema. Prilikom unosa obaveze se mogu postaviti kao javne, koje su vidljive svim pratiocima datog korisnika, ili privatne. Pratioci mogu željeni termin koji je slobodan i poslati zahtjev korisniku za ugovaranje sastanka, koji može biti prihvaćen, odgođen ili odbijen. Osim dodavanja obaveza za određeni dan, korisniku je omogućeno i vođenje privatnog ili javnog dnevnika - bloga, te dijeljenje omiljene muzike. Dakle, osnovni ciljevi ovog sistema su interakcija među ljudima, lakše usklađivanje obaveza sa drugima i spajanje ljudi istih (u ovom slučaju, muzičkih) interesa. " TextWrapping="Wrap" />
+                    <TextBlock FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee" Name="tekstDnevnika" Width="Auto" Text="{Binding TextDnevnika}" VerticalAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
                 </ScrollViewer>
             </Grid>
-            <Grid  Name="UnosDnevnika" Grid.Row="0" Grid.Column="1" Opacity="0.7" Margin="0,70, 0, 0" Visibility="Collapsed">
+            <Grid  Name="UnosDnevnika" Visibility="{Binding UnosVisibility, Mode=TwoWay, FallbackValue=Collapsed}" Grid.Row="0" Grid.Column="1" Opacity="0.7" Margin="0,70, 0, 0">
                 <Grid.Background>
                     <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                         <GradientStop Color="White" Offset="0.75"></GradientStop>

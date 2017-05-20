@@ -1,4 +1,5 @@
-﻿using System;
+﻿using planB.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,5 +27,19 @@ namespace planB.View
         {
             this.InitializeComponent();
         }
+
+
+        private void sider_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            sliderValue.Text =  slider.Value.ToString();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //base.OnNavigatedTo(e);
+
+            DataContext = new ObavezaViewModel();
+        }
     }
+    
 }

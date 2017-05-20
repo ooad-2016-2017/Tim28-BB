@@ -1,4 +1,6 @@
-﻿using System;
+﻿using planB.ViewModel;
+using planB.View;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +24,31 @@ namespace planB.View
     /// </summary>
     public sealed partial class PregledObaveza : Page
     {
+
+        //public Visibility DnevnikVisibility;
+
         public PregledObaveza()
         {
             this.InitializeComponent();
+            
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //base.OnNavigatedTo(e);
+
+            DataContext = new PregledObavezaViewModel();
+        }
+
+        private void dnevnikButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProfilPage.frame.Visibility = Visibility.Collapsed;
+        }
+
+        private void obavezaButton_Click(object sender, RoutedEventArgs e)
+        {
+            ProfilPage.frame.Navigate(typeof(ObavezaPage));
+        }
+
     }
 }

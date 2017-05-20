@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace planB.Models
 {
-    public enum Vidljivost { Privatno = 1, Javno = 2}
+    public enum Vidljivost { Privatno = 1, Javno = 2, Nista}
     public abstract class Stavka : INotifyPropertyChanged
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -69,7 +69,7 @@ namespace planB.Models
 
         public Vidljivost Vidljivost
         {
-            get { return Vidljivost; }
+            get { return vidljivost; }
             set
             {
                 vidljivost = value;

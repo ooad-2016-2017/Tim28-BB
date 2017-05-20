@@ -33,6 +33,7 @@ namespace planB.View
         {
             RegisterPanel.Visibility = Visibility.Visible;
         }
+        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

@@ -21,6 +21,11 @@ namespace planB.Models
             naslov = _naslov;
         }
 
+        public override string ToString()
+        {
+            return Sadrzaj;
+        }
+
 
         private void NotifyPropertyChanged(String info)
         {

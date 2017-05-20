@@ -68,7 +68,7 @@
             </RelativePanel.Background>
             <TextBox Name="korisnickoIme" PlaceholderText="Korisničko ime" Style="{StaticResource LoginTextBox}" Text="{Binding KorisnickoIme, Mode=TwoWay}"></TextBox>
             <PasswordBox Name="lozinka" Width="200" PlaceholderText="Lozinka" RelativePanel.RightOf="korisnickoIme" Margin="20, 0, 0, 0" BorderBrush="Green" Password="{Binding Lozinka, Mode=TwoWay}" ></PasswordBox>
-            <Button Name="LogIn" Width="100" RelativePanel.RightOf="lozinka" Margin="20, 0, 0, 0" Height="30" Content="Prijavite se" Background="Green" Foreground="White" Command="{Binding Path=LoginKorisnika, Mode=TwoWay}"></Button>
+            <Button Name="LogIn"  Width="100" RelativePanel.RightOf="lozinka" Margin="20, 0, 0, 0" Height="30" Content="Prijavite se" Background="Green" Foreground="White" Command="{Binding Path=LoginKorisnika, Mode=TwoWay}"></Button>
             <HyperlinkButton Name="Register" RelativePanel.AlignRightWithPanel="True" Foreground="Green" Content="Kreirajte novi račun" Click="ShowRegisterPanel"></HyperlinkButton>
         </RelativePanel>
 

@@ -49,15 +49,15 @@
                 </Grid.ColumnDefinitions>
                 
                 <RelativePanel Grid.Column="0" Margin="10">
-                    <CalendarView Name="Kalendar" BorderBrush="Green" Margin="10,10,10,5"/>
+                    <CalendarView Name="Kalendar"  BorderBrush="Green" Margin="10,10,10,5"/>
                     <CalendarDatePicker Name="KalendarPicker" RelativePanel.Below="Kalendar" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10"></CalendarDatePicker>
                     <Grid RelativePanel.Below="KalendarPicker">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Name="dnevnikButton" Width="130" Foreground="White" Background="Green" Opacity="0.9" Content="Dnevnik" FontFamily="Calibri" FontSize="20" Margin="10,10,5,10" ></Button>
-                        <Button Grid.Column="1" Name="unesiButton" Content="Unos obaveze" Foreground="White" VerticalAlignment="Stretch" Margin="5,10,10,10" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20"></Button>
+                        <Button Grid.Column="0" Name="dnevnikButton" Click="dnevnikButton_Click" Command="{Binding Path=DnevnikButtonClick, Mode=TwoWay}" Width="130" Foreground="White" Background="Green" Opacity="0.9" Content="Dnevnik" FontFamily="Calibri" FontSize="20" Margin="10,10,5,10" ></Button>
+                        <Button Grid.Column="1" Name="unesiButton" Click="obavezaButton_Click" Content="Unos obaveze" Foreground="White" VerticalAlignment="Stretch" Margin="5,10,10,10" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20"></Button>
                     </Grid>
                 </RelativePanel>
                 <StackPanel Grid.Column="1" Orientation="Vertical" Opacity="0.75" Margin="10">
@@ -68,14 +68,7 @@
                         </LinearGradientBrush>
                     </StackPanel.Background>
                     <TextBlock Margin="10" Text="Obaveze:" IsTextSelectionEnabled="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold"></TextBlock>
-                    <ListView Margin="10" Grid.Row="1" Name="lbxObaveze" Height="300" BorderBrush="Green" BorderThickness="0.0001" FontFamily="Calibri" FontSize="15" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                        <ListBoxItem Content="Obaveza 1"/>
-                        <ListBoxItem Content="Obaveza 2"></ListBoxItem>
-                        <ListBoxItem Content="Obaveza 3"></ListBoxItem>
-                        <ListBoxItem Content="Obaveza 4"></ListBoxItem>
-                        <ListBoxItem Content="Obaveza 5"></ListBoxItem>
-                        <ListBoxItem Content="Obaveza 6"></ListBoxItem>
-                        <ListBoxItem Content="Obaveza 7"></ListBoxItem>
+                    <ListView Margin="10" Grid.Row="1" Name="lbxObaveze" ItemsSource="{Binding lbxItems}"  Height="300" BorderBrush="Green" BorderThickness="0.0001" FontFamily="Calibri" FontSize="15" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     </ListView>
                 </StackPanel>
             </Grid>
