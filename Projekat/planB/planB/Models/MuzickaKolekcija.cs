@@ -14,6 +14,7 @@ namespace planB.Models
         int id;
         String naziv;
         List<Pjesma> pjesme;
+        int korisnikID;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -64,6 +65,16 @@ namespace planB.Models
             {
                 pjesme = value;
                 NotifyPropertyChanged(nameof(Pjesme));
+            }
+        }
+
+        public int KorisnikID
+        {
+            get { return korisnikID; }
+            set
+            {
+                korisnikID = value;
+                NotifyPropertyChanged(nameof(KorisnikID));
             }
         }
     }

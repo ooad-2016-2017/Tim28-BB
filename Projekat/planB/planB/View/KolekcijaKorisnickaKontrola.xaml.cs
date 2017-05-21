@@ -1,4 +1,5 @@
-﻿using System;
+﻿using planB.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,9 +20,19 @@ namespace planB.View
 {
     public sealed partial class KolekcijaKorisnickaKontrola : UserControl
     {
+        private MuzickaKolekcijaViewModel muzickaKolekcijaViewModel;
         public KolekcijaKorisnickaKontrola()
         {
             this.InitializeComponent();
+            muzickaKolekcijaViewModel = new MuzickaKolekcijaViewModel();
+            DataContext = this;
         }
+
+        private void Search_Artist(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            
+        }
+
+        
     }
-}
+}       

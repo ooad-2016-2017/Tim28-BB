@@ -14,6 +14,9 @@ namespace planB.Models
         int id;
         String izvodjac;
         String naziv;
+        String preview;
+        String urlSlike;
+        int muzickaKolekcijaID;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -62,6 +65,32 @@ namespace planB.Models
             {
                 naziv = value;
                 NotifyPropertyChanged(nameof(Naziv));
+            }
+        }
+
+        public String Preview
+        {
+            get { return preview; }
+            set
+            {
+                preview = value;
+                NotifyPropertyChanged(nameof(Preview));
+            }
+        }
+
+        public String UrlSlike
+        {
+            get { return urlSlike; }
+            set { urlSlike = value; }
+        }
+
+        public int MuzickaKolekcijaID
+        {
+            get { return muzickaKolekcijaID; }
+            set
+            {
+                muzickaKolekcijaID = value;
+                NotifyPropertyChanged(nameof(MuzickaKolekcijaID));
             }
         }
     }

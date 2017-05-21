@@ -34,15 +34,15 @@ namespace planB.View
 
         private void PrikaziDnevnik(object sender, RoutedEventArgs e)
         {
-            DnevnikUserControl.Visibility = Visibility.Visible;
+            /*DnevnikUserControl.Visibility = Visibility.Visible;
             KolekcijaUserControl.Visibility = Visibility.Collapsed;
-            myFrame.Visibility = Visibility.Collapsed;
+            myFrame.Visibility = Visibility.Collapsed;*/
         }
 
         private void PrikaziProfil(object sender, RoutedEventArgs e)
         {
             DnevnikUserControl.Visibility = Visibility.Collapsed;
-            KolekcijaUserControl.Visibility = Visibility.Collapsed;
+            //KolekcijaUserControl.Visibility = Visibility.Collapsed;
             myFrame.Visibility = Visibility.Visible;
             myFrame.Navigate(typeof(PregledObaveza));
         }
@@ -50,7 +50,7 @@ namespace planB.View
         private void PrikaziPostavke(object sender, RoutedEventArgs e)
         {
             DnevnikUserControl.Visibility = Visibility.Collapsed;
-            KolekcijaUserControl.Visibility = Visibility.Collapsed;
+            //KolekcijaUserControl.Visibility = Visibility.Collapsed;
             myFrame.Visibility = Visibility.Visible;
             myFrame.Navigate(typeof(PostavkePage));
         }
@@ -58,16 +58,17 @@ namespace planB.View
         private void PrikaziNovosti(object sender, RoutedEventArgs e)
         {
             DnevnikUserControl.Visibility = Visibility.Collapsed;
-            KolekcijaUserControl.Visibility = Visibility.Collapsed;
+            //KolekcijaUserControl.Visibility = Visibility.Collapsed;
             myFrame.Visibility = Visibility.Visible;
             myFrame.Navigate(typeof(NovostiPage));
         }
 
         private void PrikaziMuzickuKolekciju(object sender, RoutedEventArgs e)
         {
-            KolekcijaUserControl.Visibility = Visibility.Visible;
-            DnevnikUserControl.Visibility = Visibility.Collapsed;
-            myFrame.Visibility = Visibility.Collapsed;
+            //KolekcijaUserControl.Visibility = Visibility.Visible;
+            //DnevnikUserControl.Visibility = Visibility.Collapsed;
+            //myFrame.Visibility = Visibility.Collapsed;
+            //myFrame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel());
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

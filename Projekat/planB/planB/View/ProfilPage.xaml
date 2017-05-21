@@ -74,7 +74,7 @@
                 </Grid>
             </Button>
             <Button Grid.Row="2" Click="PrikaziNovosti" Content="Novosti" Name="NovostiButton" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20" Foreground="White"></Button>
-            <Button Grid.Row="3" Name="KolekcijaButton" Click="PrikaziMuzickuKolekciju"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
+            <Button Grid.Row="3" Name="KolekcijaButton" Command="{Binding Path=PrikaziMuzickuKolekciju}" Click="PrikaziMuzickuKolekciju"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Moja muzička kolekcija" FontFamily="Calibri" FontSize="20"></TextBlock>
                     <Image Source="/Assets/note1.png" Height="20" Margin="3,0,0,0"></Image>
@@ -102,15 +102,20 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Source="/Assets/search.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,2,0"></Image>
-                <TextBox Grid.Column="1" Text="{Binding Pretraga, Mode=TwoWay}" PlaceholderText="Pretraga..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green"></TextBox>
+                <TextBox Grid.Column="1" Text="{Binding Pretraga, Mode=TwoWay}" Height="50" PlaceholderText="Pretraga..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green"></TextBox>
             </Grid>
             <Grid Name="DnevnikUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
                 <local:DnevnikKorisnickaKontrola Visibility="{Binding DnevnikVisibility, Mode=TwoWay}"></local:DnevnikKorisnickaKontrola>
             </Grid>
-            <Grid Name="KolekcijaUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
-                <local:KolekcijaKorisnickaKontrola></local:KolekcijaKorisnickaKontrola>
-            </Grid>
-            <Frame Grid.Row="2" Name="myFrame" Margin="20, 10, 20, 20"></Frame>
+            
+            <Frame Grid.Row="2" Name="myFrame" Margin="20, 10, 20, 20" Opacity="0.75">
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                        <GradientStop Color="White" Offset="0.8"></GradientStop>
+                        <GradientStop Color="Green" Offset="1"></GradientStop>
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
         </Grid>
     </Grid>
 </Page>
