@@ -21,12 +21,13 @@ namespace planB.Models
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Stavka() { }
-        public Stavka(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost)
+        public Stavka(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int kreator)
         {
             datum = _datum;
             sadrzaj = _sadrzaj;
             vidljivost = _vidljivost;
             id = _id;
+            kreatorID = kreator;
         }
 
         private void NotifyPropertyChanged(String info)

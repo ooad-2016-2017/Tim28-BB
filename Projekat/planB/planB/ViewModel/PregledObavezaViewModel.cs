@@ -19,6 +19,7 @@ namespace planB.ViewModel
         public Korisnik korisnik;
         public List<Obaveza> lbxItems { get; set; }
         public ICommand OdabranDatum { get; set; }
+        public ICommand ObavezaButtonClick { get; set; }
         DateTime datum;
 
 
@@ -26,13 +27,14 @@ namespace planB.ViewModel
         public PregledObavezaViewModel()
         {
             DnevnikButtonClick = new RelayCommand<object>(dnevnikButtonClick);
+            ObavezaButtonClick = new RelayCommand<object>(obavezaButtonClick);
             OdabranDatum = new RelayCommand<object>(odabranDatum);
             korisnik = LoginViewModel.korisnik;
-            //lbxItems = korisnik.Obaveze;
+            lbxItems = new List<Obaveza>();
             datum = DateTime.Now;
-            if(korisnik.Obaveze != null)
-                for (int i=0; i<korisnik.Obaveze.Count(); i++)
-                    if(korisnik.Obaveze[i].Datum.Date == datum.Date) lbxItems.Add(korisnik.Obaveze[i]);
+            for (int i=0; i<korisnik.Obaveze.Count(); i++)
+                if(korisnik.Obaveze[i].Datum.Date == datum.Date)
+                    lbxItems.Add(korisnik.Obaveze[i]);
         }
 
         private void odabranDatum(object obj)
@@ -43,13 +45,17 @@ namespace planB.ViewModel
                 if (o.Datum.Date == datum.Date) lbxItems.Add(o.Sadrzaj);*/
 
         }
-
-        public ProfilViewModel p;
+        
         private void dnevnikButtonClick(object parametar)
         {
-            ProfilPage.frame.Visibility = Visibility.Collapsed;
-            p = new ProfilViewModel();
-            p.DnevnikVisibility = Visibility.Visible;
+            ProfilPage.frame.Visibility = Visibility.Visible;
+            ProfilPage.frame.Navigate(typeof(DnevnikPage));
+        }
+
+        private void obavezaButtonClick(object parametar)
+        {
+            ProfilPage.frame.Visibility = Visibility.Visible;
+            ProfilPage.frame.Navigate(typeof(ObavezaPage));
         }
     }
 }

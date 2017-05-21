@@ -15,8 +15,8 @@ namespace planB.Models
 
         public Obaveza() : base() { }
 
-        public Obaveza(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int _prioritet) :
-            base(_id, _datum, _sadrzaj, _vidljivost)
+        public Obaveza(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int _prioritet, int kreator) :
+            base(_id, _datum, _sadrzaj, _vidljivost, kreator)
         {
             prioritet = _prioritet;
         }

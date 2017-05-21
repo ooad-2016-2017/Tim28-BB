@@ -2,6 +2,7 @@
 using planB.Models;
 using planB.View;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -104,6 +105,15 @@ namespace planB.ViewModel
 
                 else
                 {
+                    korisnik.Obaveze = new List<Obaveza>();
+                    korisnik.Dnevnik = new List<StavkaDnevnika>();
+
+                    foreach (Obaveza o in DB.Obaveze)
+                        if (o.KreatorID == korisnik.ID) korisnik.Obaveze.Add(o);
+
+                    foreach (StavkaDnevnika o in DB.Dnevnik)
+                        if (o.KreatorID == korisnik.ID) korisnik.Dnevnik.Add(o);
+                    
                     ((Frame)Window.Current.Content).Navigate(typeof(ProfilPage));
                 }
 

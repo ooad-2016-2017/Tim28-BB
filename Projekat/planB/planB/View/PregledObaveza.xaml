@@ -56,8 +56,8 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Name="dnevnikButton" Click="dnevnikButton_Click" Command="{Binding Path=DnevnikButtonClick, Mode=TwoWay}" Width="130" Foreground="White" Background="Green" Opacity="0.9" Content="Dnevnik" FontFamily="Calibri" FontSize="20" Margin="10,10,5,10" ></Button>
-                        <Button Grid.Column="1" Name="unesiButton" Click="obavezaButton_Click" Content="Unos obaveze" Foreground="White" VerticalAlignment="Stretch" Margin="5,10,10,10" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20"></Button>
+                        <Button Grid.Column="0" Name="dnevnikButton" Command="{Binding Path=DnevnikButtonClick, Mode=TwoWay}" Width="130" Foreground="White" Background="Green" Opacity="0.9" Content="Dnevnik" FontFamily="Calibri" FontSize="20" Margin="10,10,5,10" ></Button>
+                        <Button Grid.Column="1" Name="unesiButton" Command="{Binding Path=ObavezaButtonClick, Mode=TwoWay}" Content="Unos obaveze" Foreground="White" VerticalAlignment="Stretch" Margin="5,10,10,10" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20"></Button>
                     </Grid>
                 </RelativePanel>
                 <StackPanel Grid.Column="1" Orientation="Vertical" Opacity="0.75" Margin="10">

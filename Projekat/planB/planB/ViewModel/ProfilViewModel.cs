@@ -1,10 +1,12 @@
 ﻿using planB.Models;
+using planB.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 
 namespace planB.ViewModel
@@ -13,7 +15,8 @@ namespace planB.ViewModel
     {
         public String Naziv { get; set; }
         public Korisnik korisnik { get; set; }
-        
+        public ICommand PrikaziDnevnik { get; set; }
+
         private Visibility vidljivost;
         public Visibility DnevnikVisibility
         {
@@ -29,8 +32,16 @@ namespace planB.ViewModel
         public ProfilViewModel()
         {
             DnevnikVisibility = Visibility.Collapsed;
+            
             korisnik = LoginViewModel.korisnik;
-            Naziv = korisnik.Ime + korisnik.Prezime;
+            Naziv = korisnik.Ime + " " + korisnik.Prezime;
+
+            PrikaziDnevnik = new RelayCommand<object>(prikaziDnevnik);
+        }
+
+        private void prikaziDnevnik(object obj)
+        {
+            ProfilPage.frame.Navigate(typeof(DnevnikPage));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -11,9 +11,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace planB.ViewModel
 {
-    class ObavezaViewModel //: INotifyPropertyChanged
+    class ObavezaViewModel : INotifyPropertyChanged
     {
-        /*public MessageDialog Poruka { get; set; }
+        public MessageDialog Poruka { get; set; }
         public String TextObaveze { get; set; }
         public ICommand SpremiButton { get; set; }
         public String sliderVrijednost { get; set; }
@@ -22,6 +22,7 @@ namespace planB.ViewModel
         private bool privatno;
         private bool javno;
         Korisnik korisnik;
+        DateTime datum;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,18 +46,19 @@ namespace planB.ViewModel
                 javno = value;
                 if (value) vidljivost = Vidljivost.Javno;
                 else vidljivost = Vidljivost.Nista;
-                NotifyPropertyChanged(nameof(privatnoChecked));
+                NotifyPropertyChanged(nameof(javnoChecked));
             }
         }
 
         public ObavezaViewModel(){
             SpremiButton = new RelayCommand<object>(spremiButton);
             vidljivost = Vidljivost.Nista;
-            DatumText = "13.05.2017.";
+            DatumText = DateTime.Now.ToString("dd.mm.yyyy.");
             TextObaveze = "";
             sliderVrijednost = "0";
             privatnoChecked = false;
             korisnik = LoginViewModel.korisnik;
+            datum = DateTime.Now;
         }
 
         private void NotifyPropertyChanged(String info)
@@ -82,9 +84,9 @@ namespace planB.ViewModel
 
                 else
                 {
-                    DateTime d = DateTime.ParseExact(DatumText, "dd.mm.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
+                   // DateTime d = DateTime.ParseExact(DatumText, "dd.mm.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
                     //new DateTime(int.Parse(String.Concat(DatumText[6] + DatumText[7] + DatumText[8] + DatumText[9])), int.Parse(String.Concat(DatumText[3] + DatumText[4])), int.Parse(String.Concat(DatumText[0] + DatumText[1])))
-                    Obaveza obaveza = new Obaveza(0, new DateTime(1999,1,1), TextObaveze, vidljivost, int.Parse(sliderVrijednost));
+                    Obaveza obaveza = new Obaveza(0, datum, TextObaveze, vidljivost, int.Parse(sliderVrijednost), korisnik.ID);
                     korisnik.Obaveze.Add(obaveza);
                     DB.Obaveze.Add(obaveza);
                     DB.SaveChanges();
@@ -92,6 +94,6 @@ namespace planB.ViewModel
                     await Poruka.ShowAsync();
                 }
             }
-        }*/
+        }
     }
 }

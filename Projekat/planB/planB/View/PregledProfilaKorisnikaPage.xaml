@@ -106,10 +106,6 @@
                     <ComboBoxItem Content="Muzička kolekcija" FontSize="15" Foreground="Green"></ComboBoxItem>
                 </ComboBox>
             </Grid>
-            
-            <Grid Visibility="Collapsed" Name="DnevnikUserControl" Background="White" Opacity="0.7" Grid.Row="1" Margin="0, 20, 0, 0">
-                <local:DnevnikKorisnickaKontrola></local:DnevnikKorisnickaKontrola>
-            </Grid>
         </Grid>
     </Grid>
 </Page>

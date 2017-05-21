@@ -34,41 +34,28 @@ namespace planB.View
 
         private void PrikaziDnevnik(object sender, RoutedEventArgs e)
         {
-            DnevnikUserControl.Visibility = Visibility.Visible;
-            KolekcijaUserControl.Visibility = Visibility.Collapsed;
-            myFrame.Visibility = Visibility.Collapsed;
+            myFrame.Visibility = Visibility.Visible;
+            myFrame.Navigate(typeof(DnevnikPage));
         }
 
         private void PrikaziProfil(object sender, RoutedEventArgs e)
         {
-            DnevnikUserControl.Visibility = Visibility.Collapsed;
-            KolekcijaUserControl.Visibility = Visibility.Collapsed;
             myFrame.Visibility = Visibility.Visible;
             myFrame.Navigate(typeof(PregledObaveza));
         }
 
         private void PrikaziPostavke(object sender, RoutedEventArgs e)
         {
-            DnevnikUserControl.Visibility = Visibility.Collapsed;
-            KolekcijaUserControl.Visibility = Visibility.Collapsed;
             myFrame.Visibility = Visibility.Visible;
             myFrame.Navigate(typeof(PostavkePage));
         }
 
         private void PrikaziNovosti(object sender, RoutedEventArgs e)
         {
-            DnevnikUserControl.Visibility = Visibility.Collapsed;
-            KolekcijaUserControl.Visibility = Visibility.Collapsed;
             myFrame.Visibility = Visibility.Visible;
             myFrame.Navigate(typeof(NovostiPage));
         }
-
-        private void PrikaziMuzickuKolekciju(object sender, RoutedEventArgs e)
-        {
-            KolekcijaUserControl.Visibility = Visibility.Visible;
-            DnevnikUserControl.Visibility = Visibility.Collapsed;
-            myFrame.Visibility = Visibility.Collapsed;
-        }
+        
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {

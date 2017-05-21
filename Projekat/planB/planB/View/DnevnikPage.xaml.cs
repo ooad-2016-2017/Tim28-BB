@@ -21,24 +21,18 @@ namespace planB.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ObavezaPage : Page
+    public sealed partial class DnevnikPage : Page
     {
-        public ObavezaPage()
+        public DnevnikPage()
         {
             this.InitializeComponent();
         }
 
-
-        private void sider_ValueChanged(object sender, RoutedEventArgs e)
-        {
-            sliderValue.Text =  slider.Value.ToString();
-        }
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //base.OnNavigatedTo(e);
 
-            DataContext = new ObavezaViewModel();
+            DataContext = new DnevnikViewModel();
         }
     }
-    
 }

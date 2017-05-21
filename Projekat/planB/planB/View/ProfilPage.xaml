@@ -74,13 +74,13 @@
                 </Grid>
             </Button>
             <Button Grid.Row="2" Click="PrikaziNovosti" Content="Novosti" Name="NovostiButton" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20" Foreground="White"></Button>
-            <Button Grid.Row="3" Name="KolekcijaButton" Click="PrikaziMuzickuKolekciju"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
+            <Button Grid.Row="3" Name="KolekcijaButton" FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,16" Background="Green" Opacity="0.9" VerticalAlignment="Bottom">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Moja muzička kolekcija" FontFamily="Calibri" FontSize="20"></TextBlock>
                     <Image Source="/Assets/note1.png" Height="20" Margin="3,0,0,0"></Image>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="4" Content="Dnevnik" Click="PrikaziDnevnik" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
+            <Button Grid.Row="4" Content="Dnevnik" Command="{Binding Path=PrikaziDnevnik, Mode=TwoWay}" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
         </Grid>
         <Grid Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>
@@ -103,12 +103,6 @@
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="0" Source="/Assets/search.png" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,0,2,0"></Image>
                 <TextBox Grid.Column="1" Text="{Binding Pretraga, Mode=TwoWay}" PlaceholderText="Pretraga..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green"></TextBox>
-            </Grid>
-            <Grid Name="DnevnikUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
-                <local:DnevnikKorisnickaKontrola Visibility="{Binding DnevnikVisibility, Mode=TwoWay}"></local:DnevnikKorisnickaKontrola>
-            </Grid>
-            <Grid Name="KolekcijaUserControl" Grid.Row="2" Background="White" Opacity="0.75" Visibility="Collapsed">
-                <local:KolekcijaKorisnickaKontrola></local:KolekcijaKorisnickaKontrola>
             </Grid>
             <Frame Grid.Row="2" Name="myFrame" Margin="20, 10, 20, 20"></Frame>
         </Grid>
