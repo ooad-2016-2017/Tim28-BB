@@ -3,6 +3,7 @@
     "EASendMail": "7.3.1.2",
     "EntityFramework.Commands": "7.0.0-beta6",
     "EntityFramework.SQLite": "7.0.0-beta6",
+    "Json.NET.Web": "1.0.49",
     "Microsoft.CodeAnalysis.CSharp": "1.1.0",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0"
   },

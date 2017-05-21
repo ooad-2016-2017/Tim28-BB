@@ -16,6 +16,8 @@ namespace planB.ViewModel
         public String Naziv { get; set; }
         public Korisnik korisnik { get; set; }
         public ICommand PrikaziDnevnik { get; set; }
+        
+        public ICommand PrikaziMuzickuKolekciju { get; set; }
 
         private Visibility vidljivost;
         public Visibility DnevnikVisibility
@@ -37,6 +39,7 @@ namespace planB.ViewModel
             Naziv = korisnik.Ime + " " + korisnik.Prezime;
 
             PrikaziDnevnik = new RelayCommand<object>(prikaziDnevnik);
+            PrikaziMuzickuKolekciju = new RelayCommand<object>(prikaziMuzickuKolekciju);
         }
 
         private void prikaziDnevnik(object obj)
@@ -52,6 +55,11 @@ namespace planB.ViewModel
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
             }
+        }
+
+        private void prikaziMuzickuKolekciju(object parametar)
+        {
+            ProfilPage.frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel(LoginViewModel.korisnik));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using planB.ViewModel;
+﻿using planB.Models;
+using planB.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,25 +22,32 @@ namespace planB.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PrikazPjesmeForm : Page
+    public sealed partial class MuzickaKolekcijaPage : Page
     {
-        public static MediaElement PlaySound;
-        public PrikazPjesmeForm()
+        private MuzickaKolekcijaViewModel muzickaKolekcijaViewModel;
+        public MuzickaKolekcijaPage()
         {
             this.InitializeComponent();
-            PlaySound = playSound;
+            muzickaKolekcijaViewModel = new MuzickaKolekcijaViewModel();
+        }
+
+        private void Search_Artist(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            muzickaKolekcijaViewModel.Search_Artist();
+            sender.ItemsSource = muzickaKolekcijaViewModel.rezultatPretrage;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //base.OnNavigatedTo(e);
 
-            DataContext = e.Parameter as PjesmaViewModel;
+            DataContext = muzickaKolekcijaViewModel;
         }
 
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ArtistIsChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
-            
+            Pjesma odabranaPjesma = args.SelectedItem as Pjesma;
+            muzickaKolekcijaViewModel.PrikaziPjesmu(odabranaPjesma);
         }
     }
 }

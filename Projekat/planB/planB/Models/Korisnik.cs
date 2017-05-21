@@ -26,7 +26,12 @@ namespace planB.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Korisnik() { }
+        public Korisnik()
+        {
+            obaveze = new List<Obaveza>();
+            dnevnik = new List<StavkaDnevnika>();
+            muzickaKolekcija = new List<MuzickaKolekcija>();
+        }
         public Korisnik(int _id, String _ime, String _prezime, String _korisnickoIme, String _lozinka, DateTime _datumRodjenja, String _email, byte[] _slika = null)
         {
             id = _id;

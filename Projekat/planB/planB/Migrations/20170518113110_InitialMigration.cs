@@ -94,10 +94,12 @@ namespace planBMigrations
                 columns: table => new
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
-                        //.Annotation("Sqlite:Autoincrement", true),
+                    //.Annotation("Sqlite:Autoincrement", true),
                     Izvodjac = table.Column(type: "TEXT", nullable: true),
                     MuzickaKolekcijaID = table.Column(type: "INTEGER", nullable: true),
-                    Naziv = table.Column(type: "TEXT", nullable: true)
+                    Naziv = table.Column(type: "TEXT", nullable: true),
+                    Preview = table.Column(type: "TEXT", nullable: true),
+                    UrlSlike = table.Column(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

@@ -5,7 +5,14 @@
     xmlns:local="using:planB.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:planB.Models"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="EL_MuzickaKolekcija" x:DataType="data:MuzickaKolekcija">
+            <TextBlock Text="{x:Bind Naziv}"></TextBlock>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid>
         <VisualStateManager.VisualStateGroups>
@@ -34,12 +41,26 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Image Grid.Column="0" Source="/Assets/album.png" Margin="10"></Image>
-        <RelativePanel Grid.Column="1" Background="WhiteSmoke" Opacity="0.75">
-            <TextBlock Name="nazivPjesme" Text="Muzičar - Naziv pjesme" Margin="10" Foreground="Green" FontFamily="Segoe Print" FontSize="20" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" FontWeight="Bold"/>
-            <Button Name="playButton" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
+        <RelativePanel Grid.Column="1" Background="White" Visibility="{Binding PjesmaDetailsVisibility, Mode=TwoWay}">
+            <TextBlock Name="nazivPjesme" Text="{Binding PjesmaDetails, Mode=TwoWay}" Margin="10" Foreground="Green" FontFamily="Segoe Print" FontSize="20" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" FontWeight="Bold"/>
+            <Button Name="playButton" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Command="{Binding Path=PustiPjesmu, Mode=TwoWay}">
                 <Image Source="/Assets/play3.png" Margin="10" Height="100" Width="100"></Image>
             </Button>
-            <Button Name="dodajButton" Content="Dodaj u kolekciju" Background="Green" Foreground="White" FontFamily="Calibri" FontSize="20" RelativePanel.AlignBottomWithPanel="True" RelativePanel.Below="playButton" RelativePanel.AlignHorizontalCenterWithPanel="True"></Button>
+            <MediaElement x:Name="playSound" Source="{Binding OdabranaPjesma.Preview}" AutoPlay="False" Height="100" Width="100" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            <Button Name="dodajButton" Command="{Binding Path=DodajUKolekciju, Mode=TwoWay}" Content="Dodaj u kolekciju" Background="Green" Foreground="White" FontFamily="Calibri" FontSize="20" RelativePanel.AlignBottomWithPanel="True" RelativePanel.Below="playSound" RelativePanel.AlignHorizontalCenterWithPanel="True"></Button>
         </RelativePanel>
+        <ListBox SelectedItem="{Binding Path=OdabranaKolekcija, Mode=TwoWay}" Grid.Column="1" Margin="100" ItemsSource="{Binding MuzKolekcija, Mode=TwoWay}" ItemTemplate="{StaticResource EL_MuzickaKolekcija}" Visibility="{Binding DodajVisibility, Mode=TwoWay}">
+           
+        </ListBox>
+        <StackPanel Grid.Column="1" Margin="100" Padding="30,30,30,30" Name="NazivPanel" Visibility="{Binding NazivKolekcijeVisibility}" Opacity="0.85">
+            <StackPanel.Background>
+                <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                    <GradientStop Color="White" Offset="0.75"></GradientStop>
+                    <GradientStop Color="Green" Offset="1"></GradientStop>
+                </LinearGradientBrush>
+            </StackPanel.Background>
+            <TextBox  PlaceholderText="Naziv kolekcije..." Text="{Binding NazivNoveKolekcije, Mode=TwoWay}" BorderBrush="Green"></TextBox>
+            <Button Content="Potvrdi" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0, 10, 0, 0" Background="Green" Opacity="0.85" Foreground="White" Command="{Binding Path=ZavrsiDodavanje, Mode=TwoWay}"></Button>
+        </StackPanel>
     </Grid>
 </Page>

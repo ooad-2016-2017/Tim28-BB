@@ -55,7 +55,14 @@ namespace planB.View
             myFrame.Visibility = Visibility.Visible;
             myFrame.Navigate(typeof(NovostiPage));
         }
-        
+
+        private void PrikaziMuzickuKolekciju(object sender, RoutedEventArgs e)
+        {
+            //KolekcijaUserControl.Visibility = Visibility.Visible;
+            //DnevnikUserControl.Visibility = Visibility.Collapsed;
+            //myFrame.Visibility = Visibility.Collapsed;
+            //myFrame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel());
+        }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
