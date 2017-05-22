@@ -22,11 +22,12 @@ namespace planB.Models
 
         public Pjesma() { }
         
-        public Pjesma (int _id, String _izvodjac, String _naziv)
+        public Pjesma (String _izvodjac, String _naziv, String _preview, String _urlSlike)
         {
             izvodjac = _izvodjac;
             naziv = _naziv;
-            id = _id;
+            preview = _preview;
+            urlSlike = _urlSlike;
         }
 
         private void NotifyPropertyChanged(String info)

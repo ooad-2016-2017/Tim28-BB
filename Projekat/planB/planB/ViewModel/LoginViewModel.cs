@@ -211,7 +211,8 @@ namespace planB.ViewModel
             }
             catch (Exception ep)
             {
-                Result = String.Format("Failed to send email with the following error: {0}", ep.Message);
+
+                Result = String.Format("Failed to send email with the following error: {0}\nVaš verifikacijski kod: {1}.", ep.Message, VerifikacijskiKod);
             }
 
             Poruka = new MessageDialog(Result);

@@ -181,9 +181,11 @@ namespace planB.ViewModel
                     }
                 }
 
-                OdabranaPjesma.MuzickaKolekcijaID = muzickaKolekcija.ID;
-                muzickaKolekcija.Pjesme.Add(OdabranaPjesma);
-                DB.Pjesme.Add(OdabranaPjesma);
+                Pjesma novaPjesma = new Pjesma(OdabranaPjesma.Izvodjac, OdabranaPjesma.Naziv, OdabranaPjesma.Preview, OdabranaPjesma.UrlSlike);
+                novaPjesma.MuzickaKolekcijaID = odabranaKolekcija.ID;
+                muzickaKolekcija.Pjesme.Add(novaPjesma);
+                TrenutniKorisnik.MuzickaKolekcija.Where(x => (x.ID == muzickaKolekcija.ID)).FirstOrDefault().Pjesme.Add(novaPjesma);
+                DB.Pjesme.Add(novaPjesma);
                 DB.SaveChanges();
                 Poruka = new MessageDialog("Pjesma uspješno dodana u kolekciju " + odabranaKolekcija.Naziv + ".");
                 await Poruka.ShowAsync();
