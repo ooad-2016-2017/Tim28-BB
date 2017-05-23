@@ -42,7 +42,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <AutoSuggestBox ItemsSource="{Binding RezultatiPretrage, Mode=TwoWay}"  Text="{Binding SearchingText, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Pjesme}" Grid.Row="0" Margin="10,10,10,10" BorderBrush="Green" PlaceholderText="Izvođač..." QueryIcon="Find" Background="White" QuerySubmitted="Search_Artist"  SuggestionChosen="ArtistIsChosen"></AutoSuggestBox>
+        <AutoSuggestBox ItemsSource="{Binding RezultatiPretrage, Mode=TwoWay}"  Text="{Binding SearchingText, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Pjesme}" Grid.Row="0" Margin="10,10,10,10" BorderBrush="Green" PlaceholderText="Izvođač..." QueryIcon="Find" Background="White" QuerySubmitted="Search_Artist"  SuggestionChosen="ArtistIsChosen" IsEnabled="{Binding SearchingEnabled, Mode=TwoWay}"></AutoSuggestBox>
 
         <StackPanel Grid.Row="1" Name="Kolekcije" Opacity="0.75" Padding="15, 15, 15, 15" Margin="50, 10, 50, 0">
             <StackPanel.Background>

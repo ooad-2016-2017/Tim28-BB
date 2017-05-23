@@ -100,13 +100,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DBModels\Follow.cs" />
     <Compile Include="INavigate.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20170518113110_InitialMigration.cs" />
-    <Compile Include="Migrations\20170518113110_InitialMigration.designer.cs">
-      <DependentUpon>20170518113110_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170523013846_InitialMigration.cs" />
+    <Compile Include="Migrations\20170523013846_InitialMigration.designer.cs">
+      <DependentUpon>20170523013846_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PlanBDbContextModelSnapshot.cs" />
     <Compile Include="Models\Korisnik.cs" />
@@ -126,10 +127,12 @@
     <Compile Include="Services\Track.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MuzickaKolekcijaViewModel.cs" />
+    <Compile Include="ViewModel\NovostiViewModel.cs" />
     <Compile Include="ViewModel\ObavezaViewModel.cs" />
     <Compile Include="ViewModel\PjesmaViewModel.cs" />
     <Compile Include="ViewModel\PostavkeViewModel.cs" />
     <Compile Include="ViewModel\PregledObavezaViewModel.cs" />
+    <Compile Include="ViewModel\PregledProfilaKorisnikaViewModel.cs" />
     <Compile Include="ViewModel\ProfilViewModel.cs" />
     <Compile Include="View\DnevnikPage.xaml.cs">
       <DependentUpon>DnevnikPage.xaml</DependentUpon>

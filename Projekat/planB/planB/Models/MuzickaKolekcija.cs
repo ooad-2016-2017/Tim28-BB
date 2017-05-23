@@ -15,6 +15,7 @@ namespace planB.Models
         String naziv;
         List<Pjesma> pjesme;
         int korisnikID;
+        DateTime datumKreiranja;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -75,6 +76,28 @@ namespace planB.Models
             {
                 korisnikID = value;
                 NotifyPropertyChanged(nameof(KorisnikID));
+            }
+        }
+
+        public String Kreator
+        {
+            get
+            {
+                using (var DB = new PlanBDbContext())
+                {
+                    Korisnik k = DB.Korisnici.Where(x => (x.ID == KorisnikID)).FirstOrDefault();
+                    return k.Ime + " " + k.Prezime;
+                }
+            }
+        }
+
+        public DateTime DatumKreiranja
+        {
+            get { return datumKreiranja; }
+            set
+            {
+                datumKreiranja = value;
+                NotifyPropertyChanged(nameof(DatumKreiranja));
             }
         }
     }

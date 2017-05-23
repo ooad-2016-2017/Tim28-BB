@@ -33,7 +33,7 @@ namespace planB.View
 
         private void Search_Artist(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            muzickaKolekcijaViewModel.Search_Artist();
+            muzickaKolekcijaViewModel.Search_Artist(args.QueryText.ToString());
             sender.ItemsSource = muzickaKolekcijaViewModel.rezultatPretrage;
         }
 

@@ -18,11 +18,13 @@ namespace planB.Models
         String lozinka;
         DateTime datumRodjenja;
         String email;
+        String status;
         byte[] slika;
 
         List<Obaveza> obaveze;
         List<StavkaDnevnika> dnevnik;
         List<MuzickaKolekcija> muzickaKolekcija;
+        List<Korisnik> followingList;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -31,6 +33,7 @@ namespace planB.Models
             obaveze = new List<Obaveza>();
             dnevnik = new List<StavkaDnevnika>();
             muzickaKolekcija = new List<MuzickaKolekcija>();
+            followingList = new List<Korisnik>();
         }
         public Korisnik(int _id, String _ime, String _prezime, String _korisnickoIme, String _lozinka, DateTime _datumRodjenja, String _email, byte[] _slika = null)
         {
@@ -162,6 +165,16 @@ namespace planB.Models
             {
                 muzickaKolekcija = value;
                 NotifyPropertyChanged(nameof(MuzickaKolekcija));
+            }
+        }
+
+       public List<Korisnik> FollowingList
+        {
+            get { return followingList; }
+            set
+            {
+                followingList = value;
+                NotifyPropertyChanged(nameof(FollowingList));
             }
         }
 

@@ -5,9 +5,67 @@
     xmlns:local="using:planB.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:planB.Models"
     mc:Ignorable="d">
 
-    <Grid Margin="10" BorderBrush="Green" BorderThickness="1">
-        <ListBox Name="novostiLbx" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto"></ListBox>
+    <Page.Resources>
+        <DataTemplate x:Key="EL_Stavka" x:DataType="data:Stavka">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Assets/user.jpg" Width="50" Height="70"></Image>
+                <StackPanel Orientation="Vertical" Grid.Column="1">
+                    <Grid Margin="5,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind Kreator}"></TextBlock>
+                        <TextBlock Text=" je dodao/la novu aktivnost." Grid.Column="1"></TextBlock>
+                    </Grid>
+                    <TextBlock Text="{x:Bind Datum}" Margin="5,0,0,0"></TextBlock>
+                    <TextBlock Text="{x:Bind Sadrzaj}" Margin="10" FontWeight="Bold"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="EL_MuzickaKolekcija" x:DataType="data:MuzickaKolekcija">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Assets/user.jpg" Width="50" Height="70"></Image>
+                <StackPanel Orientation="Vertical" Grid.Column="1">
+                    <Grid Margin="5,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{x:Bind Kreator}"></TextBlock>
+                        <TextBlock Text=" je dodao/la novu muzičku kolekciju." Grid.Column="1"></TextBlock>
+                    </Grid>
+                    <TextBlock Text="{x:Bind DatumKreiranja}" Margin="5,0,0,0"></TextBlock>
+                    <TextBlock Text="{x:Bind Naziv}" Margin="10" FontWeight="Bold"></TextBlock>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center" Content="Obaveze/Blog" Command="{Binding StavkeNovosti, Mode=TwoWay}"></RadioButton>
+            <RadioButton HorizontalAlignment="Center" Margin="5,0,0,0" VerticalAlignment="Center" Content="Muzičke kolekcije" Command="{Binding KolekcijeNovosti, Mode=TwoWay}"></RadioButton>
+        </StackPanel>
+        <ListBox Grid.Row="1" Name="novostiLbx" ItemsSource="{Binding Stavke, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Stavka}" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="{Binding StavkeVisibility, Mode=TwoWay}"></ListBox>
+        <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding Kolekcije, Mode=TwoWay}" ItemTemplate="{StaticResource EL_MuzickaKolekcija}" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="{Binding KolekcijeVisibility, Mode=TwoWay}"></ListBox>
+        
     </Grid>
+
 </Page>

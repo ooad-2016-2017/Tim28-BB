@@ -1,4 +1,5 @@
-﻿using System;
+﻿using planB.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,18 @@ namespace planB.View
     /// </summary>
     public sealed partial class PregledProfilaKorisnika : Page
     {
+        public static Frame Frame;
         public PregledProfilaKorisnika()
         {
             this.InitializeComponent();
+            Frame = myFrame;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            //base.OnNavigatedTo(e);
+
+            DataContext = e.Parameter as PregledProfilaKorisnikaViewModel;
         }
     }
 }

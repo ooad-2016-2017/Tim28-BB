@@ -66,35 +66,40 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" >
                 <TextBlock Name="followingText" Text="Prati" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                <TextBlock Name="followingNumber" Text="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
+                <TextBlock Name="followingNumber" Text="{Binding FollowingNumber, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
             </StackPanel>
             <Image Name="userPhoto" Grid.Column="1" Source="Assets/DefaultUser.png" ></Image>
             <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Name="followersText" Text="Pratioci" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-                <TextBlock Name="followersNumber" Text="24" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
+                <TextBlock Name="followersNumber" Text="{Binding FollowNumber, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
             </StackPanel>
         </Grid>
-        <Button Name="FollowButton" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Prati" Background="Green" Foreground="White" Margin="20,0,20,10" Opacity="0.75"></Button>
+        <Button Name="FollowButton" Command="{Binding Path=ZapratiKorisnika, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding FollowStatus, Mode=TwoWay}" Background="Green" Foreground="White" Margin="20,0,20,10" Opacity="0.75"></Button>
         <Grid Grid.Row="2" Margin="20, 0, 20, 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="227*"/>
+                <ColumnDefinition Width="93*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Name="Menu" Grid.Row="0" Background="White" Opacity="0.75">
+            <Grid Name="Menu" Grid.Row="0" Background="White" Opacity="0.75" Grid.ColumnSpan="2" Margin="0,0,0,421.333" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Maid Bajramović" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                <Button Content="Obaveze" Grid.Column="1" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
+                <TextBlock Text="{Binding ImeIPrezime, Mode=TwoWay}" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <Button Content="Obaveze" Command="{Binding PrikaziObaveze, Mode=TwoWay}" Grid.Column="1" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
                 <Button Content="Blog" Grid.Column="2" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
-                <Button Content="Muzička kolekcija" Grid.Column="3" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
+                <Button Content="Muzička kolekcija" Grid.Column="3" Style="{StaticResource ButtonStyle}" Command="{Binding Path=PrikaziMuzickuKolekciju, Mode=TwoWay}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
             </Grid>
+            <Frame Grid.Row="1" Name="myFrame" Margin="20,20.333,20,19.333" Grid.ColumnSpan="2"></Frame>
 
-            <Grid Name="MenuMobile" Grid.Row="0" Background="White" Opacity="0.75">
+            <Grid Name="MenuMobile" Grid.Row="0" Background="White" Opacity="0.75" Grid.ColumnSpan="2" Margin="0,0,0,421.333" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>

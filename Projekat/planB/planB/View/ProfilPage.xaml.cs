@@ -1,4 +1,5 @@
-﻿using planB.ViewModel;
+﻿using planB.Models;
+using planB.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,12 +25,14 @@ namespace planB.View
     public sealed partial class ProfilPage : Page
     {
         public static Frame frame;
+        ProfilViewModel profilViewModel;
 
         public ProfilPage()
         {
             this.InitializeComponent();
             frame = myFrame;
             myFrame.Navigate(typeof(PregledObaveza));
+            profilViewModel = new ProfilViewModel();
         }
 
         private void PrikaziDnevnik(object sender, RoutedEventArgs e)
@@ -68,7 +71,25 @@ namespace planB.View
         {
             //base.OnNavigatedTo(e);
 
-            DataContext = new ProfilViewModel();
+            DataContext = profilViewModel;
+        }
+
+        private void TraziKorisnike(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            profilViewModel.PretraziKorisnike();
+            sender.ItemsSource = profilViewModel.RezultatiPretrage;
+        }
+
+        private void PronadjiKorisnika(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            profilViewModel.PronadjiKorisnika();
+            sender.ItemsSource = profilViewModel.RezultatiPretrage;
+        }
+
+        private void PrikaziProfil(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            Korisnik odabraniKorisnik = args.SelectedItem as Korisnik;
+            profilViewModel.PrikaziProfilKorisnika(odabraniKorisnik);
         }
     }
 }

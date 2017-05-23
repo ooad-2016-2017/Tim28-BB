@@ -87,5 +87,19 @@ namespace planB.Models
                 NotifyPropertyChanged(nameof(KreatorID));
             }
         }
+
+        public String Kreator
+        {
+            get
+            {
+                using (var DB = new PlanBDbContext())
+                {
+                    Korisnik k = DB.Korisnici.Where(x => (x.ID == kreatorID)).FirstOrDefault();
+                    return k.Ime + " " + k.Prezime;
+                }
+            }
+
+        }
+
     }
 }

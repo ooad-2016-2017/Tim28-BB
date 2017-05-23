@@ -1,4 +1,5 @@
-﻿using System;
+﻿using planB.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,11 @@ namespace planB.View
         public NovostiPage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            DataContext = new NovostiViewModel();
         }
     }
 }

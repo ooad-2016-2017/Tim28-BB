@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Entity;
+using planB.DBModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,8 @@ namespace planB.Models
         public DbSet<StavkaDnevnika> Dnevnik { get; set; }
         public DbSet<Pjesma> Pjesme { get; set; }
         public DbSet<MuzickaKolekcija> MuzickaKolekcija { get; set; }
+        public DbSet<Follow> Follow { get; set; }
+        
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

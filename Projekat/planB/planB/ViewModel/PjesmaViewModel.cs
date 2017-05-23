@@ -19,6 +19,7 @@ namespace planB.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public MessageDialog Poruka { get; set; }
         private MuzickaKolekcijaViewModel muzickaKolekcijaViewModel;
+        bool IsEnabled;
 
         public Pjesma OdabranaPjesma { get; set; }
         private String pjesmaDetails;
@@ -45,8 +46,9 @@ namespace planB.ViewModel
             PustiPjesmu = new RelayCommand<object>(pustiPjesmu);
         }
 
-        public PjesmaViewModel(Pjesma odabranaPjesma, Korisnik trenutniKorisnik)
+        public PjesmaViewModel(Pjesma odabranaPjesma, Korisnik trenutniKorisnik, bool enabled = true)
         {
+            //IsEnabled = enabled;
             OdabranaPjesma = odabranaPjesma;
             pjesmaDetails = odabranaPjesma.Izvodjac + " - " + odabranaPjesma.Naziv;
             TrenutniKorisnik = trenutniKorisnik;
@@ -61,7 +63,7 @@ namespace planB.ViewModel
 
 
             PustiPjesmu = new RelayCommand<object>(pustiPjesmu);
-            DodajUKolekciju = new RelayCommand<object>(dodajUKolekciju);
+            if (enabled) DodajUKolekciju = new RelayCommand<object>(dodajUKolekciju);
             ZavrsiDodavanje = new RelayCommand<object>(zavrsiDodavanje);
         }
 

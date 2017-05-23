@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace planB.ViewModel
@@ -20,7 +21,7 @@ namespace planB.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
 
-        public String SearchingText { get; set; }
+        private String searchingText;
         public ObservableCollection<Pjesma> rezultatPretrage { get; set; }
         private PretragaMuzike pretragaMuzike;
 
@@ -30,6 +31,8 @@ namespace planB.ViewModel
         public MuzickaKolekcija odabranaKolekcija { get; set; }
         public ObservableCollection<Pjesma> pjesmeIzOdabraneKolekcije { get; set; }
 
+        private bool searchingEnabled;
+
         private Pjesma _odabranaPjesma;
        
         public MuzickaKolekcijaViewModel()
@@ -38,20 +41,22 @@ namespace planB.ViewModel
             TrenutniKorisnik = LoginViewModel.korisnik;
             pretragaMuzike = new PretragaMuzike();
             rezultatPretrage = new ObservableCollection<Pjesma>();
+            SearchingEnabled = true;
 
             if (TrenutniKorisnik.MuzickaKolekcija.Count == 0)
             {
                 dajKolekcije();
             }
 
-          
             Kolekcija = new ObservableCollection<MuzickaKolekcija>(TrenutniKorisnik.MuzickaKolekcija);
-
         }
+
+        
 
         public MuzickaKolekcijaViewModel(Korisnik trenutniKorisnik)
         {
-            
+            TrenutniKorisnik = trenutniKorisnik;
+            SearchingEnabled = false;
         }
 
         public ObservableCollection<Pjesma> RezultatiPretrage
@@ -61,6 +66,16 @@ namespace planB.ViewModel
             {
                 rezultatPretrage = value;
                 NotifyPropertyChanged(nameof(RezultatiPretrage));
+            }
+        }
+
+        public String SearchingText
+        {
+            get { return searchingText; }
+            set
+            {
+                searchingText = value;
+                NotifyPropertyChanged(nameof(SearchingText));
             }
         }
 
@@ -94,6 +109,16 @@ namespace planB.ViewModel
             }
         }
 
+        public bool SearchingEnabled
+        {
+            get { return searchingEnabled; }
+            set
+            {
+                searchingEnabled = value;
+                NotifyPropertyChanged(nameof(searchingEnabled));
+            }
+        }
+
         private void NotifyPropertyChanged(String info)
         {
             if (PropertyChanged != null)
@@ -102,8 +127,9 @@ namespace planB.ViewModel
             }
         }
 
-        public async void Search_Artist()
+        public async void Search_Artist(String search)
         {
+            //SearchingText = search;
             rezultatPretrage = new ObservableCollection<Pjesma>();
             SearchingResult rezultatWEBPretrage = new SearchingResult();
             rezultatWEBPretrage = await pretragaMuzike.Search_Artists(SearchingText);
@@ -121,7 +147,7 @@ namespace planB.ViewModel
 
         public void PrikaziPjesmu(Pjesma odabranaPjesma)
         {
-            ProfilPage.frame.Navigate(typeof(PrikazPjesmeForm), new PjesmaViewModel(odabranaPjesma, TrenutniKorisnik));
+            ProfilPage.frame.Navigate(typeof(PrikazPjesmeForm), new PjesmaViewModel(odabranaPjesma, TrenutniKorisnik, searchingEnabled));
         }
 
         public async void dodajNovuKolekciju(String NazivNoveKolekcije, Pjesma odabranaPjesma)
@@ -153,6 +179,7 @@ namespace planB.ViewModel
                 MuzickaKolekcija novaKolekcija = new MuzickaKolekcija();
                 novaKolekcija.Naziv = NazivNoveKolekcije;
                 novaKolekcija.Pjesme.Add(odabranaPjesma);
+                novaKolekcija.DatumKreiranja = DateTime.Today;
                 TrenutniKorisnik.MuzickaKolekcija.Add(novaKolekcija);
                 novaKolekcija.KorisnikID = TrenutniKorisnik.ID;
                 DB.Pjesme.Add(odabranaPjesma);

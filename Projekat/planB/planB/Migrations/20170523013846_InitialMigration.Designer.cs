@@ -11,7 +11,7 @@ namespace planBMigrations
     {
         public override string Id
         {
-            get { return "20170518113110_InitialMigration"; }
+            get { return "20170523013846_InitialMigration"; }
         }
 
         public override string ProductVersion
@@ -23,6 +23,18 @@ namespace planBMigrations
         {
             builder
                 .Annotation("ProductVersion", "7.0.0-beta6-13815");
+
+            builder.Entity("planB.DBModels.Follow", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Following_KorisnikID");
+
+                    b.Property<int>("KorisnikID");
+
+                    b.Key("ID");
+                });
 
             builder.Entity("planB.Models.Korisnik", b =>
                 {
@@ -36,6 +48,8 @@ namespace planBMigrations
                     b.Property<string>("Ime");
 
                     b.Property<string>("KorisnickoIme");
+
+                    b.Property<int?>("KorisnikID");
 
                     b.Property<string>("Lozinka");
 
@@ -51,7 +65,7 @@ namespace planBMigrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("KorisnikID");
+                    b.Property<int>("KorisnikID");
 
                     b.Property<string>("Naziv");
 
@@ -85,9 +99,13 @@ namespace planBMigrations
 
                     b.Property<string>("Izvodjac");
 
-                    b.Property<int?>("MuzickaKolekcijaID");
+                    b.Property<int>("MuzickaKolekcijaID");
 
                     b.Property<string>("Naziv");
+
+                    b.Property<string>("Preview");
+
+                    b.Property<string>("UrlSlike");
 
                     b.Key("ID");
                 });
@@ -110,6 +128,13 @@ namespace planBMigrations
                     b.Property<int>("Vidljivost");
 
                     b.Key("ID");
+                });
+
+            builder.Entity("planB.Models.Korisnik", b =>
+                {
+                    b.Reference("planB.Models.Korisnik")
+                        .InverseCollection()
+                        .ForeignKey("KorisnikID");
                 });
 
             builder.Entity("planB.Models.MuzickaKolekcija", b =>
