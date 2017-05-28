@@ -19,11 +19,16 @@ namespace planB.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public MessageDialog Poruka;
 
+        private PorukeViewModel pwm;
+
         public String Naziv { get; set; }
         public Korisnik korisnik { get; set; }
-        public ICommand PrikaziDnevnik { get; set; }
+        private int brojNovihPoruka;
 
+        public ICommand PrikaziDnevnik { get; set; }
         public ICommand PrikaziMuzickuKolekciju { get; set; }
+        public ICommand PrikaziLokaciju { get; set; }
+        public ICommand PrikaziPoruke { get; set; }
 
         public String Pretraga { get; set; }
         private ObservableCollection<Korisnik> rezultatiPretrage;
@@ -38,9 +43,12 @@ namespace planB.ViewModel
             Naziv = korisnik.Ime + " " + korisnik.Prezime;
 
             rezultatiPretrage = new ObservableCollection<Korisnik>();
-
+            pwm = new PorukeViewModel();
+            BrojNovihPoruka = pwm.BrojNovihPoruka;
             PrikaziDnevnik = new RelayCommand<object>(prikaziDnevnik);
             PrikaziMuzickuKolekciju = new RelayCommand<object>(prikaziMuzickuKolekciju);
+            PrikaziLokaciju = new RelayCommand<object>(prikaziLokaciju);
+            PrikaziPoruke = new RelayCommand<object>(prikaziPoruke);
         }
 
         public Visibility DnevnikVisibility
@@ -50,6 +58,16 @@ namespace planB.ViewModel
             {
                 vidljivost = value;
                 NotifyPropertyChanged(nameof(DnevnikVisibility));
+            }
+        }
+
+        public int BrojNovihPoruka
+        {
+            get { return brojNovihPoruka; }
+            set
+            {
+                brojNovihPoruka = value;
+                NotifyPropertyChanged(nameof(BrojNovihPoruka));
             }
         }
 
@@ -79,7 +97,17 @@ namespace planB.ViewModel
 
         private void prikaziMuzickuKolekciju(object parametar)
         {
-            ProfilPage.frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel(LoginViewModel.korisnik));
+            ProfilPage.frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel());
+        }
+
+        private void prikaziLokaciju(object parametar)
+        {
+            ProfilPage.frame.Navigate(typeof(LocationPage));
+        }
+
+        private void prikaziPoruke(object parametar)
+        {
+            ProfilPage.frame.Navigate(typeof(PorukaPage));
         }
 
         public async void PronadjiKorisnika()

@@ -14,7 +14,7 @@ namespace planBMigrations
                 columns: table => new
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
-                      //  .Annotation("Sqlite:Autoincrement", true),
+                       // .Annotation("Sqlite:Autoincrement", true),
                     Following_KorisnikID = table.Column(type: "INTEGER", nullable: false),
                     KorisnikID = table.Column(type: "INTEGER", nullable: false)
                 },
@@ -27,7 +27,7 @@ namespace planBMigrations
                 columns: table => new
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
-                       // .Annotation("Sqlite:Autoincrement", true),
+                        //.Annotation("Sqlite:Autoincrement", true),
                     DatumRodjenja = table.Column(type: "TEXT", nullable: false),
                     Email = table.Column(type: "TEXT", nullable: true),
                     Ime = table.Column(type: "TEXT", nullable: true),
@@ -52,6 +52,7 @@ namespace planBMigrations
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
                        // .Annotation("Sqlite:Autoincrement", true),
+                    DatumKreiranja = table.Column(type: "TEXT", nullable: false),
                     KorisnikID = table.Column(type: "INTEGER", nullable: false),
                     Naziv = table.Column(type: "TEXT", nullable: true)
                 },
@@ -69,7 +70,7 @@ namespace planBMigrations
                 columns: table => new
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
-                       // .Annotation("Sqlite:Autoincrement", true),
+                        //.Annotation("Sqlite:Autoincrement", true),
                     Datum = table.Column(type: "TEXT", nullable: false),
                     KorisnikID = table.Column(type: "INTEGER", nullable: true),
                     KreatorID = table.Column(type: "INTEGER", nullable: false),
@@ -87,11 +88,36 @@ namespace planBMigrations
                         referencedColumn: "ID");
                 });
             migration.CreateTable(
-                name: "StavkaDnevnika",
+                name: "Poruka",
                 columns: table => new
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
                        // .Annotation("Sqlite:Autoincrement", true),
+                    DatumSlanja = table.Column(type: "TEXT", nullable: false),
+                    PosiljaocID = table.Column(type: "INTEGER", nullable: true),
+                    PrimaocID = table.Column(type: "INTEGER", nullable: true),
+                    Tekst = table.Column(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Poruka", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Poruka_Korisnik_PosiljaocID",
+                        columns: x => x.PosiljaocID,
+                        referencedTable: "Korisnik",
+                        referencedColumn: "ID");
+                    table.ForeignKey(
+                        name: "FK_Poruka_Korisnik_PrimaocID",
+                        columns: x => x.PrimaocID,
+                        referencedTable: "Korisnik",
+                        referencedColumn: "ID");
+                });
+            migration.CreateTable(
+                name: "StavkaDnevnika",
+                columns: table => new
+                {
+                    ID = table.Column(type: "INTEGER", nullable: false),
+                      //  .Annotation("Sqlite:Autoincrement", true),
                     Datum = table.Column(type: "TEXT", nullable: false),
                     KorisnikID = table.Column(type: "INTEGER", nullable: true),
                     KreatorID = table.Column(type: "INTEGER", nullable: false),
@@ -113,7 +139,7 @@ namespace planBMigrations
                 columns: table => new
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
-                      //  .Annotation("Sqlite:Autoincrement", true),
+                       // .Annotation("Sqlite:Autoincrement", true),
                     Izvodjac = table.Column(type: "TEXT", nullable: true),
                     MuzickaKolekcijaID = table.Column(type: "INTEGER", nullable: false),
                     Naziv = table.Column(type: "TEXT", nullable: true),
@@ -136,6 +162,7 @@ namespace planBMigrations
             migration.DropTable("Follow");
             migration.DropTable("Obaveza");
             migration.DropTable("Pjesma");
+            migration.DropTable("Poruka");
             migration.DropTable("StavkaDnevnika");
             migration.DropTable("MuzickaKolekcija");
             migration.DropTable("Korisnik");

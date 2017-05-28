@@ -18,6 +18,7 @@ namespace planB.Models
         public DbSet<Pjesma> Pjesme { get; set; }
         public DbSet<MuzickaKolekcija> MuzickaKolekcija { get; set; }
         public DbSet<Follow> Follow { get; set; }
+        public DbSet<Poruka> Poruke { get; set; }
         
 
 

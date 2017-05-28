@@ -22,32 +22,20 @@ namespace planB.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MuzickaKolekcijaPage : Page
+    public sealed partial class PorukaPage : Page
     {
-        private MuzickaKolekcijaViewModel muzickaKolekcijaViewModel;
-        public MuzickaKolekcijaPage()
+        PorukeViewModel porukeViewModel;
+        public PorukaPage()
         {
             this.InitializeComponent();
-            muzickaKolekcijaViewModel = new MuzickaKolekcijaViewModel();
-        }
-
-        private void Search_Artist(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            muzickaKolekcijaViewModel.Search_Artist(args.QueryText.ToString());
-            sender.ItemsSource = muzickaKolekcijaViewModel.rezultatPretrage;
+            //porukeViewModel = new PorukeViewModel();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //base.OnNavigatedTo(e);
 
-            DataContext = e.Parameter as MuzickaKolekcijaViewModel;
-        }
-
-        private void ArtistIsChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
-        {
-            Pjesma odabranaPjesma = args.SelectedItem as Pjesma;
-            muzickaKolekcijaViewModel.PrikaziPjesmu(odabranaPjesma);
+            DataContext = new PorukeViewModel();
         }
     }
 }

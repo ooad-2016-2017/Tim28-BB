@@ -10,29 +10,100 @@
     mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="EL_MuzickaKolekcija" x:DataType="data:MuzickaKolekcija">
-            <Grid>
+            <UserControl>
+                <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState>
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowHeight="0"></AdaptiveTrigger>
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Target="ikona.Width" Value="0"></Setter>
+                                <Setter Target="ikona.Height" Value="0"></Setter>
+                                <Setter Target="naziv.FontSize" Value="8"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState>
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowHeight="600"></AdaptiveTrigger>
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Target="ikona.Width" Value="60"></Setter>
+                                <Setter Target="ikona.Height" Value="60"></Setter>
+                                <Setter Target="naziv.FontSize" Value="15"></Setter>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="/Assets/MuzickiFolder.png" Width="60" Height="60"></Image>
-                <TextBlock Text="{x:Bind Naziv}" Margin="0,3,0,0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <Image Grid.Row="0" Name="ikona" Source="/Assets/MuzickiFolder.png" Width="60" Height="60"></Image>
+                <TextBlock Text="{x:Bind Naziv}" Name="naziv" Margin="0,3,0,0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
             </Grid>
+            </UserControl>
         </DataTemplate>
 
         <DataTemplate x:Key="EL_Pjesme" x:DataType="data:Pjesma">
-            <Grid>
+            <UserControl>
+                <Grid>
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup>
+                        <VisualState>
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowHeight="0"></AdaptiveTrigger>
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                    <Setter Target="izvodjac.FontSize" Value="10"></Setter>
+                                    <Setter Target="naziv.FontSize" Value="8"></Setter>
+                                </VisualState.Setters>
+                        </VisualState>
+                        <VisualState>
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowHeight="600"></AdaptiveTrigger>
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                    <Setter Target="izvodjac.FontSize" Value="20"></Setter>
+                                    <Setter Target="naziv.FontSize" Value="15"></Setter>
+                                </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Text="{x:Bind Izvodjac}" FontSize="20" Foreground="Green"></TextBlock>
-                <TextBlock Text="{x:Bind Naziv}" FontSize="15" Margin="0, 0, 0, 0" Grid.Row="1"></TextBlock>
+                <TextBlock Text="{x:Bind Izvodjac}" Name="izvodjac" Foreground="Green"></TextBlock>
+                <TextBlock Text="{x:Bind Naziv}" Name="naziv"  Margin="0, 0, 0, 0" Grid.Row="1"></TextBlock>
             </Grid>
+            </UserControl>
         </DataTemplate>
     </Page.Resources>
-    <Grid
-       >
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Pjesme.Margin" Value="50,0,50,0"></Setter>
+                        <Setter Target="Pjesme.Padding" Value="3,3,3,3"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="600"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Pjesme.Margin" Value="50,30,50,30"></Setter>
+                        <Setter Target="Pjesme.Padding" Value="15,15,15,15"></Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.Background>
             <ImageBrush ImageSource="Assets/profileBackGround.jpg"></ImageBrush>
         </Grid.Background>
@@ -41,9 +112,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-
         <AutoSuggestBox ItemsSource="{Binding RezultatiPretrage, Mode=TwoWay}"  Text="{Binding SearchingText, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Pjesme}" Grid.Row="0" Margin="10,10,10,10" BorderBrush="Green" PlaceholderText="Izvođač..." QueryIcon="Find" Background="White" QuerySubmitted="Search_Artist"  SuggestionChosen="ArtistIsChosen" IsEnabled="{Binding SearchingEnabled, Mode=TwoWay}"></AutoSuggestBox>
-
         <StackPanel Grid.Row="1" Name="Kolekcije" Opacity="0.75" Padding="15, 15, 15, 15" Margin="50, 10, 50, 0">
             <StackPanel.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
@@ -59,14 +128,14 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </StackPanel>
-        <StackPanel Name="Pjesme"  Grid.Row="2" Opacity="0.75" Padding="15, 15, 15, 15" Margin="50, 30, 50, 30">
+        <StackPanel Name="Pjesme"  Grid.Row="2" Opacity="0.75">
             <StackPanel.Background>
                 <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                     <GradientStop Color="White" Offset="0.75"></GradientStop>
                     <GradientStop Color="Green" Offset="1"></GradientStop>
                 </LinearGradientBrush>
             </StackPanel.Background>
-            <ListView Name="searchResults" Margin="10,10,10,10" BorderBrush="Green" ItemsSource="{Binding PjesmeIzOdabraneKolekcije, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Pjesme}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Disabled" SelectedItem="{Binding _OdabranaPjesma, Mode=TwoWay}"></ListView>
+            <ListView Name="searchResults" Margin="10,10,10,10" BorderBrush="Green" ItemsSource="{Binding PjesmeIzOdabraneKolekcije, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Pjesme}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollMode="Disabled" SelectedItem="{Binding _OdabranaPjesma, Mode=TwoWay}" Height="800"></ListView>
         </StackPanel>
         
     </Grid>

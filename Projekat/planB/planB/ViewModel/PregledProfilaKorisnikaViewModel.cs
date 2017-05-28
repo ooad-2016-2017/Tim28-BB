@@ -20,14 +20,19 @@ namespace planB.ViewModel
         public Korisnik TrenutniKorisnik { get; set; }
         public Korisnik OdabraniKorisnik { get; set; }
         public String ImeIPrezime { get; set; } // jer su u jednom TextBlock-u...
+        public String TekstPoruke { get; set; }
 
         public ICommand ZapratiKorisnika { get; set; }
         public ICommand PrikaziMuzickuKolekciju { get; set; }
         public ICommand PrikaziObaveze { get; set; }
+        public ICommand PosaljiPoruku { get; set; }
+        public ICommand ZavrsiSlanjePoruke { get; set; }
 
         private String followStatus;
         private int followNumber;
         private int followingNumber;
+
+        private Boolean unosPorukeVisibility;
 
         public PregledProfilaKorisnikaViewModel()
         {
@@ -39,6 +44,7 @@ namespace planB.ViewModel
             OdabraniKorisnik = _OdabraniKorisnik;
             TrenutniKorisnik = LoginViewModel.korisnik;
             ImeIPrezime = OdabraniKorisnik.Ime + " " + OdabraniKorisnik.Prezime;
+            UnosPorukeVisibility = false;
 
             FollowNumber = 0;
             FollowingNumber = 0;
@@ -48,6 +54,18 @@ namespace planB.ViewModel
             PrikaziMuzickuKolekciju = new RelayCommand<object>(prikaziMuzickuKolekciju);
             ZapratiKorisnika = new RelayCommand<object>(zapratiKorisnika);
             PrikaziObaveze = new RelayCommand<object>(prikaziObaveze);
+            PosaljiPoruku = new RelayCommand<object>(posaljiPoruku);
+            ZavrsiSlanjePoruke = new RelayCommand<object>(zavrsiSlanje);
+        }
+
+        public Boolean UnosPorukeVisibility
+        {
+            get { return unosPorukeVisibility; }
+            set
+            {
+                unosPorukeVisibility = value;
+                NotifyPropertyChanged(nameof(UnosPorukeVisibility));
+            }
         }
 
         public String FollowStatus
@@ -89,6 +107,38 @@ namespace planB.ViewModel
                     FollowStatus = "Pratim";
                 else
                     FollowStatus = "Prati";
+            }
+        }
+
+        private void posaljiPoruku(object parametar)
+        {
+            UnosPorukeVisibility = true;
+        }
+
+        private async void zavrsiSlanje(object parametar)
+        {
+            if (TekstPoruke.Length > 0)
+            {
+                using (var DB = new PlanBDbContext())
+                {
+                    Poruka novaPoruka = new Poruka();
+                    novaPoruka.DatumSlanja = DateTime.Today;
+                    novaPoruka.PosiljaocID = TrenutniKorisnik.ID;
+                    novaPoruka.PrimaocID = OdabraniKorisnik.ID;
+                    novaPoruka.Tekst = TekstPoruke;
+                    novaPoruka.StatusPoruke = StatusPoruke.Neprocitano;
+                    DB.Poruke.Add(novaPoruka);
+                    DB.SaveChanges();
+                }
+                Poruka = new MessageDialog("Poruka uspješno poslana.");
+                await Poruka.ShowAsync();
+                UnosPorukeVisibility = false;
+            }
+            else
+            {
+                Poruka = new MessageDialog("Ne možete poslati praznu poruku.");
+                await Poruka.ShowAsync();
+                return;
             }
         }
 
@@ -139,7 +189,7 @@ namespace planB.ViewModel
 
         private void prikaziMuzickuKolekciju(object parametar)
         {
-            PregledProfilaKorisnika.Frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel());
+            PregledProfilaKorisnika.Frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel(OdabraniKorisnik));
         }
 
         private void prikaziObaveze(object parametar)

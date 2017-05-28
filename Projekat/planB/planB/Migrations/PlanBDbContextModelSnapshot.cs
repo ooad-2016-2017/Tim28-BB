@@ -55,6 +55,8 @@ namespace planBMigrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("DatumKreiranja");
+
                     b.Property<int>("KorisnikID");
 
                     b.Property<string>("Naziv");
@@ -96,6 +98,22 @@ namespace planBMigrations
                     b.Property<string>("Preview");
 
                     b.Property<string>("UrlSlike");
+
+                    b.Key("ID");
+                });
+
+            builder.Entity("planB.Models.Poruka", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DatumSlanja");
+
+                    b.Property<int?>("PosiljaocID");
+
+                    b.Property<int?>("PrimaocID");
+
+                    b.Property<string>("Tekst");
 
                     b.Key("ID");
                 });
@@ -146,6 +164,17 @@ namespace planBMigrations
                     b.Reference("planB.Models.MuzickaKolekcija")
                         .InverseCollection()
                         .ForeignKey("MuzickaKolekcijaID");
+                });
+
+            builder.Entity("planB.Models.Poruka", b =>
+                {
+                    b.Reference("planB.Models.Korisnik")
+                        .InverseCollection()
+                        .ForeignKey("PosiljaocID");
+
+                    b.Reference("planB.Models.Korisnik")
+                        .InverseCollection()
+                        .ForeignKey("PrimaocID");
                 });
 
             builder.Entity("planB.Models.StavkaDnevnika", b =>

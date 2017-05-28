@@ -1,0 +1,45 @@
+Analiza prethodno dizajniranog dijagrama klasa sa aspekta upotrebe dizajn paterna
+
+
+1. Strukturalni paterni
+
+Prvi strukturalni patern koji bi se mogao primijeniti i iskoristiti je, svakako, Adapter patern, 
+prvenstveno zbog toga što ovaj patern omogucava upotrebu vec postojecih klasa, odnosno, omogucava
+da definiramo i drugaciji interfejs neke vec postojece klase, a da pri tome ne mijenjamo
+postojecu klasu. Nakon nekog izvjesnog vremena korištenja aplikacije, neka od
+funkcionalnosti aplikacije bi se mogla promijeniti, a za tu svrhu bi se mogao iskoristiti
+Adapter patern. Naprimjer, trenutno aplikacija omogucava dodavanje obaveza i njihovu podjelu
+na privatne i javne, te na prioritetne i manje prioritetne obaveze. Promjena koja bi se mogla 
+napraviti je, recimo, da se obaveze ne dijele samo na privatne i javne, vec da postoji mogucnost
+skrivanja obaveza od nekog korisnika (ili više njih). Ista stvar bi se mogla promijeniti i u 
+trenutnoj funkcionalnosti dnenvika (bloga). Realizacija ovog primjera korištenjem Adapater
+paterna je data u prilogu (AdapterPatern).
+
+Sljedeci patern koji bi se, eventualno, mogao iskoristiti je Facade patern. Recimo, ovaj patern
+bi se mogao iskoristi kod login-a korisnika. Naime, nakon što se korisnik prijavi, potrebno je
+"povuci" iz baze podataka njegove podatke - obaveze, dnevnik, kolekcije, informacija o tome koga 
+prati i ko ga prati. Ono što se može kreirati jesu klase za svaku od ovih funkcionalnosti, te
+ih pozivati iz Facade klase, a zatim kod login-a korisnika pozvati samo Facade klasu. Primjer
+upotrebe Facade paterna za datu funckionalnost dat je u prilogu (FacadePatern).
+
+Još jedan od strukturalnih paterna koji bi mogao naci upotrebu je Proxy patern. Kod pregleda profila
+drugog korisnika postoje neke opcije koje treba zabraniti, obzirom da se koriste iste forme. Proxy
+klasa bi se mogla iskoristiti upravu u svrhu te zabrane. Dakle, u Proxy klasi bi bile vršene kontrole
+pristupa "glavnom" objektu. Primjer (pojednostavljene) implementacije dat je u prilogu (ProxyPatern).
+
+
+2. Kreacijski paterni
+
+Kreacijski patern koji bi se mogao iskoristiti je Prototype patern, odnosno, patern koji omogucava 
+kreiranje novih objekata klonirajuci jednu od postojecih instanci, a u cilju smanjivanja broja klasa.
+Recimo, dovoljno je imati klasu Obaveza, koja instancira obavezu, a pri kreiranju stavke dnevnika (npr.
+neka stavka kraceg sadržaja) izvršiti kloniranje, a pri tome samo izmijeniti parametar prioriteta 
+obaveze (npr. dodijeliti mu vrijednost -1, obzirom da stavka dnevnika nema prioritet). Pojednostavljeni
+primjer implementacije ove funkcionalnosti je dat u prilogu (PrototypePatern).
+
+Factory Method patern je takoder kreacijski patern koji bi se mogao iskoristiti. Recimo, kada korisnik
+ude na svoj profil, ima izbor izmedu prikaza obaveza, dnevnika, kolekcije i novosti. Ova funckionalnost
+bi se mogla realizirati i preko Factory Method paterna, pri cemu bi imali 4 klase koje na razlicite
+nacine implementiraju interfejs, u zavisnosti od klika na dugme. Takoder, potrebno bi bilo napraviti
+i Creator klasu koja ce implementirati FactoryMethod(), odnosno, metodu koja pravi odluku koju od
+4 klase instancirati. Pojednostavljeni primjer implementacije dat je u prilogu (FactoryMethodPatern)

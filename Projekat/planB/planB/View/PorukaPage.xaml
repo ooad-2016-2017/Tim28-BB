@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="planB.View.PorukaPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:planB.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helper="using:planB.Helpers"
+    xmlns:data="using:planB.Models"
+    mc:Ignorable="d">
+    
+    <Page.Resources>
+        <helper:BooleanToVisibilityConverter x:Key="BoolToVis"></helper:BooleanToVisibilityConverter>
+        <DataTemplate x:Key="EL_Poruke" x:DataType="data:Poruka">
+            <UserControl>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{x:Bind Posiljaoc}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{x:Bind Tekst}" Foreground="Gray"></TextBlock>
+                    <TextBlock Grid.Row="2" Text="{x:Bind DatumSlanja}" Foreground="Gray"></TextBlock>
+                </Grid>
+            </UserControl>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                <GradientStop Color="White" Offset="0.75"></GradientStop>
+                <GradientStop Color="Green" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <ListView Margin="20,20,20,20" ItemsSource="{Binding Poruke, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Poruke}" SelectedItem="{Binding OdabranaPoruka, Mode=TwoWay}"></ListView>
+        <Grid Grid.Column="1" Name="PregledPoruke" Visibility="{Binding Path=PregledPorukeVisibility, Converter={StaticResource BoolToVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Margin="40" Text="{Binding OdabranaPoruka.Tekst, Mode=TwoWay}"></TextBlock>
+            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Green" Foreground="White" Width="200" Content="Odgovori" Command="{Binding Path=OdgovoriNaPoruku, Mode=TwoWay}"></Button>
+        </Grid>
+        <Grid Grid.Column="1" Name="UnosPoruke" Visibility="{Binding Path=UnosPorukeVisibility, Converter={StaticResource BoolToVis}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox PlaceholderText="Unesite tekst poruke..." BorderBrush="Green" Margin="40" TextWrapping="Wrap" Text="{Binding SadrzajNovePoruke, Mode=TwoWay}"></TextBox>
+            <Button Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Background="Green" Foreground="White" Width="200" Content="Pošalji" Command="{Binding Path=PosaljiPoruku, Mode=TwoWay}"></Button>
+
+        </Grid>
+    </Grid>
+</Page>

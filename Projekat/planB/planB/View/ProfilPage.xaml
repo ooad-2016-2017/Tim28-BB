@@ -74,6 +74,8 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
             <Image Grid.Row="0" Source="/Assets/user.jpg" Margin="7"></Image>
@@ -95,6 +97,15 @@
                 </StackPanel>
             </Button>
             <Button Grid.Row="4" Content="Dnevnik" Command="{Binding Path=PrikaziDnevnik, Mode=TwoWay}" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
+            <Button Grid.Row="5" Content="Lokacija" Command="{Binding Path=PrikaziLokaciju, Mode=TwoWay}" FontSize="20" FontFamily="Calibri" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
+            <Button Grid.Row="6" Command="{Binding Path=PrikaziPoruke, Mode=TwoWay}" FontSize="20" FontFamily="Calibri" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Poruke" FontFamily="Calibri" FontSize="20"></TextBlock>
+                    <TextBlock Text=" (" FontFamily="Calibri" FontSize="20"></TextBlock>
+                    <TextBlock Text="{Binding BrojNovihPoruka, Mode=TwoWay}" FontFamily="Calibri" FontSize="20"></TextBlock>
+                    <TextBlock Text=")" FontFamily="Calibri" FontSize="20"></TextBlock>
+                </StackPanel>
+            </Button>
         </Grid>
         <Grid Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>

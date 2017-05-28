@@ -5,7 +5,12 @@
     xmlns:local="using:planB.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helper="using:planB.Helpers"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <helper:BooleanToVisibilityConverter x:Key="BoolToVis"></helper:BooleanToVisibilityConverter>
+    </Page.Resources>
 
     <Grid>
         <Grid.Background>
@@ -74,18 +79,22 @@
                 <TextBlock Name="followersNumber" Text="{Binding FollowNumber, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
             </StackPanel>
         </Grid>
-        <Button Name="FollowButton" Command="{Binding Path=ZapratiKorisnika, Mode=TwoWay}" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding FollowStatus, Mode=TwoWay}" Background="Green" Foreground="White" Margin="20,0,20,10" Opacity="0.75"></Button>
-        <Grid Grid.Row="2" Margin="20, 0, 20, 20">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="227*"/>
-                <ColumnDefinition Width="93*"/>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Button Name="FollowButton" Command="{Binding Path=ZapratiKorisnika, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding FollowStatus, Mode=TwoWay}" Background="Green" Foreground="White" Margin="20,0,20,10" Opacity="0.75"></Button>
+            <Button Name="MsgButton" Command="{Binding Path=PosaljiPoruku, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Poruka" Background="Green" Foreground="White" Opacity="0.75" Grid.Column="1" Margin="0,0,20,10"></Button>
+        </Grid>
+        <Grid Grid.Row="2" Margin="20, 0, 20, 20">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Name="Menu" Grid.Row="0" Background="White" Opacity="0.75" Grid.ColumnSpan="2" Margin="0,0,0,421.333" Grid.RowSpan="2">
+            <Grid Name="Menu" Grid.Row="0" Background="White" Opacity="0.75"  Margin="10,10,10,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -97,9 +106,12 @@
                 <Button Content="Blog" Grid.Column="2" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
                 <Button Content="Muzička kolekcija" Grid.Column="3" Style="{StaticResource ButtonStyle}" Command="{Binding Path=PrikaziMuzickuKolekciju, Mode=TwoWay}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
             </Grid>
-            <Frame Grid.Row="1" Name="myFrame" Margin="20,20.333,20,19.333" Grid.ColumnSpan="2"></Frame>
-
-            <Grid Name="MenuMobile" Grid.Row="0" Background="White" Opacity="0.75" Grid.ColumnSpan="2" Margin="0,0,0,421.333" Grid.RowSpan="2">
+            <Frame Grid.Row="1" Name="myFrame" Margin="10,10,10,10"></Frame>
+            <StackPanel Name="UnosPoruke" Background="White" Orientation="Vertical" Grid.Row="1" Margin="100,50,100,100" Opacity="0.85" Visibility="{Binding UnosPorukeVisibility, Converter={Binding BoolToVis}}">
+                <TextBox  Text="{Binding TekstPoruke, Mode=TwoWay}" TextWrapping="Wrap" BorderBrush="Green" Margin="40, 40, 40, 40" PlaceholderText="Unesite tekst poruke..."></TextBox>
+                <Button Background="Green" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Pošalji" Width="200" Command="{Binding ZavrsiSlanjePoruke, Mode=TwoWay}"></Button>
+            </StackPanel>
+                <Grid Name="MenuMobile" Grid.Row="0" Background="White" Opacity="0.75" Grid.ColumnSpan="2" Margin="0,0,0,421.333" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -113,4 +125,5 @@
             </Grid>
         </Grid>
     </Grid>
+    
 </Page>

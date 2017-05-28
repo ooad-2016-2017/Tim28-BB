@@ -1,29 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace planB.Models
 {
+    public enum StatusPoruke {Procitano = 1, Neprocitano = 2};
     public class Poruka : INotifyPropertyChanged
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        int id;
         String tekst;
         DateTime datumSlanja;
-        Korisnik posiljaoc;
-        Korisnik primaoc;
+        int posiljaocID;
+        int primaocID;
+        StatusPoruke statusPoruke;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Poruka() { }
         
-        public Poruka(String _tekst, DateTime _datumSlanja, Korisnik _posiljaoc, Korisnik _primaoc)
+        public Poruka(String _tekst, DateTime _datumSlanja)
         {
             tekst = _tekst;
             datumSlanja = _datumSlanja;
-            posiljaoc = _posiljaoc;
-            primaoc = _primaoc;
         }
 
         private void NotifyPropertyChanged(String info)
@@ -31,6 +34,16 @@ namespace planB.Models
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
+        }
+
+        public int ID
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                NotifyPropertyChanged(nameof(ID));
             }
         }
 
@@ -54,23 +67,45 @@ namespace planB.Models
             }
         }
 
-        public Korisnik Posiljaoc
+        public int PosiljaocID
         {
-            get { return posiljaoc; }
+            get { return posiljaocID; }
             set
             {
-                posiljaoc = value;
-                NotifyPropertyChanged(nameof(Posiljaoc));
+                posiljaocID = value;
+                NotifyPropertyChanged(nameof(PosiljaocID));
             }
         }
 
-        public Korisnik Primaoc
+        public int PrimaocID
         {
-            get { return primaoc; }
+            get { return primaocID; }
             set
             {
-                primaoc = value;
-                NotifyPropertyChanged(nameof(Primaoc));
+                primaocID = value;
+                NotifyPropertyChanged(nameof(PrimaocID));
+            }
+        }
+
+        public String Posiljaoc
+        {
+            get
+            {
+                using (var DB = new PlanBDbContext())
+                {
+                    return DB.Korisnici.Where(x => (x.ID == PosiljaocID)).FirstOrDefault().Ime +
+                        DB.Korisnici.Where(x => (x.ID == PosiljaocID)).FirstOrDefault().Prezime;
+                }
+            }
+        }
+
+        public StatusPoruke StatusPoruke
+        {
+            get { return statusPoruke; }
+            set
+            {
+                statusPoruke = value;
+                NotifyPropertyChanged(nameof(StatusPoruke));
             }
         }
     }

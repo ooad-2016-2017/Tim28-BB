@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="planB.View.LocationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:planB.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    xmlns:helper="using:planB.Helpers"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <helper:BooleanToVisibilityConverter x:Key="boolean" />
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                <GradientStop Color="White" Offset="0.75"></GradientStop>
+                <GradientStop Color="Green" Offset="1"></GradientStop>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Margin="20, 20, 20, 10" Name="lociraj" Content="Lociraj" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Background="Green" Foreground="White" Command="{Binding Path=LocirajKorisnika, Mode=TwoWay}"></Button>
+        <TextBlock Margin="20, 10, 20, 10" Name="lokacija" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee" Text="{Binding Adresa, Mode=TwoWay}" Visibility="{Binding Path=AdresaVisibility, Converter={StaticResource boolean}}"></TextBlock>
+        <Button Margin="20, 10, 20, 10" Name="share" Grid.Row="2" Content="Podijeli" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Green" Width="200" Foreground="White" Command="{Binding Path=PodijeliLokaciju, Mode=TwoWay}" Visibility="{Binding Path=ShareVisibility, Converter={StaticResource boolean}}"></Button>
+        <maps:MapControl Margin="20, 10, 10, 20" Grid.Row="3" x:Name="mapa" Center="{Binding TrenutnaLokacija, Mode=OneWay}" Visibility="{Binding MapaVisibility, Converter={StaticResource boolean}}"/>
+    </Grid>
+</Page>

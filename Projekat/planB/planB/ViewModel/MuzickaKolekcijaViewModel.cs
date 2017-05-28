@@ -57,6 +57,11 @@ namespace planB.ViewModel
         {
             TrenutniKorisnik = trenutniKorisnik;
             SearchingEnabled = false;
+            if (TrenutniKorisnik.MuzickaKolekcija.Count == 0)
+            {
+                dajKolekcije();
+            }
+            Kolekcija = new ObservableCollection<MuzickaKolekcija>(TrenutniKorisnik.MuzickaKolekcija);
         }
 
         public ObservableCollection<Pjesma> RezultatiPretrage

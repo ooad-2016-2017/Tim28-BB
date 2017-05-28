@@ -94,6 +94,7 @@
     <Content Include="Assets\Fonts\Handlee-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="app.manifest" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -101,13 +102,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DBModels\Follow.cs" />
+    <Compile Include="Helpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="INavigate.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20170523013846_InitialMigration.cs" />
-    <Compile Include="Migrations\20170523013846_InitialMigration.designer.cs">
-      <DependentUpon>20170523013846_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170528175849_InitialMigration.cs" />
+    <Compile Include="Migrations\20170528175849_InitialMigration.designer.cs">
+      <DependentUpon>20170528175849_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PlanBDbContextModelSnapshot.cs" />
     <Compile Include="Models\Korisnik.cs" />
@@ -125,11 +127,13 @@
     <Compile Include="Services\PretragaMuzike.cs" />
     <Compile Include="Services\SerachingResult.cs" />
     <Compile Include="Services\Track.cs" />
+    <Compile Include="ViewModel\LocationViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MuzickaKolekcijaViewModel.cs" />
     <Compile Include="ViewModel\NovostiViewModel.cs" />
     <Compile Include="ViewModel\ObavezaViewModel.cs" />
     <Compile Include="ViewModel\PjesmaViewModel.cs" />
+    <Compile Include="ViewModel\PorukeViewModel.cs" />
     <Compile Include="ViewModel\PostavkeViewModel.cs" />
     <Compile Include="ViewModel\PregledObavezaViewModel.cs" />
     <Compile Include="ViewModel\PregledProfilaKorisnikaViewModel.cs" />
@@ -137,8 +141,14 @@
     <Compile Include="View\DnevnikPage.xaml.cs">
       <DependentUpon>DnevnikPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\LocationPage.xaml.cs">
+      <DependentUpon>LocationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MuzickaKolekcijaPage.xaml.cs">
       <DependentUpon>MuzickaKolekcijaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PorukaPage.xaml.cs">
+      <DependentUpon>PorukaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProfilPage.xaml.cs">
       <DependentUpon>ProfilPage.xaml</DependentUpon>
@@ -204,7 +214,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\LocationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MuzickaKolekcijaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PorukaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -244,6 +262,9 @@
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
