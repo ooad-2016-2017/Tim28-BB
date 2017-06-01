@@ -1,4 +1,6 @@
-﻿using planB.Models;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using planB.AzureModels;
+using planB.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +15,9 @@ namespace planB.ViewModel
 {
     class ObavezaViewModel : INotifyPropertyChanged
     {
+
+        IMobileServiceTable<ObavezaAzure> userTableObj = App.MobileService.GetTable<ObavezaAzure>();
+
         public MessageDialog Poruka { get; set; }
         public String TextObaveze { get; set; }
         public ICommand SpremiButton { get; set; }
@@ -84,9 +89,19 @@ namespace planB.ViewModel
 
                 else
                 {
-                   // DateTime d = DateTime.ParseExact(DatumText, "dd.mm.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
+                    // DateTime d = DateTime.ParseExact(DatumText, "dd.mm.yyyy.", System.Globalization.CultureInfo.InvariantCulture);
                     //new DateTime(int.Parse(String.Concat(DatumText[6] + DatumText[7] + DatumText[8] + DatumText[9])), int.Parse(String.Concat(DatumText[3] + DatumText[4])), int.Parse(String.Concat(DatumText[0] + DatumText[1])))
-                    Obaveza obaveza = new Obaveza(0, datum, TextObaveze, vidljivost, int.Parse(sliderVrijednost), korisnik.ID);
+
+                    ObavezaAzure obavezaAzure = new ObavezaAzure();
+                    obavezaAzure.datum = datum;
+                    obavezaAzure.kreatorID = korisnik.idAzure;
+                    obavezaAzure.postaviVidljivost(vidljivost);
+                    obavezaAzure.sadrzaj = TextObaveze;
+                    obavezaAzure.prioritet = int.Parse(sliderVrijednost);
+                    await userTableObj.InsertAsync(obavezaAzure);
+
+                    Obaveza obaveza = new Obaveza(0, datum, TextObaveze, vidljivost, int.Parse(sliderVrijednost), korisnik.idAzure);
+                    obaveza.kreatorAzure = obavezaAzure.id;
                     korisnik.Obaveze.Add(obaveza);
                     DB.Obaveze.Add(obaveza);
                     DB.SaveChanges();

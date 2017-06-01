@@ -19,8 +19,10 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <RelativePanel Grid.Column="0">
-                <Image Name="image" Grid.Column="0" Source="/Assets/user.jpg" Margin="10" Height="280" RelativePanel.AlignHorizontalCenterWithPanel="True"></Image>
-                <Button Name="promijeniButton" Margin="10" RelativePanel.Below="image" RelativePanel.AlignHorizontalCenterWithPanel="True" Content="Promijeni sliku profila" FontFamily="Calibri" FontSize="20" Background="Green" Foreground="White" Opacity="0.9"></Button>
+                <Image Name="image" Source="/Assets/user.jpg" Margin="10" Height="280" RelativePanel.AlignHorizontalCenterWithPanel="True"></Image>
+                <Image Name="SlikaControl" RelativePanel.Below="image" Height="10" HorizontalAlignment="Center" Margin="5,5,5,5" VerticalAlignment="Center" Source="{Binding Slika, Mode=TwoWay}"/>
+                <Button Content="Uslikaj" Name="button" RelativePanel.Below="SlikaControl" HorizontalAlignment="Stretch" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="5,5,5,5" VerticalAlignment="Top" Command="{Binding Path=Uslikaj, Mode=TwoWay}" FontFamily="Calibri" FontSize="20" Background="Green" Foreground="White" Opacity="0.9"/>
+                <Button Name="promijeniButton" Margin="10" RelativePanel.Below="button" RelativePanel.AlignHorizontalCenterWithPanel="True" Content="Promijeni sliku profila" FontFamily="Calibri" FontSize="20" Background="Green" Foreground="White" Opacity="0.9" Command="{Binding Path=Promijeni, Mode=TwoWay}"></Button>
             </RelativePanel>
             <StackPanel Orientation="Vertical" Grid.Column="1">
                 <StackPanel Orientation="Vertical" Margin="5,10,10,5" Background="WhiteSmoke" Opacity="0.75" BorderBrush="Green" BorderThickness="1,1,1,1">

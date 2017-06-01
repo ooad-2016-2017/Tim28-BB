@@ -12,13 +12,13 @@ namespace planB.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         int id;
+        public String idAzure { get; set; }
         String ime;
         String prezime;
         String korisnickoIme;
         String lozinka;
         DateTime datumRodjenja;
         String email;
-        String status;
         byte[] slika;
 
         List<Obaveza> obaveze;

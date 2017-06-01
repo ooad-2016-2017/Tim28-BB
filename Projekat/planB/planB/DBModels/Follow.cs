@@ -11,12 +11,12 @@ namespace planB.DBModels
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         int id;
-        int korisnikID;
-        int following_KorisnikID;
+        String korisnikID;
+        String following_KorisnikID;
 
         public Follow() { }
 
-        public Follow(int _id, int _korisnikID, int _following_KorisnikID)
+        public Follow(int _id, String _korisnikID, String _following_KorisnikID)
         {
             id = _id;
             korisnikID = _korisnikID;
@@ -29,13 +29,13 @@ namespace planB.DBModels
             set { id = value; }
         }
 
-        public int KorisnikID
+        public String KorisnikID
         {
             get { return korisnikID; }
             set { korisnikID = value; }
         }
 
-        public int Following_KorisnikID
+        public String Following_KorisnikID
         {
             get { return following_KorisnikID; }
             set { following_KorisnikID = value; }

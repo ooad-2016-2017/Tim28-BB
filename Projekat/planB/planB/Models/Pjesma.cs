@@ -16,7 +16,7 @@ namespace planB.Models
         String naziv;
         String preview;
         String urlSlike;
-        int muzickaKolekcijaID;
+        public String kolekcijaAzure{ get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -83,16 +83,6 @@ namespace planB.Models
         {
             get { return urlSlike; }
             set { urlSlike = value; }
-        }
-
-        public int MuzickaKolekcijaID
-        {
-            get { return muzickaKolekcijaID; }
-            set
-            {
-                muzickaKolekcijaID = value;
-                NotifyPropertyChanged(nameof(MuzickaKolekcijaID));
-            }
         }
     }
 }

@@ -25,11 +25,11 @@ namespace planB.ViewModel
         public ICommand ObavezaButtonClick { get; set; }
         DateTime datum;
         public List<Obaveza> ob = new List<Obaveza>();
-        int id;
+        String id;
 
 
 
-        public PregledObavezaViewModel(int id = -1)
+        public PregledObavezaViewModel(String id = "")
         {
             //jeLiMojProfil = _jeLiMojProfil;
             this.id = id;
@@ -37,14 +37,14 @@ namespace planB.ViewModel
             ObavezaButtonClick = new RelayCommand<object>(obavezaButtonClick);
             OdabranDatum = new RelayCommand<object>(odabranDatum);
             
-            if (id != -1)
+            if (id != "")
             {
                 using (var DB = new PlanBDbContext())
                 {
-                    korisnik = DB.Korisnici.Where(x => (x.ID == id)).FirstOrDefault();
+                    korisnik = DB.Korisnici.Where(x => (x.idAzure == id)).FirstOrDefault();
                     //korisnik.Obaveze = DB.Obaveze.Where(x => (x.KreatorID == id)).ToList();
                     foreach (Obaveza o in DB.Obaveze)
-                        if (o.KreatorID == id)
+                        if (o.kreatorAzure == id)
                             korisnik.Obaveze.Add(o);
                 }
             }
@@ -102,7 +102,7 @@ namespace planB.ViewModel
                 }
                 else
                 {
-                    if(id == -1)
+                    if(id == "")
                     {
                         ob.Add(o);
                     }

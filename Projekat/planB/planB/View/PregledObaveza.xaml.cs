@@ -38,6 +38,7 @@ namespace planB.View
             //base.OnNavigatedTo(e);
 
             DataContext = e.Parameter as PregledObavezaViewModel;
+
         }
 
         private void dnevnikButton_Click(object sender, RoutedEventArgs e)

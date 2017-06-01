@@ -1,4 +1,6 @@
-﻿using planB.Models;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using planB.AzureModels;
+using planB.Models;
 using planB.Services;
 using planB.View;
 using System;
@@ -173,13 +175,22 @@ namespace planB.ViewModel
                     return;
                 }
 
-                Pjesma postojecaPjesma = DB.Pjesme.Where(x => (x.MuzickaKolekcijaID == odabranaPjesma.ID)).FirstOrDefault();
+                Pjesma postojecaPjesma = null; // DB.Pjesme.Where(x => (x.kolekcijaAzure == odabranaPjesma.ID)).FirstOrDefault();
                 if (postojecaPjesma != null)
                 {
                     Poruka = new MessageDialog("Pjesma vec postoji u kolekciji.");
                     await Poruka.ShowAsync();
                     return;
                 }
+
+                IMobileServiceTable<KolekcijaAzure> userTableObj = App.MobileService.GetTable<KolekcijaAzure>();
+                KolekcijaAzure novaKolekcija1 = new KolekcijaAzure();
+                novaKolekcija1.naziv = NazivNoveKolekcije;
+                novaKolekcija1.datumKreiranja = DateTime.Today;
+                novaKolekcija1.korisnikID = TrenutniKorisnik.idAzure;
+                await userTableObj.InsertAsync(novaKolekcija1);
+
+                odabranaPjesma.kolekcijaAzure = novaKolekcija1.id;
 
                 MuzickaKolekcija novaKolekcija = new MuzickaKolekcija();
                 novaKolekcija.Naziv = NazivNoveKolekcije;
@@ -204,7 +215,7 @@ namespace planB.ViewModel
 
                 foreach(Pjesma p in DB.Pjesme)
                 {
-                    MuzickaKolekcija muzcikaKolekcija = DB.MuzickaKolekcija.Where(x => (x.ID == p.MuzickaKolekcijaID)).FirstOrDefault();
+                    MuzickaKolekcija muzcikaKolekcija = DB.MuzickaKolekcija.Where(x => (x.idAzure == p.kolekcijaAzure)).FirstOrDefault();
                     if (p.Naziv == OdabranaPjesma.Naziv && odabranaKolekcija.ID == muzcikaKolekcija.ID)
                     {
                         Poruka = new MessageDialog("Pjesma vec postoji u kolekciji.");
@@ -212,11 +223,23 @@ namespace planB.ViewModel
                         return;
                     }
                 }
-
+                
                 Pjesma novaPjesma = new Pjesma(OdabranaPjesma.Izvodjac, OdabranaPjesma.Naziv, OdabranaPjesma.Preview, OdabranaPjesma.UrlSlike);
-                novaPjesma.MuzickaKolekcijaID = odabranaKolekcija.ID;
+                novaPjesma.kolekcijaAzure = odabranaKolekcija.idAzure;
+
+
+                IMobileServiceTable<PjesmaAzure> userTableObj = App.MobileService.GetTable<PjesmaAzure>();
+                PjesmaAzure pjesmaAzure = new PjesmaAzure();
+                pjesmaAzure.naziv = novaPjesma.Naziv;
+                pjesmaAzure.preview = novaPjesma.Preview;
+                pjesmaAzure.urlSlike = novaPjesma.UrlSlike;
+                pjesmaAzure.izvodjac = novaPjesma.Izvodjac;
+                pjesmaAzure.muzickaKolekcijaID = novaPjesma.kolekcijaAzure;
+                await userTableObj.InsertAsync(pjesmaAzure);
+
                 muzickaKolekcija.Pjesme.Add(novaPjesma);
                 TrenutniKorisnik.MuzickaKolekcija.Where(x => (x.ID == muzickaKolekcija.ID)).FirstOrDefault().Pjesme.Add(novaPjesma);
+                
                 DB.Pjesme.Add(novaPjesma);
                 DB.SaveChanges();
                 Poruka = new MessageDialog("Pjesma uspješno dodana u kolekciju " + odabranaKolekcija.Naziv + ".");
@@ -237,7 +260,7 @@ namespace planB.ViewModel
                         {
                             foreach (Pjesma p in DB.Pjesme)
                             {
-                                if (p.MuzickaKolekcijaID == mk.ID && !mk.Pjesme.Contains(p))
+                                if (p.kolekcijaAzure == mk.idAzure && !mk.Pjesme.Contains(p))
                                     mk.Pjesme.Add(p);
                             }
                             

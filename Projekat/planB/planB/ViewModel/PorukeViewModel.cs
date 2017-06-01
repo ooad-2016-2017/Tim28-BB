@@ -1,4 +1,6 @@
-﻿using planB.Models;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using planB.AzureModels;
+using planB.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +15,8 @@ namespace planB.ViewModel
 {
     public class PorukeViewModel : INotifyPropertyChanged
     {
+        IMobileServiceTable<PorukaAzure> userTableObj = App.MobileService.GetTable<PorukaAzure>();
+
         public MessageDialog Poruka;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -125,10 +129,18 @@ namespace planB.ViewModel
             {
                 using (var DB = new PlanBDbContext())
                 {
+                    PorukaAzure poruka = new PorukaAzure();
+                    poruka.postaviStatus(StatusPoruke.Neprocitano);
+                    poruka.posiljaocID = TrenutniKorisnik.idAzure;
+                    poruka.primaocID = odabranaPoruka.posiljaocAzure;
+                    poruka.tekst = SadrzajNovePoruke;
+                    poruka.datumSlanja = DateTime.Today;
+                    await userTableObj.InsertAsync(poruka);
+
                     Poruka novaPoruka = new Poruka();
                     novaPoruka.Tekst = SadrzajNovePoruke;
-                    novaPoruka.PosiljaocID = TrenutniKorisnik.ID;
-                    novaPoruka.PrimaocID = OdabranaPoruka.PosiljaocID;
+                    novaPoruka.posiljaocAzure = poruka.posiljaocID;
+                    novaPoruka.primaocAzure = poruka.primaocID;
                     novaPoruka.StatusPoruke = StatusPoruke.Neprocitano;
                     novaPoruka.DatumSlanja = DateTime.Today;
                     DB.Poruke.Add(novaPoruka);
@@ -151,11 +163,15 @@ namespace planB.ViewModel
         private void povuciPoruke()
         {
             List<Poruka> poruke = new List<Poruka>();
+            int broj = 0;
             using (var DB = new PlanBDbContext())
             {
-                poruke = DB.Poruke.Where(x => (x.PrimaocID == TrenutniKorisnik.ID)).ToList();
-                NeprocitanePoruke = DB.Poruke.Where(x => (x.PrimaocID == TrenutniKorisnik.ID && x.StatusPoruke == StatusPoruke.Neprocitano)).ToList();
+                poruke = DB.Poruke.Where(x => (x.primaocAzure == TrenutniKorisnik.idAzure)).ToList();
+                NeprocitanePoruke = DB.Poruke.Where(x => (x.primaocAzure == TrenutniKorisnik.idAzure && x.StatusPoruke == StatusPoruke.Neprocitano)).ToList();
+
+                broj = DB.Poruke.Count();
             }
+
             poruke.Sort((x, y) => DateTime.Compare(x.DatumSlanja, y.DatumSlanja));
             Poruke = new ObservableCollection<Poruka>(poruke);
             BrojNovihPoruka = NeprocitanePoruke.Count;

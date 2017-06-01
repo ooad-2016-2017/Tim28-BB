@@ -23,11 +23,11 @@ namespace planB.View
     /// </summary>
     public sealed partial class PregledProfilaKorisnika : Page
     {
-        public static Frame Frame;
+        public static Frame frame;
         public PregledProfilaKorisnika()
         {
             this.InitializeComponent();
-            Frame = myFrame;
+            frame = myFrame;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

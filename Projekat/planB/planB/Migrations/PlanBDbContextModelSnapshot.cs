@@ -19,9 +19,9 @@ namespace planBMigrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Following_KorisnikID");
+                    b.Property<string>("Following_KorisnikID");
 
-                    b.Property<int>("KorisnikID");
+                    b.Property<string>("KorisnikID");
 
                     b.Key("ID");
                 });
@@ -47,6 +47,8 @@ namespace planBMigrations
 
                     b.Property<byte[]>("Slika");
 
+                    b.Property<string>("idAzure");
+
                     b.Key("ID");
                 });
 
@@ -61,6 +63,8 @@ namespace planBMigrations
 
                     b.Property<string>("Naziv");
 
+                    b.Property<string>("idAzure");
+
                     b.Key("ID");
                 });
 
@@ -73,13 +77,13 @@ namespace planBMigrations
 
                     b.Property<int?>("KorisnikID");
 
-                    b.Property<int>("KreatorID");
-
                     b.Property<int>("Prioritet");
 
                     b.Property<string>("Sadrzaj");
 
                     b.Property<int>("Vidljivost");
+
+                    b.Property<string>("kreatorAzure");
 
                     b.Key("ID");
                 });
@@ -91,13 +95,15 @@ namespace planBMigrations
 
                     b.Property<string>("Izvodjac");
 
-                    b.Property<int>("MuzickaKolekcijaID");
+                    b.Property<int?>("MuzickaKolekcijaID");
 
                     b.Property<string>("Naziv");
 
                     b.Property<string>("Preview");
 
                     b.Property<string>("UrlSlike");
+
+                    b.Property<string>("kolekcijaAzure");
 
                     b.Key("ID");
                 });
@@ -109,11 +115,13 @@ namespace planBMigrations
 
                     b.Property<DateTime>("DatumSlanja");
 
-                    b.Property<int?>("PosiljaocID");
-
-                    b.Property<int?>("PrimaocID");
+                    b.Property<int>("StatusPoruke");
 
                     b.Property<string>("Tekst");
+
+                    b.Property<string>("posiljaocAzure");
+
+                    b.Property<string>("primaocAzure");
 
                     b.Key("ID");
                 });
@@ -127,13 +135,13 @@ namespace planBMigrations
 
                     b.Property<int?>("KorisnikID");
 
-                    b.Property<int>("KreatorID");
-
                     b.Property<string>("Naslov");
 
                     b.Property<string>("Sadrzaj");
 
                     b.Property<int>("Vidljivost");
+
+                    b.Property<string>("kreatorAzure");
 
                     b.Key("ID");
                 });
@@ -164,17 +172,6 @@ namespace planBMigrations
                     b.Reference("planB.Models.MuzickaKolekcija")
                         .InverseCollection()
                         .ForeignKey("MuzickaKolekcijaID");
-                });
-
-            builder.Entity("planB.Models.Poruka", b =>
-                {
-                    b.Reference("planB.Models.Korisnik")
-                        .InverseCollection()
-                        .ForeignKey("PosiljaocID");
-
-                    b.Reference("planB.Models.Korisnik")
-                        .InverseCollection()
-                        .ForeignKey("PrimaocID");
                 });
 
             builder.Entity("planB.Models.StavkaDnevnika", b =>

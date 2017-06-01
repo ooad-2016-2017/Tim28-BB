@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using planB.AzureModels;
 
 namespace planB.Models
 {
@@ -15,12 +16,12 @@ namespace planB.Models
 
         public Obaveza() : base() { }
 
-        public Obaveza(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int _prioritet, int kreator) :
+        public Obaveza(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int _prioritet, String kreator) :
             base(_id, _datum, _sadrzaj, _vidljivost, kreator)
         {
             prioritet = _prioritet;
         }
-
+        
         public override string ToString()
         {
             return Sadrzaj;

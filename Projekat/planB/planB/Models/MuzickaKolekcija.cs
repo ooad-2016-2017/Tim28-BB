@@ -13,6 +13,7 @@ namespace planB.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         int id;
         String naziv;
+        public String idAzure { get; set; }
         List<Pjesma> pjesme;
         int korisnikID;
         DateTime datumKreiranja;

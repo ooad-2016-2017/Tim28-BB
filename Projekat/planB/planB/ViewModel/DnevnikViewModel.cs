@@ -1,4 +1,6 @@
-﻿using planB.Models;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using planB.AzureModels;
+using planB.Models;
 using planB.View;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,9 @@ namespace planB.ViewModel
 {
     class DnevnikViewModel : INotifyPropertyChanged
     {
+
+        IMobileServiceTable<StavkaDnevnikAzure> userTableObj = App.MobileService.GetTable<StavkaDnevnikAzure>();
+
         public List<StavkaDnevnika> lbxDnevnik { get; set; }
         public ICommand DodajDnevnik { get; set; }
         public String DatumText { get; set; }
@@ -83,9 +88,19 @@ namespace planB.ViewModel
                     await Poruka.ShowAsync();
                     return;
                 }
-                
+
                 //new DateTime(int.Parse(String.Concat(DatumText[6] + DatumText[7] + DatumText[8] + DatumText[9])), int.Parse(String.Concat(DatumText[3] + DatumText[4])), int.Parse(String.Concat(DatumText[0] + DatumText[1])))
-                StavkaDnevnika sd = new StavkaDnevnika(0, DateTime.Now, UnosDnevnikaTextBox, vidljivost, NaslovTextBox, korisnik.ID);
+
+                StavkaDnevnikAzure stavka = new StavkaDnevnikAzure();
+                stavka.datum = DateTime.Now;
+                stavka.kreatorID = korisnik.idAzure;
+                stavka.naslov = NaslovTextBox;
+                stavka.sadrzaj = UnosDnevnikaTextBox;
+                stavka.postaviVidljivost(vidljivost);
+                await userTableObj.InsertAsync(stavka);
+
+                StavkaDnevnika sd = new StavkaDnevnika(0, DateTime.Now, UnosDnevnikaTextBox, vidljivost, NaslovTextBox, korisnik.idAzure);
+                sd.kreatorAzure = stavka.id;
                 korisnik.Dnevnik.Add(sd);
                 DB.Dnevnik.Add(sd);
                 DB.SaveChanges();

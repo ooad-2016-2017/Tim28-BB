@@ -16,8 +16,7 @@ namespace planB.Services
         String SpotifyGETArtist = "&type=artist&limit=1";
         String SpotifyGETTracks = "https://api.spotify.com/v1/artists/";
         String SpotifyGETTracksAdd = "/top-tracks?country=US";
-
-        MessageDialog Poruka;
+        
         SearchingResult searchingResult;
 
         public PretragaMuzike()

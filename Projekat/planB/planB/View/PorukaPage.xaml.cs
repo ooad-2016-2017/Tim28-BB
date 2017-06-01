@@ -24,16 +24,13 @@ namespace planB.View
     /// </summary>
     public sealed partial class PorukaPage : Page
     {
-        PorukeViewModel porukeViewModel;
         public PorukaPage()
         {
             this.InitializeComponent();
-            //porukeViewModel = new PorukeViewModel();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //base.OnNavigatedTo(e);
 
             DataContext = new PorukeViewModel();
         }

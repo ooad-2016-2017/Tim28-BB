@@ -15,18 +15,22 @@ namespace planB.Models
         int id;
         String tekst;
         DateTime datumSlanja;
-        int posiljaocID;
-        int primaocID;
+        public String posiljaocAzure { get; set;}
+        public String primaocAzure { get; set; }
+        public String idAzure;
         StatusPoruke statusPoruke;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Poruka() { }
         
-        public Poruka(String _tekst, DateTime _datumSlanja)
+        public Poruka(String _tekst, DateTime _datumSlanja, String poslao, String primio, StatusPoruke status)
         {
             tekst = _tekst;
             datumSlanja = _datumSlanja;
+            posiljaocAzure = poslao;
+            primaocAzure = primio;
+            statusPoruke = status;
         }
 
         private void NotifyPropertyChanged(String info)
@@ -67,34 +71,14 @@ namespace planB.Models
             }
         }
 
-        public int PosiljaocID
-        {
-            get { return posiljaocID; }
-            set
-            {
-                posiljaocID = value;
-                NotifyPropertyChanged(nameof(PosiljaocID));
-            }
-        }
-
-        public int PrimaocID
-        {
-            get { return primaocID; }
-            set
-            {
-                primaocID = value;
-                NotifyPropertyChanged(nameof(PrimaocID));
-            }
-        }
-
         public String Posiljaoc
         {
             get
             {
                 using (var DB = new PlanBDbContext())
                 {
-                    return DB.Korisnici.Where(x => (x.ID == PosiljaocID)).FirstOrDefault().Ime +
-                        DB.Korisnici.Where(x => (x.ID == PosiljaocID)).FirstOrDefault().Prezime;
+                    return DB.Korisnici.Where(x => (x.idAzure == posiljaocAzure)).FirstOrDefault().Ime +
+                        DB.Korisnici.Where(x => (x.idAzure == posiljaocAzure)).FirstOrDefault().Prezime;
                 }
             }
         }

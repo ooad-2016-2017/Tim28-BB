@@ -15,7 +15,7 @@ namespace planB.Models
 
         public StavkaDnevnika() : base() { }
 
-        public StavkaDnevnika(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, String _naslov, int kreator) :
+        public StavkaDnevnika(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, String _naslov, String kreator) :
             base(_id, _datum, _sadrzaj, _vidljivost, kreator)
         {
             naslov = _naslov;

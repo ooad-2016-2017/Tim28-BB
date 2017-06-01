@@ -27,7 +27,6 @@ namespace planB.ViewModel
         public ICommand KolekcijeNovosti { get; set; }
 
         List<Follow> followLista;
-        MuzickaKolekcijaViewModel muzickaKolekcijaViewModel;
 
         public NovostiViewModel()
         {
@@ -78,7 +77,7 @@ namespace planB.ViewModel
         {
             using (var DB = new PlanBDbContext())
             {
-                followLista = DB.Follow.Where(x => (x.KorisnikID == TrenutniKorisnik.ID)).ToList();
+                followLista = DB.Follow.Where(x => (x.KorisnikID == TrenutniKorisnik.idAzure)).ToList();
             }
         }
 
@@ -90,12 +89,12 @@ namespace planB.ViewModel
                 {
                     foreach(Obaveza o in DB.Obaveze)
                     {
-                        if (o.KreatorID == f.Following_KorisnikID)
+                        if (o.kreatorAzure == f.Following_KorisnikID)
                             Stavke.Add(o);
                     }
                     foreach(StavkaDnevnika sd in DB.Dnevnik)
                     {
-                        if (sd.KreatorID == f.Following_KorisnikID)
+                        if (sd.kreatorAzure == f.Following_KorisnikID)
                             Stavke.Add(sd);
                     }
                 }
@@ -110,7 +109,7 @@ namespace planB.ViewModel
                 {
                    foreach(MuzickaKolekcija mk in DB.MuzickaKolekcija)
                     {
-                        if (mk.KorisnikID == f.Following_KorisnikID)
+                        if (mk.idAzure == f.Following_KorisnikID)
                         {
                             Kolekcije.Add(mk);
                         }

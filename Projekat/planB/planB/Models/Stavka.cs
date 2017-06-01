@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace planB.Models
 {
-    public enum Vidljivost { Privatno = 1, Javno = 2, Nista}
+    public enum Vidljivost { Privatno = 1, Javno = 2, Nista = 3}
     public abstract class Stavka : INotifyPropertyChanged
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -16,18 +16,18 @@ namespace planB.Models
         DateTime datum;
         String sadrzaj;
         Vidljivost vidljivost;
-        int kreatorID;
+        public String kreatorAzure { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Stavka() { }
-        public Stavka(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, int kreator)
+        public Stavka(int _id, DateTime _datum, String _sadrzaj, Vidljivost _vidljivost, String kreator)
         {
             datum = _datum;
             sadrzaj = _sadrzaj;
             vidljivost = _vidljivost;
             id = _id;
-            kreatorID = kreator;
+            kreatorAzure = kreator;
         }
 
         private void NotifyPropertyChanged(String info)
@@ -77,24 +77,14 @@ namespace planB.Models
                 NotifyPropertyChanged(nameof(Vidljivost));
             }
         }
-
-        public int KreatorID
-        {
-            get { return kreatorID; }
-            set
-            {
-                kreatorID = value;
-                NotifyPropertyChanged(nameof(KreatorID));
-            }
-        }
-
+        
         public String Kreator
         {
             get
             {
                 using (var DB = new PlanBDbContext())
                 {
-                    Korisnik k = DB.Korisnici.Where(x => (x.ID == kreatorID)).FirstOrDefault();
+                    Korisnik k = DB.Korisnici.Where(x => (x.idAzure == kreatorAzure)).FirstOrDefault();
                     return k.Ime + " " + k.Prezime;
                 }
             }

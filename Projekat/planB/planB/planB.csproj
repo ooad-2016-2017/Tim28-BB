@@ -101,15 +101,21 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AzureModels\KolekcijaAzure.cs" />
+    <Compile Include="AzureModels\KorisnikAzure.cs" />
+    <Compile Include="AzureModels\ObavezaAzure.cs" />
+    <Compile Include="AzureModels\PjesmaAzure.cs" />
+    <Compile Include="AzureModels\PorukaAzure.cs" />
+    <Compile Include="AzureModels\StavkaDnevnikAzure.cs" />
     <Compile Include="DBModels\Follow.cs" />
     <Compile Include="Helpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="INavigate.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20170528175849_InitialMigration.cs" />
-    <Compile Include="Migrations\20170528175849_InitialMigration.designer.cs">
-      <DependentUpon>20170528175849_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\20170601204917_MyDatabase.cs" />
+    <Compile Include="Migrations\20170601204917_MyDatabase.designer.cs">
+      <DependentUpon>20170601204917_MyDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PlanBDbContextModelSnapshot.cs" />
     <Compile Include="Models\Korisnik.cs" />

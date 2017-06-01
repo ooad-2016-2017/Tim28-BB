@@ -102,7 +102,7 @@ namespace planB.ViewModel
         {
             using (var DB = new PlanBDbContext())
             {
-                Follow followCheck = DB.Follow.Where(x => (x.KorisnikID == TrenutniKorisnik.ID && x.Following_KorisnikID == OdabraniKorisnik.ID)).FirstOrDefault();
+                Follow followCheck = DB.Follow.Where(x => (x.KorisnikID == TrenutniKorisnik.idAzure && x.Following_KorisnikID == OdabraniKorisnik.idAzure)).FirstOrDefault();
                 if (followCheck != null)
                     FollowStatus = "Pratim";
                 else
@@ -123,8 +123,8 @@ namespace planB.ViewModel
                 {
                     Poruka novaPoruka = new Poruka();
                     novaPoruka.DatumSlanja = DateTime.Today;
-                    novaPoruka.PosiljaocID = TrenutniKorisnik.ID;
-                    novaPoruka.PrimaocID = OdabraniKorisnik.ID;
+                    novaPoruka.posiljaocAzure = TrenutniKorisnik.idAzure;
+                    novaPoruka.primaocAzure = OdabraniKorisnik.idAzure;
                     novaPoruka.Tekst = TekstPoruke;
                     novaPoruka.StatusPoruke = StatusPoruke.Neprocitano;
                     DB.Poruke.Add(novaPoruka);
@@ -149,8 +149,8 @@ namespace planB.ViewModel
                 if (FollowStatus == "Prati")
                 {
                     Follow newFollow = new Follow();
-                    newFollow.KorisnikID = TrenutniKorisnik.ID;
-                    newFollow.Following_KorisnikID = OdabraniKorisnik.ID;
+                    newFollow.KorisnikID = TrenutniKorisnik.idAzure;
+                    newFollow.Following_KorisnikID = OdabraniKorisnik.idAzure;
                     //LoginViewModel.korisnik.FollowingList.Add(OdabraniKorisnik);
                     FollowStatus = "Pratim";
                     //DB.Korisnici.Update(LoginViewModel.korisnik);
@@ -180,21 +180,21 @@ namespace planB.ViewModel
         {
             using (var DB = new PlanBDbContext())
             {
-                List<Follow> follow = DB.Follow.Where(x => (x.KorisnikID == OdabraniKorisnik.ID)).ToList();
+                List<Follow> follow = DB.Follow.Where(x => (x.KorisnikID == OdabraniKorisnik.idAzure)).ToList();
                 FollowingNumber = follow.Count();
-                follow = DB.Follow.Where(x => (x.Following_KorisnikID == OdabraniKorisnik.ID)).ToList();
+                follow = DB.Follow.Where(x => (x.Following_KorisnikID == OdabraniKorisnik.idAzure)).ToList();
                 FollowNumber = follow.Count();
             }
         }
 
         private void prikaziMuzickuKolekciju(object parametar)
         {
-            PregledProfilaKorisnika.Frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel(OdabraniKorisnik));
+            PregledProfilaKorisnika.frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel(OdabraniKorisnik));
         }
 
         private void prikaziObaveze(object parametar)
         {
-            PregledProfilaKorisnika.Frame.Navigate(typeof(PregledObaveza), new PregledObavezaViewModel(OdabraniKorisnik.ID));
+            PregledProfilaKorisnika.frame.Navigate(typeof(PregledObaveza), new PregledObavezaViewModel(OdabraniKorisnik.idAzure));
         }
 
     }

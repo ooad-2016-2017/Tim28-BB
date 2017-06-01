@@ -19,7 +19,6 @@ namespace planB.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public MessageDialog Poruka { get; set; }
         private MuzickaKolekcijaViewModel muzickaKolekcijaViewModel;
-        bool IsEnabled;
 
         public Pjesma OdabranaPjesma { get; set; }
         private String pjesmaDetails;
