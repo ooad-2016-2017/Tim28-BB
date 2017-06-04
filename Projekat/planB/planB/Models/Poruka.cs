@@ -17,7 +17,7 @@ namespace planB.Models
         DateTime datumSlanja;
         public String posiljaocAzure { get; set;}
         public String primaocAzure { get; set; }
-        public String idAzure;
+        public String idAzure { get; set; }
         StatusPoruke statusPoruke;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -77,7 +77,7 @@ namespace planB.Models
             {
                 using (var DB = new PlanBDbContext())
                 {
-                    return DB.Korisnici.Where(x => (x.idAzure == posiljaocAzure)).FirstOrDefault().Ime +
+                    return DB.Korisnici.Where(x => (x.idAzure == posiljaocAzure)).FirstOrDefault().Ime + " " +
                         DB.Korisnici.Where(x => (x.idAzure == posiljaocAzure)).FirstOrDefault().Prezime;
                 }
             }

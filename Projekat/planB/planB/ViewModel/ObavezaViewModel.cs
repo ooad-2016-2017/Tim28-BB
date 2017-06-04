@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace planB.ViewModel
 {
-    class ObavezaViewModel : INotifyPropertyChanged
+    public class ObavezaViewModel : INotifyPropertyChanged
     {
 
         IMobileServiceTable<ObavezaAzure> userTableObj = App.MobileService.GetTable<ObavezaAzure>();
@@ -55,15 +55,17 @@ namespace planB.ViewModel
             }
         }
 
-        public ObavezaViewModel(){
+        public ObavezaViewModel(DateTime date = new DateTime()){
             SpremiButton = new RelayCommand<object>(spremiButton);
             vidljivost = Vidljivost.Nista;
-            DatumText = DateTime.Now.ToString("dd.mm.yyyy.");
+            DatumText = //date.ToString("dd.mm.yyyy.");
+               ((date.Day <= 9)? "0" : "") + date.Day.ToString() + "." + ((date.Month <= 9) ? "0" : "") + date.Month.ToString() + "." +
+                date.Year.ToString() + ".";
             TextObaveze = "";
             sliderVrijednost = "0";
             privatnoChecked = false;
             korisnik = LoginViewModel.korisnik;
-            datum = DateTime.Now;
+            datum = date;
         }
 
         private void NotifyPropertyChanged(String info)
@@ -98,6 +100,9 @@ namespace planB.ViewModel
                     obavezaAzure.postaviVidljivost(vidljivost);
                     obavezaAzure.sadrzaj = TextObaveze;
                     obavezaAzure.prioritet = int.Parse(sliderVrijednost);
+                    IMobileServiceTable<ObavezaAzure> azureObaveze = App.MobileService.GetTable<ObavezaAzure>();
+                    List<ObavezaAzure> listaAzure = await azureObaveze.Where(x => x.id != "").ToListAsync();
+                    obavezaAzure.redniBroj = listaAzure.Count + 1;
                     await userTableObj.InsertAsync(obavezaAzure);
 
                     Obaveza obaveza = new Obaveza(0, datum, TextObaveze, vidljivost, int.Parse(sliderVrijednost), korisnik.idAzure);

@@ -119,6 +119,8 @@ namespace planBMigrations
 
                     b.Property<string>("Tekst");
 
+                    b.Property<string>("idAzure");
+
                     b.Property<string>("posiljaocAzure");
 
                     b.Property<string>("primaocAzure");

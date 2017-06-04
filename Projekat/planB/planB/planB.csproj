@@ -101,6 +101,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AzureModels\FollowAzure.cs" />
     <Compile Include="AzureModels\KolekcijaAzure.cs" />
     <Compile Include="AzureModels\KorisnikAzure.cs" />
     <Compile Include="AzureModels\ObavezaAzure.cs" />
@@ -113,9 +114,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20170601204917_MyDatabase.cs" />
-    <Compile Include="Migrations\20170601204917_MyDatabase.designer.cs">
-      <DependentUpon>20170601204917_MyDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\20170603105310_MyDatabase.cs" />
+    <Compile Include="Migrations\20170603105310_MyDatabase.designer.cs">
+      <DependentUpon>20170603105310_MyDatabase.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\PlanBDbContextModelSnapshot.cs" />
     <Compile Include="Models\Korisnik.cs" />

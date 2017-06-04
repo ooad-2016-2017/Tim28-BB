@@ -23,9 +23,12 @@ namespace planB.View
     /// </summary>
     public sealed partial class ObavezaPage : Page
     {
+        //ObavezaViewModel viewModel;
+
         public ObavezaPage()
         {
             this.InitializeComponent();
+            //viewModel = ovm;
         }
 
 
@@ -37,7 +40,8 @@ namespace planB.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
 
-            DataContext = new ObavezaViewModel();
+            DataContext = e.Parameter as ObavezaViewModel;
+            //DataContext = viewModel;
         }
     }
     

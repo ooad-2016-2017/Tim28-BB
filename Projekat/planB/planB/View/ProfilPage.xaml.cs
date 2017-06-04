@@ -35,6 +35,12 @@ namespace planB.View
             profilViewModel = new ProfilViewModel();
         }
 
+        private void Odjava(object sender, RoutedEventArgs e)
+        {
+
+            ((Frame)Window.Current.Content).Navigate(typeof(LoginPage));
+        }
+
         private void PrikaziDnevnik(object sender, RoutedEventArgs e)
         {
             myFrame.Visibility = Visibility.Visible;

@@ -188,6 +188,8 @@ namespace planB.ViewModel
                 novaKolekcija1.naziv = NazivNoveKolekcije;
                 novaKolekcija1.datumKreiranja = DateTime.Today;
                 novaKolekcija1.korisnikID = TrenutniKorisnik.idAzure;
+                List<KolekcijaAzure> listaAzure = await userTableObj.Where(x => x.id != "").ToListAsync();
+                novaKolekcija1.redniBroj = listaAzure.Count + 1;
                 await userTableObj.InsertAsync(novaKolekcija1);
 
                 odabranaPjesma.kolekcijaAzure = novaKolekcija1.id;
@@ -236,7 +238,8 @@ namespace planB.ViewModel
                 pjesmaAzure.izvodjac = novaPjesma.Izvodjac;
                 pjesmaAzure.muzickaKolekcijaID = novaPjesma.kolekcijaAzure;
                 await userTableObj.InsertAsync(pjesmaAzure);
-
+                List<PjesmaAzure> listaAzure = await userTableObj.Where(x => x.id != "").ToListAsync();
+                pjesmaAzure.redniBroj = listaAzure.Count + 1;
                 muzickaKolekcija.Pjesme.Add(novaPjesma);
                 TrenutniKorisnik.MuzickaKolekcija.Where(x => (x.ID == muzickaKolekcija.ID)).FirstOrDefault().Pjesme.Add(novaPjesma);
                 

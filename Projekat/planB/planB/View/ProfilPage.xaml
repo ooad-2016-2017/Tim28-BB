@@ -76,7 +76,8 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
             <Image Grid.Row="0" Source="/Assets/user.jpg" Margin="7"></Image>
             <Button Grid.Row="1" Click="PrikaziProfil" HorizontalAlignment="Stretch" Margin="40,0,40,0" Name="ProfilButton" Foreground="White" Background="Green" Opacity="0.9">
@@ -106,6 +107,7 @@
                     <TextBlock Text=")" FontFamily="Calibri" FontSize="20"></TextBlock>
                 </StackPanel>
             </Button>
+            <HyperlinkButton Grid.Row="8" Name="Register" VerticalAlignment="Top" HorizontalAlignment="Center" Foreground="Green" FontSize="18" Content="Odjava" Click="Odjava" FontStyle="Italic"></HyperlinkButton>
         </Grid>
         <Grid Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>
@@ -122,7 +124,7 @@
                 <TextBlock Name="imeTbx" Text="{Binding Naziv, Mode=TwoWay, FallbackValue=Ime Prezime}" Margin="10,10,10,10"  IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton"></TextBlock>
             </RelativePanel>
             <Grid Grid.Row="1" Margin="10,10,10,10">
-                <AutoSuggestBox ItemsSource="{Binding RezultatiPretrage, Mode=TwoWay}"  Text="{Binding Pretraga, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Korisnik}" Grid.Row="0" Margin="10,10,10,10" BorderBrush="Green" PlaceholderText="Izvođač..." QueryIcon="Find" Background="White" TextChanged="TraziKorisnike" QuerySubmitted="PronadjiKorisnika" SuggestionChosen="PrikaziProfil" ></AutoSuggestBox>
+                <AutoSuggestBox ItemsSource="{Binding RezultatiPretrage, Mode=TwoWay}"  Text="{Binding Pretraga, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Korisnik}" Grid.Row="0" Margin="10,10,10,10" BorderBrush="Green" PlaceholderText="Traži..." QueryIcon="Find" Background="White" TextChanged="TraziKorisnike" QuerySubmitted="PronadjiKorisnika" SuggestionChosen="PrikaziProfil" ></AutoSuggestBox>
             </Grid>            
             <Frame Grid.Row="2" Name="myFrame" Margin="20, 10, 20, 20" Opacity="0.75">
                 <Frame.Background>

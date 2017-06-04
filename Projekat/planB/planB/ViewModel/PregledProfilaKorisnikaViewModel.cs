@@ -9,6 +9,8 @@ using System.Windows.Input;
 using Windows.UI.Popups;
 using planB.View;
 using planB.DBModels;
+using Microsoft.WindowsAzure.MobileServices;
+using planB.AzureModels;
 
 namespace planB.ViewModel
 {
@@ -121,12 +123,24 @@ namespace planB.ViewModel
             {
                 using (var DB = new PlanBDbContext())
                 {
+                    IMobileServiceTable<PorukaAzure> userTableObj = App.MobileService.GetTable<PorukaAzure>();
+                    PorukaAzure poruka = new PorukaAzure();
+                    poruka.postaviStatus(StatusPoruke.Neprocitano);
+                    poruka.posiljaocID = TrenutniKorisnik.idAzure;
+                    poruka.primaocID = OdabraniKorisnik.idAzure;
+                    poruka.tekst = TekstPoruke;
+                    poruka.datumSlanja = DateTime.Today;
+                    IMobileServiceTable<PorukaAzure> azureObaveze = App.MobileService.GetTable<PorukaAzure>();
+                    List<PorukaAzure> listaAzure = await azureObaveze.Where(x => x.id != "").ToListAsync();
+                    poruka.redniBroj = listaAzure.Count + 1;
+                    await userTableObj.InsertAsync(poruka);
+
                     Poruka novaPoruka = new Poruka();
-                    novaPoruka.DatumSlanja = DateTime.Today;
-                    novaPoruka.posiljaocAzure = TrenutniKorisnik.idAzure;
-                    novaPoruka.primaocAzure = OdabraniKorisnik.idAzure;
                     novaPoruka.Tekst = TekstPoruke;
+                    novaPoruka.posiljaocAzure = poruka.posiljaocID;
+                    novaPoruka.primaocAzure = poruka.primaocID;
                     novaPoruka.StatusPoruke = StatusPoruke.Neprocitano;
+                    novaPoruka.DatumSlanja = DateTime.Today;
                     DB.Poruke.Add(novaPoruka);
                     DB.SaveChanges();
                 }
@@ -148,6 +162,16 @@ namespace planB.ViewModel
             {
                 if (FollowStatus == "Prati")
                 {
+                    IMobileServiceTable<FollowAzure> userTableObj = App.MobileService.GetTable<FollowAzure>();
+                    FollowAzure poruka = new FollowAzure();
+                    poruka.korisnikID = TrenutniKorisnik.idAzure;
+                    poruka.following_KorisnikID = OdabraniKorisnik.idAzure;
+                    IMobileServiceTable<FollowAzure> azureObaveze = App.MobileService.GetTable<FollowAzure>();
+                    List<FollowAzure> listaAzure = await azureObaveze.Where(x => x.korisnikID != "").ToListAsync();
+                    poruka.redniBroj = listaAzure.Count + 1;
+                    await userTableObj.InsertAsync(poruka);
+
+
                     Follow newFollow = new Follow();
                     newFollow.KorisnikID = TrenutniKorisnik.idAzure;
                     newFollow.Following_KorisnikID = OdabraniKorisnik.idAzure;

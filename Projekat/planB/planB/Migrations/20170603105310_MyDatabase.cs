@@ -56,6 +56,7 @@ namespace planBMigrations
                     DatumSlanja = table.Column(type: "TEXT", nullable: false),
                     StatusPoruke = table.Column(type: "INTEGER", nullable: false),
                     Tekst = table.Column(type: "TEXT", nullable: true),
+                    idAzure = table.Column(type: "TEXT", nullable: true),
                     posiljaocAzure = table.Column(type: "TEXT", nullable: true),
                     primaocAzure = table.Column(type: "TEXT", nullable: true)
                 },
@@ -88,7 +89,7 @@ namespace planBMigrations
                 columns: table => new
                 {
                     ID = table.Column(type: "INTEGER", nullable: false),
-                        //.Annotation("Sqlite:Autoincrement", true),
+                       // .Annotation("Sqlite:Autoincrement", true),
                     Datum = table.Column(type: "TEXT", nullable: false),
                     KorisnikID = table.Column(type: "INTEGER", nullable: true),
                     Prioritet = table.Column(type: "INTEGER", nullable: false),

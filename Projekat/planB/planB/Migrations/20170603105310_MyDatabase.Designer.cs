@@ -11,7 +11,7 @@ namespace planBMigrations
     {
         public override string Id
         {
-            get { return "20170601204917_MyDatabase"; }
+            get { return "20170603105310_MyDatabase"; }
         }
 
         public override string ProductVersion
@@ -128,6 +128,8 @@ namespace planBMigrations
                     b.Property<int>("StatusPoruke");
 
                     b.Property<string>("Tekst");
+
+                    b.Property<string>("idAzure");
 
                     b.Property<string>("posiljaocAzure");
 

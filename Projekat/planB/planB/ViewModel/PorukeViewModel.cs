@@ -15,7 +15,6 @@ namespace planB.ViewModel
 {
     public class PorukeViewModel : INotifyPropertyChanged
     {
-        IMobileServiceTable<PorukaAzure> userTableObj = App.MobileService.GetTable<PorukaAzure>();
 
         public MessageDialog Poruka;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -78,9 +77,20 @@ namespace planB.ViewModel
                     DB.Poruke.Update(value);
                     DB.SaveChanges();
                     odabranaPoruka = value;
+                    procitaj();
+
                 }
                 NotifyPropertyChanged(nameof(OdabranaPoruka));
             }
+        }
+
+        async void procitaj()
+        {
+
+            IMobileServiceTable<PorukaAzure> azureObaveze = App.MobileService.GetTable<PorukaAzure>();
+            List<PorukaAzure> listaAzure = await azureObaveze.Where(x => x.id != OdabranaPoruka.idAzure).ToListAsync();
+            listaAzure[0].postaviStatus(StatusPoruke.Procitano);
+            await azureObaveze.UpdateAsync(listaAzure[0]);
         }
 
         public String SadrzajNovePoruke
@@ -129,12 +139,16 @@ namespace planB.ViewModel
             {
                 using (var DB = new PlanBDbContext())
                 {
+                    IMobileServiceTable<PorukaAzure> userTableObj = App.MobileService.GetTable<PorukaAzure>();
                     PorukaAzure poruka = new PorukaAzure();
                     poruka.postaviStatus(StatusPoruke.Neprocitano);
                     poruka.posiljaocID = TrenutniKorisnik.idAzure;
                     poruka.primaocID = odabranaPoruka.posiljaocAzure;
                     poruka.tekst = SadrzajNovePoruke;
                     poruka.datumSlanja = DateTime.Today;
+                    IMobileServiceTable<PorukaAzure> azureObaveze = App.MobileService.GetTable<PorukaAzure>();
+                    List<PorukaAzure> listaAzure = await azureObaveze.Where(x => x.id != "").ToListAsync();
+                    poruka.redniBroj = listaAzure.Count + 1;
                     await userTableObj.InsertAsync(poruka);
 
                     Poruka novaPoruka = new Poruka();
@@ -145,12 +159,13 @@ namespace planB.ViewModel
                     novaPoruka.DatumSlanja = DateTime.Today;
                     DB.Poruke.Add(novaPoruka);
                     DB.SaveChanges();
-                }
 
-                Poruka = new MessageDialog("Poruka uspješno poslana.");
-                await Poruka.ShowAsync();
-                UnosPorukeVisibility = false;
-                PregledPorukeVisibility = true;
+
+                    Poruka = new MessageDialog("Poruka uspješno poslana.");
+                    await Poruka.ShowAsync();
+                    UnosPorukeVisibility = false;
+                    PregledPorukeVisibility = true;
+                }
             }
             else
             {
@@ -166,7 +181,8 @@ namespace planB.ViewModel
             int broj = 0;
             using (var DB = new PlanBDbContext())
             {
-                poruke = DB.Poruke.Where(x => (x.primaocAzure == TrenutniKorisnik.idAzure)).ToList();
+                String pomocna = TrenutniKorisnik.idAzure;
+                poruke = DB.Poruke.Where(x => (x.primaocAzure == pomocna)).ToList();
                 NeprocitanePoruke = DB.Poruke.Where(x => (x.primaocAzure == TrenutniKorisnik.idAzure && x.StatusPoruke == StatusPoruke.Neprocitano)).ToList();
 
                 broj = DB.Poruke.Count();

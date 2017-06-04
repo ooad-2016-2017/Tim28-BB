@@ -16,8 +16,6 @@
                         <AdaptiveTrigger MinWindowWidth="0" MinWindowHeight="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Kalendar.Visibility" Value="Collapsed"></Setter>
-                        <Setter Target="KalendarPicker.Visibility" Value="Visible"></Setter>
                         <Setter Target="unesiButton.FontSize" Value="12"></Setter>
                         <Setter Target="dnevnikButton.FontSize" Value="12"></Setter>
                     </VisualState.Setters>
@@ -28,8 +26,6 @@
                     </VisualState.StateTriggers>
 
                     <VisualState.Setters>
-                        <Setter Target="KalendarPicker.Visibility" Value="Collapsed"></Setter>
-                        <Setter Target="Kalendar.Visibility" Value="Visible"></Setter>
                         <Setter Target="unesiButton.FontSize" Value="20"></Setter>
                         <Setter Target="dnevnikButton.FontSize" Value="20"></Setter>
                     </VisualState.Setters>
@@ -39,18 +35,15 @@
         <Grid Grid.Column="1" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="9*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBox Grid.Row ="0" Text="Ažuriraj status..." Foreground="Gray" FontStyle="Italic" BorderBrush="Green" />
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 
                 <RelativePanel Grid.Column="0" Margin="10">
-                    <CalendarView Name="Kalendar"  BorderBrush="Green" Margin="10,10,10,5"/>
-                    <CalendarDatePicker Name="KalendarPicker" RelativePanel.Below="Kalendar" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10"></CalendarDatePicker>
+                    <CalendarDatePicker Name="KalendarPicker" Date="{Binding DatumPicker, Mode=TwoWay}" DateFormat="{}{day.integer}/{month.integer}/{year.full}" Width="300" BorderBrush="Green" Margin="10,10,10,5"/>
                     <Grid RelativePanel.Below="KalendarPicker">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>

@@ -15,6 +15,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Microsoft.WindowsAzure.MobileServices;
+using planB.DBModels;
 
 namespace planB.ViewModel
 {
@@ -93,24 +94,46 @@ namespace planB.ViewModel
         {
             using (var DB = new PlanBDbContext())
             {
+
+                IMobileServiceTable<KorisnikAzure> azureKorisnik = App.MobileService.GetTable<KorisnikAzure>();
+
+                int broj1 = DB.Korisnici.Count();
+                List<KorisnikAzure> listaKorisnika = await azureKorisnik.Where(x => x.id != "").ToListAsync();
+                if (broj1 < listaKorisnika.Count)
+                {
+                    listaKorisnika = await azureKorisnik.Where(x => x.redniBroj > broj1).ToListAsync();
+                    
+                    foreach (KorisnikAzure o in listaKorisnika)
+                    {
+
+                        using (var DB1 = new PlanBDbContext())
+                        {
+                            Korisnik kk = new Korisnik(0, o.ime, o.prezime, o.korisnickoIme, o.lozinka, o.datumRodjenja, o.email);
+                            kk.idAzure = o.id;
+                            DB1.Korisnici.Add(kk);
+                            DB1.SaveChanges();
+                        }
+                    }
+                }
+
+
                 IMobileServiceTable<ObavezaAzure> azureObaveze = App.MobileService.GetTable<ObavezaAzure>();
 
                 int broj = DB.Obaveze.Count();
                 List<ObavezaAzure> listaAzure = await azureObaveze.Where(x => x.id != "").ToListAsync();
-                if (broj != listaAzure.Count)
+                if (broj < listaAzure.Count)
                 {
                     listaAzure = await azureObaveze.Where(x => x.redniBroj > broj).ToListAsync();
 
-                }
-
-                foreach (ObavezaAzure o in listaAzure)
-                {
-
-                    using (var DB1 = new PlanBDbContext())
+                    foreach (ObavezaAzure o in listaAzure)
                     {
-                        Obaveza obaveza = new Obaveza(0, o.datum, o.sadrzaj, o.dajVidljivost(), o.prioritet, o.kreatorID);
-                        DB1.Obaveze.Add(obaveza);
-                        DB1.SaveChanges();
+
+                        using (var DB1 = new PlanBDbContext())
+                        {
+                            Obaveza obaveza = new Obaveza(0, o.datum, o.sadrzaj, o.dajVidljivost(), o.prioritet, o.kreatorID);
+                            DB1.Obaveze.Add(obaveza);
+                            DB1.SaveChanges();
+                        }
                     }
                 }
 
@@ -118,41 +141,59 @@ namespace planB.ViewModel
 
                 broj = DB.Dnevnik.Count();
                 List<StavkaDnevnikAzure> listaDnevnik = await azureDnevnik.Where(x => x.id != "").ToListAsync();
-                if (broj != listaAzure.Count)
+                if (broj < listaAzure.Count)
                 {
                     listaAzure = await azureObaveze.Where(x => x.redniBroj > broj).ToListAsync();
-
-                }
-
-                foreach (StavkaDnevnikAzure o in listaDnevnik)
-                {
-
-                    using (var DB1 = new PlanBDbContext())
+                    foreach (StavkaDnevnikAzure o in listaDnevnik)
                     {
-                        StavkaDnevnika sd = new StavkaDnevnika(0, DateTime.Now, o.sadrzaj, o.dajVidljivost(), o.naslov, o.kreatorID);
-                        DB1.Dnevnik.Add(sd);
-                        DB1.SaveChanges();
+
+                        using (var DB1 = new PlanBDbContext())
+                        {
+                            StavkaDnevnika sd = new StavkaDnevnika(0, DateTime.Now, o.sadrzaj, o.dajVidljivost(), o.naslov, o.kreatorID);
+                            DB1.Dnevnik.Add(sd);
+                            DB1.SaveChanges();
+                        }
                     }
                 }
 
                 IMobileServiceTable<PorukaAzure> porukeAzure = App.MobileService.GetTable<PorukaAzure>();
-
+                broj = DB.Poruke.Count();
                 List<PorukaAzure> listaPoruke = await porukeAzure.Where(x => x.redniBroj > 0).ToListAsync();
-                if (broj != listaPoruke.Count)
+                if (broj < listaPoruke.Count)
                 {
                     listaPoruke = await porukeAzure.Where(x => x.redniBroj > broj).ToListAsync();
 
+                    foreach (PorukaAzure o in listaPoruke)
+                    {
+
+                        using (var DB1 = new PlanBDbContext())
+                        {
+                            Poruka poruka = new Poruka(o.tekst, o.datumSlanja, o.posiljaocID, o.primaocID, o.dajStatus());
+                            poruka.idAzure = o.id;
+                            DB1.Poruke.Add(poruka);
+                            DB1.SaveChanges();
+                        }
+                    }
                 }
 
-                foreach (PorukaAzure o in listaPoruke)
+                IMobileServiceTable<FollowAzure> followAzure = App.MobileService.GetTable<FollowAzure>();
+                broj = DB.Follow.Count();
+                List<FollowAzure> listaFollow = await followAzure.Where(x => x.redniBroj > 0).ToListAsync();
+                if (broj < listaFollow.Count)
                 {
+                    listaFollow = await followAzure.Where(x => x.redniBroj > broj).ToListAsync();
 
-                    using (var DB1 = new PlanBDbContext())
+                    foreach (FollowAzure o in listaFollow)
                     {
-                        Poruka poruka = new Poruka(o.tekst, o.datumSlanja, o.posiljaocID, o.primaocID, o.dajStatus());
-                        poruka.idAzure = o.id;
-                        DB1.Poruke.Add(poruka);
-                        DB1.SaveChanges();
+
+                        using (var DB1 = new PlanBDbContext())
+                        {
+                            Follow poruka = new Follow();
+                            poruka.KorisnikID = o.korisnikID;
+                            poruka.Following_KorisnikID = o.following_KorisnikID;
+                            DB1.Follow.Add(poruka);
+                            DB1.SaveChanges();
+                        }
                     }
                 }
             }
@@ -244,9 +285,13 @@ namespace planB.ViewModel
                 obj.lozinka = rLozinka;
                 obj.email = rEmail;
                 obj.datumRodjenja = rDatumRodjenja;
+                IMobileServiceTable<KorisnikAzure> azureKorisnik = App.MobileService.GetTable<KorisnikAzure>();
+                List<KorisnikAzure> listaKorisnika = await azureKorisnik.Where(x => x.id != "").ToListAsync();
+                obj.redniBroj = listaKorisnika.Count + 1;
                 await userTableObj.InsertAsync(obj);
 
                 Korisnik korisnik = new Korisnik(0, rIme, rPrezime, rKorisnickoIme, rLozinka, rDatumRodjenja, rEmail);
+                korisnik.idAzure = obj.id;
                 DB.Korisnici.Add(korisnik);
                 DB.SaveChanges();
                 

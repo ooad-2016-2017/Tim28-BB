@@ -22,7 +22,7 @@
                     <TextBlock Text="Datum: " Margin="10,10,0,10" Foreground="Green" FontFamily="Calibri" FontSize="20"></TextBlock>
                     <TextBlock Text="{Binding DatumText, Mode=TwoWay, FallbackValue=13.05.2017.}"  Margin="10,10,0,10" Foreground="Green" FontFamily="Calibri" FontSize="20" FontStyle="Italic"></TextBlock>
                 </StackPanel>
-                <TextBox Margin="10,10,10,10" Grid.Row="1" Text="{Binding TextObaveze, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Green" Opacity="0.75">
+                <TextBox Margin="10,10,10,10" Grid.Row="1" Text="{Binding TextObaveze, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="Green" Opacity="0.75" >
                     <TextBox.Background>
                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                             <GradientStop Color="White" Offset="0.75"></GradientStop>
