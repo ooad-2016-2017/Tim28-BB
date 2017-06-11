@@ -38,7 +38,7 @@ namespace planB.View
             //base.OnNavigatedTo(e);
 
             //DataContext = e.Parameter as PregledObavezaViewModel;
-            DataContext = new PregledObavezaViewModel();
+            DataContext = e.Parameter as PregledObavezaViewModel;
 
         }
 

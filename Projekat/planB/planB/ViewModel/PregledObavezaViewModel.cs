@@ -5,11 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace planB.ViewModel
 {
@@ -128,13 +125,13 @@ namespace planB.ViewModel
 
         private void dnevnikButtonClick(object parametar)
         {
-            ProfilPage.frame.Visibility = Visibility.Visible;
+            //ProfilPage.frame.Visibility = Visibility.Visible;
             ProfilPage.frame.Navigate(typeof(DnevnikPage));
         }
 
         private void obavezaButtonClick(object parametar)
         {
-            ProfilPage.frame.Visibility = Visibility.Visible;
+            //ProfilPage.frame.Visibility = Visibility.Visible;
             //ProfilPage.frame.Navigate(typeof(ObavezaPage));
             ProfilPage.
                 frame.

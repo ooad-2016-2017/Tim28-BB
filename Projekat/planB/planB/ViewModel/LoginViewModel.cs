@@ -48,8 +48,8 @@ namespace planB.ViewModel
         public ICommand KrajRegistracije { get; set; }
         public static Korisnik korisnik { get; set; }
 
-        private Visibility _podaciVis;
-        public Visibility PodaciPanelVisibility
+        private Boolean _podaciVis;
+        public Boolean PodaciPanelVisibility
         {
             get { return _podaciVis; }
             set
@@ -59,8 +59,8 @@ namespace planB.ViewModel
             }
         }
 
-        private Visibility _verifikacijaVis;
-        public Visibility VerifikacijaPanelVisiblity
+        private Boolean _verifikacijaVis;
+        public Boolean VerifikacijaPanelVisiblity
         {
             get { return _verifikacijaVis; }
             set
@@ -81,8 +81,8 @@ namespace planB.ViewModel
             rLozinka = "";
             rEmail = "";
 
-            VerifikacijaPanelVisiblity = Visibility.Collapsed;
-            PodaciPanelVisibility = Visibility.Collapsed;
+            VerifikacijaPanelVisiblity = false;
+            PodaciPanelVisibility = false;
             LoginKorisnika = new RelayCommand<object>(loginKorisnika);
             RegistracijaKorisnika = new RelayCommand<object>(registracijaKorisnika);
             KrajRegistracije = new RelayCommand<object>(zavrsiRegistraciju);
@@ -260,8 +260,9 @@ namespace planB.ViewModel
                     return;
                 }
                 rDatumRodjenja = rDatumRodjenjaOffset.Date;
-                VerifikacijaPanelVisiblity = Visibility.Visible;
-                PodaciPanelVisibility = Visibility.Collapsed;
+                
+                PodaciPanelVisibility = false;
+                VerifikacijaPanelVisiblity = true;
                 await Send_Email(rEmail);
 
             }
@@ -296,7 +297,7 @@ namespace planB.ViewModel
                 DB.SaveChanges();
                 
                 Poruka = new MessageDialog("Uspješno kreiran račun.");
-                VerifikacijaPanelVisiblity = Visibility.Collapsed;
+                VerifikacijaPanelVisiblity = false;
                 await Poruka.ShowAsync();
             }
         }

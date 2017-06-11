@@ -34,9 +34,9 @@ namespace planB.ViewModel
         public ICommand SelectionChanged { get; set; }
         private ImageSource slika;
 
-        private Visibility dodajVisiblity;
-        private Visibility nazivKolekcijeVisibility;
-        private Visibility pjesmaDetailsVisibility;
+        private bool dodajVisiblity;
+        private bool nazivKolekcijeVisibility;
+        private bool pjesmaDetailsVisibility;
         public MuzickaKolekcija odabranaKolekcija;
 
         public ObservableCollection<MuzickaKolekcija> MuzKolekcija { get; set; }
@@ -59,9 +59,9 @@ namespace planB.ViewModel
             pjesmaDetails = odabranaPjesma.Izvodjac + " - " + odabranaPjesma.Naziv;
             TrenutniKorisnik = trenutniKorisnik;
             NazivNoveKolekcije = "";
-            dodajVisiblity = Visibility.Collapsed;
-            nazivKolekcijeVisibility = Visibility.Collapsed;
-            pjesmaDetailsVisibility = Visibility.Visible;
+            dodajVisiblity = false;
+            nazivKolekcijeVisibility = false;
+            pjesmaDetailsVisibility = true;
             muzickaKolekcijaViewModel = new MuzickaKolekcijaViewModel();
 
             MuzKolekcija = new ObservableCollection<MuzickaKolekcija>(TrenutniKorisnik.MuzickaKolekcija);
@@ -98,7 +98,7 @@ namespace planB.ViewModel
             }
         }
 
-        public Visibility DodajVisibility
+        public bool DodajVisibility
         {
             get { return dodajVisiblity; }
             set
@@ -108,7 +108,7 @@ namespace planB.ViewModel
             }
         }
 
-        public Visibility NazivKolekcijeVisibility
+        public bool NazivKolekcijeVisibility
         {
             get { return nazivKolekcijeVisibility; }
             set
@@ -118,7 +118,7 @@ namespace planB.ViewModel
             }
         }
 
-        public Visibility PjesmaDetailsVisibility
+        public bool PjesmaDetailsVisibility
         {
             get { return pjesmaDetailsVisibility; }
             set
@@ -138,13 +138,13 @@ namespace planB.ViewModel
 
                 if (odabranaKolekcija.Naziv == "Nova kolekcija...")
                 {
-                    NazivKolekcijeVisibility = Visibility.Visible;
+                    NazivKolekcijeVisibility = true;
                 }
                 else
                 {
                     muzickaKolekcijaViewModel.dodajUPostojecu(odabranaKolekcija, OdabranaPjesma);
-                    PjesmaDetailsVisibility = Visibility.Visible;
-                    DodajVisibility = Visibility.Collapsed;
+                    PjesmaDetailsVisibility = true;
+                    DodajVisibility = false;
                 }
             }
         }
@@ -164,17 +164,17 @@ namespace planB.ViewModel
 
         private  void dodajUKolekciju(object parametar)
         {
-            DodajVisibility = Visibility.Visible;
-            PjesmaDetailsVisibility = Visibility.Collapsed; 
+            DodajVisibility = true;
+            PjesmaDetailsVisibility = false;
         }
 
         private void zavrsiDodavanje(object parametar)
         {
             muzickaKolekcijaViewModel.dodajNovuKolekciju(NazivNoveKolekcije, OdabranaPjesma);
 
-            NazivKolekcijeVisibility = Visibility.Collapsed;
-            DodajVisibility = Visibility.Collapsed;
-            PjesmaDetailsVisibility = Visibility.Visible;
+            NazivKolekcijeVisibility = false;
+            DodajVisibility = false;
+            PjesmaDetailsVisibility = true;
         }
 
         private async Task LoadImageAsync()

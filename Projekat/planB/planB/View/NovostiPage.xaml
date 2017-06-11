@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:planB.Models"
+    xmlns:helper="using:planB.Helpers"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -29,6 +30,7 @@
                     <TextBlock Text="{x:Bind Sadrzaj}" Margin="10" FontWeight="Bold"></TextBlock>
                 </StackPanel>
             </Grid>
+            
         </DataTemplate>
 
         <DataTemplate x:Key="EL_MuzickaKolekcija" x:DataType="data:MuzickaKolekcija">
@@ -52,6 +54,7 @@
                 </StackPanel>
             </Grid>
         </DataTemplate>
+        <helper:BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Page.Resources>
 
     <Grid Margin="10">
@@ -63,8 +66,8 @@
             <RadioButton HorizontalAlignment="Center" VerticalAlignment="Center" Content="Obaveze/Blog" Command="{Binding StavkeNovosti, Mode=TwoWay}"></RadioButton>
             <RadioButton HorizontalAlignment="Center" Margin="5,0,0,0" VerticalAlignment="Center" Content="Muzičke kolekcije" Command="{Binding KolekcijeNovosti, Mode=TwoWay}"></RadioButton>
         </StackPanel>
-        <ListBox Grid.Row="1" Name="novostiLbx" ItemsSource="{Binding Stavke, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Stavka}" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="{Binding StavkeVisibility, Mode=TwoWay}"></ListBox>
-        <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding Kolekcije, Mode=TwoWay}" ItemTemplate="{StaticResource EL_MuzickaKolekcija}" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="{Binding KolekcijeVisibility, Mode=TwoWay}"></ListBox>
+        <ListBox Grid.Row="1" Name="novostiLbx" ItemsSource="{Binding Stavke, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Stavka}" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="{Binding StavkeVisibility, Converter={StaticResource BoolToVis}, Mode=TwoWay}"></ListBox>
+        <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding Kolekcije, Mode=TwoWay}" ItemTemplate="{StaticResource EL_MuzickaKolekcija}" ScrollViewer.VerticalScrollBarVisibility="Auto" Visibility="{Binding KolekcijeVisibility, Converter={StaticResource BoolToVis} ,Mode=TwoWay}"></ListBox>
         
     </Grid>
 

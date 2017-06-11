@@ -38,7 +38,7 @@ namespace planB.ViewModel
         private bool searchingEnabled;
 
         private Pjesma _odabranaPjesma;
-       
+
         public MuzickaKolekcijaViewModel()
         {
             SearchingText = "";
@@ -56,7 +56,7 @@ namespace planB.ViewModel
             Kolekcija = new ObservableCollection<MuzickaKolekcija>(TrenutniKorisnik.MuzickaKolekcija);
         }
 
-        
+
 
         public MuzickaKolekcijaViewModel(Korisnik trenutniKorisnik)
         {
@@ -108,7 +108,7 @@ namespace planB.ViewModel
                 NotifyPropertyChanged(nameof(PjesmeIzOdabraneKolekcije));
             }
         }
-       
+
         public Pjesma _OdabranaPjesma
         {
             get { return _odabranaPjesma; }
@@ -125,7 +125,7 @@ namespace planB.ViewModel
             set
             {
                 searchingEnabled = value;
-                NotifyPropertyChanged(nameof(searchingEnabled));
+                NotifyPropertyChanged(nameof(SearchingEnabled));
             }
         }
 
@@ -146,13 +146,13 @@ namespace planB.ViewModel
             {
                 rezultatWEBPretrage = await lastFmPretraga.Search_Artists(SearchingText);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Poruka = new MessageDialog(e.ToString());
                 await Poruka.ShowAsync();
             }
 
-            foreach(Track track in rezultatWEBPretrage.Tracks)
+            foreach (Track track in rezultatWEBPretrage.Tracks)
             {
                 Pjesma pjesma = new Pjesma();
                 pjesma.Izvodjac = rezultatWEBPretrage.Artist;
@@ -207,6 +207,9 @@ namespace planB.ViewModel
 
                 MuzickaKolekcija novaKolekcija = new MuzickaKolekcija();
                 novaKolekcija.Naziv = NazivNoveKolekcije;
+                novaKolekcija.idAzure = TrenutniKorisnik.idAzure;
+                
+                // M A I D DODAO
                 novaKolekcija.Pjesme.Add(odabranaPjesma);
                 novaKolekcija.DatumKreiranja = DateTime.Today;
                 TrenutniKorisnik.MuzickaKolekcija.Add(novaKolekcija);
@@ -226,7 +229,7 @@ namespace planB.ViewModel
             {
                 MuzickaKolekcija muzickaKolekcija = DB.MuzickaKolekcija.Where(x => (x.Naziv == odabranaKolekcija.Naziv && x.KorisnikID == TrenutniKorisnik.ID)).FirstOrDefault();
 
-                foreach(Pjesma p in DB.Pjesme)
+                foreach (Pjesma p in DB.Pjesme)
                 {
                     MuzickaKolekcija muzcikaKolekcija = DB.MuzickaKolekcija.Where(x => (x.idAzure == p.kolekcijaAzure)).FirstOrDefault();
                     if (p.Naziv == OdabranaPjesma.Naziv && odabranaKolekcija.ID == muzcikaKolekcija.ID)
@@ -236,7 +239,7 @@ namespace planB.ViewModel
                         return;
                     }
                 }
-                
+
                 Pjesma novaPjesma = new Pjesma(OdabranaPjesma.Izvodjac, OdabranaPjesma.Naziv, OdabranaPjesma.Preview, OdabranaPjesma.UrlSlike);
                 novaPjesma.kolekcijaAzure = odabranaKolekcija.idAzure;
 
@@ -253,7 +256,7 @@ namespace planB.ViewModel
                 pjesmaAzure.redniBroj = listaAzure.Count + 1;
                 muzickaKolekcija.Pjesme.Add(novaPjesma);
                 TrenutniKorisnik.MuzickaKolekcija.Where(x => (x.ID == muzickaKolekcija.ID)).FirstOrDefault().Pjesme.Add(novaPjesma);
-                
+
                 DB.Pjesme.Add(novaPjesma);
                 DB.SaveChanges();
                 Poruka = new MessageDialog("Pjesma uspješno dodana u kolekciju " + odabranaKolekcija.Naziv + ".");
@@ -277,12 +280,12 @@ namespace planB.ViewModel
                                 if (p.kolekcijaAzure == mk.idAzure && !mk.Pjesme.Contains(p))
                                     mk.Pjesme.Add(p);
                             }
-                            
+
                             TrenutniKorisnik.MuzickaKolekcija.Add(mk);
-                            
                         }
                     }
                 }
+                Kolekcija = new ObservableCollection<MuzickaKolekcija>(TrenutniKorisnik.MuzickaKolekcija);
             }
             catch (Exception e)
             {
@@ -292,4 +295,3 @@ namespace planB.ViewModel
         }
     }
 }
-

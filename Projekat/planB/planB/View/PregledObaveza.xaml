@@ -60,7 +60,7 @@
                             <GradientStop Color="Green" Offset="1"></GradientStop>
                         </LinearGradientBrush>
                     </StackPanel.Background>
-                    <TextBlock Margin="10" Text="Obaveze:" IsTextSelectionEnabled="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold"></TextBlock>
+                    <TextBlock Margin="10" Text="Obaveze:" IsTextSelectionEnabled="True" Foreground="Green" FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee" FontSize="20" FontStyle="Italic" FontWeight="Bold"></TextBlock>
                     <ListView Margin="10" Grid.Row="1" Name="lbxObaveze" ItemsSource="{Binding lbxItems}"  Height="300" BorderBrush="Green" BorderThickness="0.0001" FontFamily="Calibri" FontSize="15" ScrollViewer.VerticalScrollBarVisibility="Auto">
                     </ListView>
                 </StackPanel>

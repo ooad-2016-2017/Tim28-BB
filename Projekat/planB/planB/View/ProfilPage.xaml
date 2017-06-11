@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:data="using:planB.Models"
+    xmlns:helper="using:planB.Helpers"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -19,6 +20,7 @@
                 <TextBlock Text="{x:Bind Prezime}" Margin="3, 0, 0, 0" Grid.Column="1"></TextBlock>
             </Grid>
         </DataTemplate>
+        <helper:BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Page.Resources>
 
     <Grid>
@@ -79,7 +81,7 @@
                 <RowDefinition Height="1*"></RowDefinition>
                 <RowDefinition Height="1*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Image Grid.Row="0" Source="/Assets/user.jpg" Margin="7"></Image>
+            <Image Grid.Row="0" Source="/Assets/userMale.jpg" Margin="7"></Image>
             <Button Grid.Row="1" Click="PrikaziProfil" HorizontalAlignment="Stretch" Margin="40,0,40,0" Name="ProfilButton" Foreground="White" Background="Green" Opacity="0.9">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -91,7 +93,7 @@
                 </Grid>
             </Button>
             <Button Grid.Row="2" Click="PrikaziNovosti" Content="Novosti" Name="NovostiButton" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9" FontFamily="Calibri" FontSize="20" Foreground="White"></Button>
-            <Button Grid.Row="3" Name="KolekcijaButton" Command="{Binding Path=PrikaziMuzickuKolekciju}" Click="PrikaziMuzickuKolekciju"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
+            <Button Grid.Row="3" Name="KolekcijaButton" Click="PrikaziMuzickuKolekciju"  FontFamily="Calibri" FontSize="20" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Moja muzička kolekcija" FontFamily="Calibri" FontSize="20"></TextBlock>
                     <Image Source="/Assets/note1.png" Height="20" Margin="3,0,0,0"></Image>
@@ -121,7 +123,7 @@
                     <Image Source="/Assets/sett2.png" Height="30" Width="30"></Image>
                 </Button>
                 <Button Content="Pratioci"  Name="PratiociButton" Margin="10" RelativePanel.RightOf="PratimButton" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
-                <TextBlock Name="imeTbx" Text="{Binding Naziv, Mode=TwoWay, FallbackValue=Ime Prezime}" Margin="10,10,10,10"  IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="Segoe Print" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton"></TextBlock>
+                <TextBlock Name="imeTbx" Text="{Binding Naziv, Mode=TwoWay, FallbackValue=Ime Prezime}" Margin="10,10,10,10"  IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton"></TextBlock>
             </RelativePanel>
             <Grid Grid.Row="1" Margin="10,10,10,10">
                 <AutoSuggestBox ItemsSource="{Binding RezultatiPretrage, Mode=TwoWay}"  Text="{Binding Pretraga, Mode=TwoWay}" ItemTemplate="{StaticResource EL_Korisnik}" Grid.Row="0" Margin="10,10,10,10" BorderBrush="Green" PlaceholderText="Traži..." QueryIcon="Find" Background="White" TextChanged="TraziKorisnike" QuerySubmitted="PronadjiKorisnika" SuggestionChosen="PrikaziProfil" ></AutoSuggestBox>

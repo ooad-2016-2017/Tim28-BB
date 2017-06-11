@@ -28,26 +28,28 @@ namespace planB.View
         public MuzickaKolekcijaPage()
         {
             this.InitializeComponent();
-            muzickaKolekcijaViewModel = new MuzickaKolekcijaViewModel();
+            //muzickaKolekcijaViewModel = new MuzickaKolekcijaViewModel();
         }
 
         private void Search_Artist(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            muzickaKolekcijaViewModel.Search_Artist(args.QueryText.ToString());
-            sender.ItemsSource = muzickaKolekcijaViewModel.rezultatPretrage;
+            MuzickaKolekcijaViewModel mkwm = new MuzickaKolekcijaViewModel();
+            mkwm.Search_Artist(args.QueryText.ToString());
+            sender.ItemsSource = mkwm.rezultatPretrage;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //base.OnNavigatedTo(e);
-
             DataContext = e.Parameter as MuzickaKolekcijaViewModel;
         }
 
         private void ArtistIsChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
         {
             Pjesma odabranaPjesma = args.SelectedItem as Pjesma;
-            muzickaKolekcijaViewModel.PrikaziPjesmu(odabranaPjesma);
+            MuzickaKolekcijaViewModel mkwm = new MuzickaKolekcijaViewModel();
+            mkwm.PrikaziPjesmu(odabranaPjesma);
+            //muzickaKolekcijaViewModel.PrikaziPjesmu(odabranaPjesma);
         }
     }
 }

@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodel="using:planB.ViewModel"
+    xmlns:helper="using:planB.Helpers"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -18,6 +19,7 @@
             <Setter Property="BorderBrush" Value="Green"></Setter>
         </Style>
         <FontFamily x:Key="TitleFont">/Assets/Gabriola-Regular.ttf #GABRIOLA</FontFamily>
+        <helper:BooleanToVisibilityConverter x:Key="BoolToVis" />
         
     </Page.Resources>
 
@@ -87,7 +89,7 @@
             </StackPanel>
         </RelativePanel>
 
-        <StackPanel Name="RegisterPanel" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Visibility="{Binding PodaciPanelVisibility, Mode=TwoWay}">
+        <StackPanel Name="RegisterPanel" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Visibility="{Binding PodaciPanelVisibility, Converter={StaticResource BoolToVis}, Mode=TwoWay}">
             <StackPanel Name="TitlePanel" Opacity="0.85" Padding="50, 25, 50, 5" Background="White" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Name="Title" Text="Kreirajte novi račun." HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="{StaticResource TitleFont}" Foreground="Green" FontSize="40"></TextBlock>
             </StackPanel>
@@ -120,7 +122,7 @@
             </StackPanel>
             <Button HorizontalAlignment="Center" VerticalAlignment="Center" Content="Registrujte se" Foreground="White" Background="Green" Width="200" Margin="0, 10, 0, 0" Command="{Binding Path=RegistracijaKorisnika}"></Button>
         </StackPanel>
-        <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Name="VerifikacijaPanel" Visibility="{Binding VerifikacijaPanelVisiblity}" Opacity="0.85">
+        <StackPanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Margin="50, 0, 0,0" Padding="30,30,30,30" Name="VerifikacijaPanel" Visibility="{Binding Path=VerifikacijaPanelVisiblity, Converter={StaticResource BoolToVis}, Mode=TwoWay}" Opacity="0.85">
         <StackPanel.Background>
             <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
                 <GradientStop Color="White" Offset="0.75"></GradientStop>

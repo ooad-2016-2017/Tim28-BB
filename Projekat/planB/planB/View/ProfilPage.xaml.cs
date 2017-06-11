@@ -31,7 +31,7 @@ namespace planB.View
         {
             this.InitializeComponent();
             frame = myFrame;
-            myFrame.Navigate(typeof(PregledObaveza));
+            myFrame.Navigate(typeof(PregledObaveza), new PregledObavezaViewModel());
             profilViewModel = new ProfilViewModel();
         }
 
@@ -67,6 +67,8 @@ namespace planB.View
 
         private void PrikaziMuzickuKolekciju(object sender, RoutedEventArgs e)
         {
+            myFrame.Visibility = Visibility.Visible;
+            myFrame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel());
             //KolekcijaUserControl.Visibility = Visibility.Visible;
             //DnevnikUserControl.Visibility = Visibility.Collapsed;
             //myFrame.Visibility = Visibility.Collapsed;

@@ -1,17 +1,12 @@
 ﻿using Microsoft.WindowsAzure.MobileServices;
 using planB.AzureModels;
 using planB.Models;
-using planB.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Navigation;
 
 namespace planB.ViewModel
 {
@@ -36,6 +31,7 @@ namespace planB.ViewModel
         public String UnosDnevnikaTextBox { get; set; }
         public List<StavkaDnevnika> lbxItems { get; set; }
         public String NaslovTextBox { get; set; }
+        public String NaslovText { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -48,12 +44,12 @@ namespace planB.ViewModel
             NaslovTextBox = "";
             DodajDnevnik = new RelayCommand<object>(dodajDnevnikStavku);
             stavka = null;
-            PregledVisibility = Visibility.Visible;
-            UnosVisibility = Visibility.Collapsed;
-            unos = Visibility.Collapsed;
-            pregled = Visibility.Visible;
-            UnosVisibility = Visibility.Collapsed;
-            PregledVisibility = Visibility.Visible;
+            PregledVisibility = true;
+            UnosVisibility = false;
+            unos = false;
+            pregled = true;
+            UnosVisibility = false;
+            PregledVisibility = true;
             UnosDnevnikaTextBox = "";
             lbxItems = new List<StavkaDnevnika>();
             vidljivost = Vidljivost.Nista;
@@ -100,7 +96,7 @@ namespace planB.ViewModel
                 await userTableObj.InsertAsync(stavka);
 
                 StavkaDnevnika sd = new StavkaDnevnika(0, DateTime.Now, UnosDnevnikaTextBox, vidljivost, NaslovTextBox, korisnik.idAzure);
-                sd.kreatorAzure = stavka.id;
+                sd.kreatorAzure = korisnik.idAzure; // M A I D DODAO
                 korisnik.Dnevnik.Add(sd);
                 DB.Dnevnik.Add(sd);
                 DB.SaveChanges();
@@ -112,8 +108,8 @@ namespace planB.ViewModel
                 TextDnevnika = sd.ToString();
                 String datum = sd.Datum.Date.ToString("dd.mm.yyyy.");
                 DatumText = datum;
-                PregledVisibility = Visibility.Visible;
-                UnosVisibility = Visibility.Collapsed;
+                PregledVisibility = true;
+                UnosVisibility = false;
                 javnoChecked = false;
                 privatnoChecked = false;
                 UnosDnevnikaTextBox = "";
@@ -121,23 +117,23 @@ namespace planB.ViewModel
             }
         }
 
-        private Visibility unos;
-        public Visibility UnosVisibility
+        private bool unos;
+        public bool UnosVisibility
         {
             get { return unos; }
             set
             {
                 unos = value;
-                if (unos == Visibility.Visible)
+                if (unos)
                 {
-                    PregledVisibility = Visibility.Collapsed;
+                    PregledVisibility = false;
                 }
                 NotifyPropertyChanged(nameof(UnosVisibility));
             }
         }
 
-        private Visibility pregled;
-        public Visibility PregledVisibility
+        private bool pregled;
+        public bool PregledVisibility
         {
             get { return pregled; }
             set
@@ -156,11 +152,15 @@ namespace planB.ViewModel
                 stavka = value;
                 if (stavka != null)
                 {
-                    TextDnevnika = stavka.ToString();
+                    TextDnevnika = stavka.Sadrzaj;
                     String datum = stavka.Datum.Date.ToString("dd.mm.yyyy.");
                     DatumText = datum;
-                    PregledVisibility = Visibility.Visible;
-                    UnosVisibility = Visibility.Collapsed;
+                    NaslovText = stavka.Naslov;
+                    PregledVisibility = true;
+                    UnosVisibility = false;
+                    NotifyPropertyChanged(nameof(TextDnevnika));
+                    NotifyPropertyChanged(nameof(DatumText));
+                    NotifyPropertyChanged(nameof(NaslovText));
                 }
                 NotifyPropertyChanged(nameof(PromjenaIndexa));
             }
@@ -176,8 +176,8 @@ namespace planB.ViewModel
 
         private void dodajDnevnikStavku(object obj)
         {
-            PregledVisibility = Visibility.Collapsed;
-            UnosVisibility = Visibility.Visible;
+            PregledVisibility = false;
+            UnosVisibility = true;
         }
         
         public bool privatnoChecked

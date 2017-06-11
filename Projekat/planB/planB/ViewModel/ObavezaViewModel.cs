@@ -106,7 +106,7 @@ namespace planB.ViewModel
                     await userTableObj.InsertAsync(obavezaAzure);
 
                     Obaveza obaveza = new Obaveza(0, datum, TextObaveze, vidljivost, int.Parse(sliderVrijednost), korisnik.idAzure);
-                    obaveza.kreatorAzure = obavezaAzure.id;
+                    obaveza.kreatorAzure = korisnik.idAzure; // M A I D DODAO
                     korisnik.Obaveze.Add(obaveza);
                     DB.Obaveze.Add(obaveza);
                     DB.SaveChanges();

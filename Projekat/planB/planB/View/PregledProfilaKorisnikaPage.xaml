@@ -53,9 +53,9 @@
         </VisualStateManager.VisualStateGroups>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Opacity="0.7" Padding="15, 15, 15, 15" Margin="20, 10, 20, 10" Grid.Row="0" >
             <Grid.Background>
@@ -73,7 +73,7 @@
                 <TextBlock Name="followingText" Text="Prati" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
                 <TextBlock Name="followingNumber" Text="{Binding FollowingNumber, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
             </StackPanel>
-            <Image Name="userPhoto" Grid.Column="1" Source="Assets/DefaultUser.png" ></Image>
+            <Image Name="userPhoto" Grid.Column="1" Source="/Assets/DefaultUser.png" ></Image>
             <StackPanel Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock Name="followersText" Text="Pratioci" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
                 <TextBlock Name="followersNumber" Text="{Binding FollowNumber, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" ></TextBlock>
@@ -88,7 +88,6 @@
             <Button Name="MsgButton" Command="{Binding Path=PosaljiPoruku, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="Poruka" Background="Green" Foreground="White" Opacity="0.75" Grid.Column="1" Margin="0,0,20,10"></Button>
         </Grid>
         <Grid Grid.Row="2" Margin="20, 0, 20, 20">
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -107,11 +106,12 @@
                 <Button Content="Muzička kolekcija" Grid.Column="3" Style="{StaticResource ButtonStyle}" Command="{Binding Path=PrikaziMuzickuKolekciju, Mode=TwoWay}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
             </Grid>
             <Frame Grid.Row="1" Name="myFrame" Margin="10,10,10,10"></Frame>
+            <Button Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Background="Green" Opacity="0.9" Foreground="White" Content="Nazad" Command="{Binding Path=VracanjeNazad}"></Button>
             <StackPanel Name="UnosPoruke" Background="White" Orientation="Vertical" Grid.Row="1" Margin="100,50,100,100" Opacity="0.85" Visibility="{Binding UnosPorukeVisibility, Converter={Binding BoolToVis}}">
                 <TextBox  Text="{Binding TekstPoruke, Mode=TwoWay}" TextWrapping="Wrap" BorderBrush="Green" Margin="40, 40, 40, 40" PlaceholderText="Unesite tekst poruke..."></TextBox>
                 <Button Background="Green" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Pošalji" Width="200" Command="{Binding ZavrsiSlanjePoruke, Mode=TwoWay}"></Button>
             </StackPanel>
-                <Grid Name="MenuMobile" Grid.Row="0" Background="White" Opacity="0.75" Grid.ColumnSpan="2" Margin="0,0,0,421.333" Grid.RowSpan="2">
+            <Grid Name="MenuMobile" Grid.Row="0" Background="White" Opacity="0.75" Grid.ColumnSpan="2" Margin="0,0,0,421.333" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -125,5 +125,4 @@
             </Grid>
         </Grid>
     </Grid>
-    
 </Page>

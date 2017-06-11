@@ -33,12 +33,11 @@ namespace planB.ViewModel
         public String Pretraga { get; set; }
         private ObservableCollection<Korisnik> rezultatiPretrage;
 
-        private Visibility vidljivost;
+        private bool vidljivost;
 
         public ProfilViewModel()
         {
-            DnevnikVisibility = Visibility.Collapsed;
-
+            DnevnikVisibility = false;
             korisnik = LoginViewModel.korisnik;
             Naziv = korisnik.Ime + " " + korisnik.Prezime;
 
@@ -51,7 +50,7 @@ namespace planB.ViewModel
             PrikaziPoruke = new RelayCommand<object>(prikaziPoruke);
         }
 
-        public Visibility DnevnikVisibility
+        public bool DnevnikVisibility
         {
             get { return vidljivost; }
             set
@@ -97,7 +96,7 @@ namespace planB.ViewModel
 
         private void prikaziMuzickuKolekciju(object parametar)
         {
-            ProfilPage.frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel());
+            //ProfilPage.frame.Navigate(typeof(MuzickaKolekcijaPage), new MuzickaKolekcijaViewModel());
         }
 
         private void prikaziLokaciju(object parametar)

@@ -5,10 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.UI.Xaml;
 
 namespace planB.ViewModel
 {
@@ -20,8 +17,8 @@ namespace planB.ViewModel
         public ObservableCollection<Stavka> Stavke { get; set; }
         public ObservableCollection<MuzickaKolekcija> Kolekcije { get; set; }
 
-        private Visibility stavkeVisibility;
-        private Visibility kolekcijeVisibility;
+        private Boolean stavkeVisibility;
+        private Boolean kolekcijeVisibility;
 
         public ICommand StavkeNovosti { get; set; }
         public ICommand KolekcijeNovosti { get; set; }
@@ -33,8 +30,8 @@ namespace planB.ViewModel
             TrenutniKorisnik = LoginViewModel.korisnik;
             Stavke = new ObservableCollection<Stavka>();
             Kolekcije = new ObservableCollection<MuzickaKolekcija>();
-            KolekcijeVisibility = Visibility.Collapsed;
-            StavkeVisibility = Visibility.Visible;
+            KolekcijeVisibility = false;
+            StavkeVisibility = true;
 
             povuciFollowDetalje();
             povuciStavke();
@@ -53,7 +50,7 @@ namespace planB.ViewModel
             }
         }
 
-        public Visibility StavkeVisibility
+        public Boolean StavkeVisibility
         {
             get { return stavkeVisibility; }
             set
@@ -63,7 +60,7 @@ namespace planB.ViewModel
             }
         }
 
-        public Visibility KolekcijeVisibility
+        public Boolean KolekcijeVisibility
         {
             get { return kolekcijeVisibility; }
             set
@@ -120,14 +117,14 @@ namespace planB.ViewModel
 
         private void prikaziStavke(object parametar)
         {
-            StavkeVisibility = Visibility.Visible;
-            KolekcijeVisibility = Visibility.Collapsed;
+            StavkeVisibility = true;
+            KolekcijeVisibility = false;
         }
 
         private void prikaziKolekcije(object parametar)
         {
-            StavkeVisibility = Visibility.Collapsed;
-            KolekcijeVisibility = Visibility.Visible;
+            StavkeVisibility = false;
+            KolekcijeVisibility = true;
         }
 
     }

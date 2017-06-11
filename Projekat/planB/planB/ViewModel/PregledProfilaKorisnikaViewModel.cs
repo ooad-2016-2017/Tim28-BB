@@ -11,6 +11,8 @@ using planB.View;
 using planB.DBModels;
 using Microsoft.WindowsAzure.MobileServices;
 using planB.AzureModels;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace planB.ViewModel
 {
@@ -29,6 +31,7 @@ namespace planB.ViewModel
         public ICommand PrikaziObaveze { get; set; }
         public ICommand PosaljiPoruku { get; set; }
         public ICommand ZavrsiSlanjePoruke { get; set; }
+        public ICommand VracanjeNazad { get; set; }
 
         private String followStatus;
         private int followNumber;
@@ -58,6 +61,7 @@ namespace planB.ViewModel
             PrikaziObaveze = new RelayCommand<object>(prikaziObaveze);
             PosaljiPoruku = new RelayCommand<object>(posaljiPoruku);
             ZavrsiSlanjePoruke = new RelayCommand<object>(zavrsiSlanje);
+            VracanjeNazad = new RelayCommand<object>(vratiNazad);
         }
 
         public Boolean UnosPorukeVisibility
@@ -175,9 +179,7 @@ namespace planB.ViewModel
                     Follow newFollow = new Follow();
                     newFollow.KorisnikID = TrenutniKorisnik.idAzure;
                     newFollow.Following_KorisnikID = OdabraniKorisnik.idAzure;
-                    //LoginViewModel.korisnik.FollowingList.Add(OdabraniKorisnik);
                     FollowStatus = "Pratim";
-                    //DB.Korisnici.Update(LoginViewModel.korisnik);
                     DB.Follow.Add(newFollow);
                     DB.SaveChanges();
                     Poruka = new MessageDialog("Korisnik uspješno zapraćen.\nSada možete zajedno planirati i dijeliti vašu omiljenu muziku. :)");
@@ -221,6 +223,11 @@ namespace planB.ViewModel
             PregledProfilaKorisnika.frame.Navigate(typeof(PregledObaveza), new PregledObavezaViewModel(OdabraniKorisnik.idAzure));
         }
 
+        private void vratiNazad(object parametar)
+        {
+            Frame currentFrame = Window.Current.Content as Frame;
+            currentFrame.Navigate(typeof(ProfilPage));
+        }
     }
 
 }
