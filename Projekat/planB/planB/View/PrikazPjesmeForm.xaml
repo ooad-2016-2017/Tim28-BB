@@ -40,7 +40,7 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Image Grid.Column="0" Source="/Assets/album.png" Margin="10"></Image>
+        <Image Grid.Column="0" Source="{Binding Slika}" Margin="10"></Image>
         <RelativePanel Grid.Column="1" Background="White" Visibility="{Binding PjesmaDetailsVisibility, Mode=TwoWay}">
             <TextBlock Name="nazivPjesme" Text="{Binding PjesmaDetails, Mode=TwoWay}" Margin="10" Foreground="Green" FontFamily="Segoe Print" FontSize="20" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" FontWeight="Bold"/>
             <Button Name="playButton" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Command="{Binding Path=PustiPjesmu, Mode=TwoWay}">

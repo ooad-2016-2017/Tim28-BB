@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -26,6 +27,7 @@ namespace planB.ViewModel
         private String searchingText;
         public ObservableCollection<Pjesma> rezultatPretrage { get; set; }
         private PretragaMuzike pretragaMuzike;
+        private LastFmPretraga lastFmPretraga;
 
         public Korisnik TrenutniKorisnik { get; set; }
 
@@ -42,6 +44,7 @@ namespace planB.ViewModel
             SearchingText = "";
             TrenutniKorisnik = LoginViewModel.korisnik;
             pretragaMuzike = new PretragaMuzike();
+            lastFmPretraga = new LastFmPretraga();
             rezultatPretrage = new ObservableCollection<Pjesma>();
             SearchingEnabled = true;
 
@@ -136,10 +139,18 @@ namespace planB.ViewModel
 
         public async void Search_Artist(String search)
         {
-            //SearchingText = search;
+            SearchingText = search;
             rezultatPretrage = new ObservableCollection<Pjesma>();
             SearchingResult rezultatWEBPretrage = new SearchingResult();
-            rezultatWEBPretrage = await pretragaMuzike.Search_Artists(SearchingText);
+            try
+            {
+                rezultatWEBPretrage = await lastFmPretraga.Search_Artists(SearchingText);
+            }
+            catch(Exception e)
+            {
+                Poruka = new MessageDialog(e.ToString());
+                await Poruka.ShowAsync();
+            }
 
             foreach(Track track in rezultatWEBPretrage.Tracks)
             {

@@ -5,12 +5,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace planB.ViewModel
 {
@@ -28,6 +32,7 @@ namespace planB.ViewModel
         public ICommand DodajUKolekciju { get; set; }
         public ICommand ZavrsiDodavanje { get; set; }
         public ICommand SelectionChanged { get; set; }
+        private ImageSource slika;
 
         private Visibility dodajVisiblity;
         private Visibility nazivKolekcijeVisibility;
@@ -43,12 +48,14 @@ namespace planB.ViewModel
         {
             pjesmaDetails = "";
             PustiPjesmu = new RelayCommand<object>(pustiPjesmu);
+            LoadImageAsync();
         }
 
         public PjesmaViewModel(Pjesma odabranaPjesma, Korisnik trenutniKorisnik, bool enabled = true)
         {
-            //IsEnabled = enabled;
             OdabranaPjesma = odabranaPjesma;
+            LoadImageAsync();
+            //IsEnabled = enabled;
             pjesmaDetails = odabranaPjesma.Izvodjac + " - " + odabranaPjesma.Naziv;
             TrenutniKorisnik = trenutniKorisnik;
             NazivNoveKolekcije = "";
@@ -66,6 +73,11 @@ namespace planB.ViewModel
             ZavrsiDodavanje = new RelayCommand<object>(zavrsiDodavanje);
         }
 
+        private async Task dajSliku()
+        {
+            await LoadImageAsync();
+        }
+
         public String PjesmaDetails
         {
             get { return pjesmaDetails; }
@@ -73,6 +85,16 @@ namespace planB.ViewModel
             {
                 pjesmaDetails = value;
                 NotifyPropertyChanged(nameof(PjesmaDetails));
+            }
+        }
+
+        public ImageSource Slika
+        {
+            get { return slika; }
+            set
+            {
+                slika = value;
+                NotifyPropertyChanged(nameof(Slika));
             }
         }
 
@@ -153,6 +175,27 @@ namespace planB.ViewModel
             NazivKolekcijeVisibility = Visibility.Collapsed;
             DodajVisibility = Visibility.Collapsed;
             PjesmaDetailsVisibility = Visibility.Visible;
-        }       
+        }
+
+        private async Task LoadImageAsync()
+        {
+            byte[] Poster = null;
+            HttpClient wClient = new HttpClient();
+            Poster = await wClient.GetByteArrayAsync(OdabranaPjesma.UrlSlike);
+            using (InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream())
+            {
+                // Writes the image byte array in an InMemoryRandomAccessStream
+                // that is needed to set the source of BitmapImage.
+                using (DataWriter writer = new DataWriter(ms.GetOutputStreamAt(0)))
+                {
+                    writer.WriteBytes(Poster);
+                    await writer.StoreAsync();
+                }
+
+                var image = new BitmapImage();
+                await image.SetSourceAsync(ms);
+                Slika = image;
+            }
+        }
     } 
 }
