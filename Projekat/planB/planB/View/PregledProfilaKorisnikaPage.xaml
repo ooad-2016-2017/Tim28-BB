@@ -102,7 +102,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="{Binding ImeIPrezime, Mode=TwoWay}" Grid.Column="0" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
                 <Button Content="Obaveze" Command="{Binding PrikaziObaveze, Mode=TwoWay}" Grid.Column="1" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
-                <Button Content="Blog" Grid.Column="2" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
+                <Button Content="Blog" Grid.Column="2" Style="{StaticResource ButtonStyle}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding Path=PrikaziDnevnik, Mode=TwoWay}"></Button>
                 <Button Content="Muzička kolekcija" Grid.Column="3" Style="{StaticResource ButtonStyle}" Command="{Binding Path=PrikaziMuzickuKolekciju, Mode=TwoWay}" FontSize="20" Background="{x:Null}" BorderBrush="{x:Null}"></Button>
             </Grid>
             <Frame Grid.Row="1" Name="myFrame" Margin="10,10,10,10"></Frame>

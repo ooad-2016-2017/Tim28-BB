@@ -32,7 +32,7 @@ namespace planB.View
         {
             //base.OnNavigatedTo(e);
 
-            DataContext = new DnevnikViewModel();
+            DataContext = e.Parameter as DnevnikViewModel;
         }
     }
 }

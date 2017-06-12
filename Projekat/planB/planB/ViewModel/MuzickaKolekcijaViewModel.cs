@@ -148,8 +148,8 @@ namespace planB.ViewModel
             }
             catch (Exception e)
             {
-                Poruka = new MessageDialog(e.ToString());
-                await Poruka.ShowAsync();
+                //Poruka = new MessageDialog(e.ToString());
+                //await Poruka.ShowAsync();
             }
 
             foreach (Track track in rezultatWEBPretrage.Tracks)

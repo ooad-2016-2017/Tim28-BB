@@ -3,6 +3,7 @@ using planB.AzureModels;
 using planB.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -10,7 +11,7 @@ using Windows.UI.Popups;
 
 namespace planB.ViewModel
 {
-    class DnevnikViewModel : INotifyPropertyChanged
+    public class DnevnikViewModel : INotifyPropertyChanged
     {
 
         IMobileServiceTable<StavkaDnevnikAzure> userTableObj = App.MobileService.GetTable<StavkaDnevnikAzure>();
@@ -33,30 +34,50 @@ namespace planB.ViewModel
         public String NaslovTextBox { get; set; }
         public String NaslovText { get; set; }
 
+        public ObservableCollection<StavkaDnevnika> Dnevnik { get; set; }
+
+        string id;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DnevnikViewModel()
+        public DnevnikViewModel(string id = "")
         {
+            this.id = id;
             korisnik = LoginViewModel.korisnik;
             lbxDnevnik = korisnik.Dnevnik;
             DatumText = "";
             TextDnevnika = "";
             NaslovTextBox = "";
-            DodajDnevnik = new RelayCommand<object>(dodajDnevnikStavku);
+            
             stavka = null;
             PregledVisibility = true;
             UnosVisibility = false;
-            unos = false;
-            pregled = true;
-            UnosVisibility = false;
-            PregledVisibility = true;
             UnosDnevnikaTextBox = "";
             lbxItems = new List<StavkaDnevnika>();
+            lbxDnevnik = new List<StavkaDnevnika>();
             vidljivost = Vidljivost.Nista;
 
             AddButtonClicked = new RelayCommand<object>(addButtonClicked);
-            for (int i = 0; i < korisnik.Dnevnik.Count(); i++)
-                lbxItems.Add(korisnik.Dnevnik[i]);
+            if (id == "")
+            {
+                korisnik = LoginViewModel.korisnik;
+                DodajDnevnik = new RelayCommand<object>(dodajDnevnikStavku);
+            }
+            else
+            {
+                using (var DB = new PlanBDbContext())
+                {
+                    korisnik = DB.Korisnici.Where(x => (x.idAzure == id)).FirstOrDefault();
+                    //korisnik.Obaveze = DB.Obaveze.Where(x => (x.KreatorID == id)).ToList();
+                    foreach (StavkaDnevnika sd in DB.Dnevnik)
+                        if (sd.kreatorAzure == id)
+                            korisnik.Dnevnik.Add(sd);
+                }
+            }
+            Dnevnik = new ObservableCollection<StavkaDnevnika>();
+            popuniListu();
+            //Dnevnik = new ObservableCollection<StavkaDnevnika>(lbxDnevnik);
+            
         }
 
         private async void addButtonClicked(object obj)
@@ -202,6 +223,29 @@ namespace planB.ViewModel
                 else vidljivost = Vidljivost.Nista;
                 NotifyPropertyChanged(nameof(javnoChecked));
             }
+        }
+
+        private void popuniListu()
+        {
+            //String d2 = ((datum.Day <= 9) ? "0" : "") + datum.Day.ToString() + "." + ((datum.Month <= 9) ? "0" : "") + datum.Month.ToString() + "." + datum.Year.ToString() + ".";
+
+            foreach (StavkaDnevnika sd in korisnik.Dnevnik.ToList())
+            {
+               // String d1 = ((o.Datum.Day <= 9) ? "0" : "") + o.Datum.Day.ToString() + "." + ((o.Datum.Month <= 9) ? "0" : "") + o.Datum.Month.ToString() + "." + o.Datum.Year.ToString() + ".";
+
+                if (sd.Vidljivost == Vidljivost.Javno && !lbxDnevnik.Contains(sd) /*&& d1 == d2*/)
+                {
+                    lbxDnevnik.Add(sd);
+                }
+                else
+                {
+                    if (id == "" && !lbxDnevnik.Contains(sd)/*&& d1 == d2*/)
+                    {
+                        lbxDnevnik.Add(sd);
+                    }
+                }
+            }
+            Dnevnik = new ObservableCollection<StavkaDnevnika>(lbxDnevnik);
         }
 
     }

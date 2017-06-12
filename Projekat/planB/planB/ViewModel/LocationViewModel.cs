@@ -96,7 +96,7 @@ namespace planB.ViewModel
         {
             MapaVisibility = true;
             AdresaVisibility = true;
-            ShareVisibility = true;
+            //ShareVisibility = true;
             Geoposition pos = null;
             
             var accessStatus = await Geolocator.RequestAccessAsync();

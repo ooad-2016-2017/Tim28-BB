@@ -99,7 +99,7 @@
                     <Image Source="/Assets/note1.png" Height="20" Margin="3,0,0,0"></Image>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="4" Content="Dnevnik" Command="{Binding Path=PrikaziDnevnik, Mode=TwoWay}" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
+            <Button Grid.Row="4" Content="Dnevnik" Click="PrikaziDnevnik" FontSize="20" Name="DnevnikButton" FontFamily="Calibri"  Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
             <Button Grid.Row="5" Content="Lokacija" Command="{Binding Path=PrikaziLokaciju, Mode=TwoWay}" FontSize="20" FontFamily="Calibri" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9"></Button>
             <Button Grid.Row="6" Command="{Binding Path=PrikaziPoruke, Mode=TwoWay}" FontSize="20" FontFamily="Calibri" Foreground="White" HorizontalAlignment="Stretch" Margin="40,0,40,0" Background="Green" Opacity="0.9">
                 <StackPanel Orientation="Horizontal">
@@ -118,11 +118,11 @@
                 <RowDefinition Height="7*"></RowDefinition>
             </Grid.RowDefinitions>
             <RelativePanel Grid.Row="0" Background="WhiteSmoke" Opacity="0.75" Margin="10">
-                <Button Content="Pratim" Name="PratimButton" Margin="10" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
+                <Button Visibility="Collapsed" Content="Pratim" Name="PratimButton" Margin="10" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
                 <Button Name="postavkeButton" Click="PrikaziPostavke" Margin="0,0,5,0" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True">
                     <Image Source="/Assets/sett2.png" Height="30" Width="30"></Image>
                 </Button>
-                <Button Content="Pratioci"  Name="PratiociButton" Margin="10" RelativePanel.RightOf="PratimButton" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
+                <Button Visibility="Collapsed" Content="Pratioci"  Name="PratiociButton" Margin="10" RelativePanel.RightOf="PratimButton" FontFamily="Calibri" FontSize="20" Foreground="White" Background="Green" Opacity="0.9"></Button>
                 <TextBlock Name="imeTbx" Text="{Binding Naziv, Mode=TwoWay, FallbackValue=Ime Prezime}" Margin="10,10,10,10"  IsTextSelectionEnabled="True" RelativePanel.AlignVerticalCenterWithPanel="True" Foreground="Green" FontFamily="/Assets/Fonts/Handlee-Regular.ttf#Handlee" FontSize="20" FontStyle="Italic" FontWeight="Bold" RelativePanel.LeftOf="postavkeButton"></TextBlock>
             </RelativePanel>
             <Grid Grid.Row="1" Margin="10,10,10,10">

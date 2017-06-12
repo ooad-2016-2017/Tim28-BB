@@ -32,6 +32,7 @@ namespace planB.ViewModel
         public ICommand PosaljiPoruku { get; set; }
         public ICommand ZavrsiSlanjePoruke { get; set; }
         public ICommand VracanjeNazad { get; set; }
+        public ICommand PrikaziDnevnik { get; set; }
 
         private String followStatus;
         private int followNumber;
@@ -62,6 +63,7 @@ namespace planB.ViewModel
             PosaljiPoruku = new RelayCommand<object>(posaljiPoruku);
             ZavrsiSlanjePoruke = new RelayCommand<object>(zavrsiSlanje);
             VracanjeNazad = new RelayCommand<object>(vratiNazad);
+            PrikaziDnevnik = new RelayCommand<object>(prikaziDnevnik);
         }
 
         public Boolean UnosPorukeVisibility
@@ -221,6 +223,11 @@ namespace planB.ViewModel
         private void prikaziObaveze(object parametar)
         {
             PregledProfilaKorisnika.frame.Navigate(typeof(PregledObaveza), new PregledObavezaViewModel(OdabraniKorisnik.idAzure));
+        }
+
+        private void prikaziDnevnik(object parametar)
+        {
+            PregledProfilaKorisnika.frame.Navigate(typeof(DnevnikPage), new DnevnikViewModel(OdabraniKorisnik.idAzure));
         }
 
         private void vratiNazad(object parametar)

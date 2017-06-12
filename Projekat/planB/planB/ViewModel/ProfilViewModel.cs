@@ -82,7 +82,7 @@ namespace planB.ViewModel
 
         private void prikaziDnevnik(object obj)
         {
-            ProfilPage.frame.Navigate(typeof(DnevnikPage));
+            //ProfilPage.frame.Navigate(typeof(DnevnikPage));
         }
 
 

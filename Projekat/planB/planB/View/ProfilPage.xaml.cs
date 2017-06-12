@@ -44,13 +44,13 @@ namespace planB.View
         private void PrikaziDnevnik(object sender, RoutedEventArgs e)
         {
             myFrame.Visibility = Visibility.Visible;
-            myFrame.Navigate(typeof(DnevnikPage));
+            myFrame.Navigate(typeof(DnevnikPage), new DnevnikViewModel());
         }
 
         private void PrikaziProfil(object sender, RoutedEventArgs e)
         {
             myFrame.Visibility = Visibility.Visible;
-            myFrame.Navigate(typeof(PregledObaveza));
+            myFrame.Navigate(typeof(PregledObaveza), new PregledObavezaViewModel());
         }
 
         private void PrikaziPostavke(object sender, RoutedEventArgs e)
