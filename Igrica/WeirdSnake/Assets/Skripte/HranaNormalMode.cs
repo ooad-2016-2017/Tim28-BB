@@ -38,10 +38,9 @@ public class HranaNormalMode : MonoBehaviour, IUpravljanjeHranom
 
     public void dajNovu()
     {
-        Sprite sp = Resources.Load<Sprite>("checkicon");
+        Sprite sp = Resources.Load<Sprite>("noteAsFood");
         hrana = new GameObject();
         hrana.tag = "HranaObicna";
-        hrana.layer = 1;
         hrana.AddComponent<SpriteRenderer>();
         hrana.GetComponent<SpriteRenderer>().sprite = sp;
         
@@ -49,13 +48,23 @@ public class HranaNormalMode : MonoBehaviour, IUpravljanjeHranom
         while (true)
         {
             x = Random.Range(1, 31);
-            y = Random.Range(-15, 0);
+            y = Random.Range(-15, -2);
             Debug.Log(x.ToString() + " " + y.ToString());
             break;
             
         }
         hrana.transform.position = new Vector3(x, y, 0);
         Instantiate(hrana, new Vector3(x, y, 0), Quaternion.identity);
+       /* int x, y;
+        while (true)
+        {
+            x = Random.Range(1, 31);
+            y = Random.Range(-15, 15);
+            break;
+        }
+        hrana.transform.position = new Vector3(x, y, 0);
+
+        Instantiate(hrana, new Vector3(x, y, 0), Quaternion.identity);*/
     }
 
     public void pojedi()

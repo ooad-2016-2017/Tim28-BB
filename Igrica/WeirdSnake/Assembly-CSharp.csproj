@@ -52,6 +52,7 @@
      <Compile Include="Assets\Skripte\IPokret.cs" />
      <Compile Include="Assets\Skripte\ISudar.cs" />
      <Compile Include="Assets\Skripte\IUpravljanjeHranom.cs" />
+     <Compile Include="Assets\Skripte\KrajIgreSkripta.cs" />
      <Compile Include="Assets\Skripte\MenuSkripta.cs" />
      <Compile Include="Assets\Skripte\Rezultat.cs" />
      <Compile Include="Assets\Skripte\ZmijaNormalMode.cs" />

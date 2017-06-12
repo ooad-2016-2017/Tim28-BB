@@ -95,10 +95,11 @@ public class ZmijaWeirdMode : MonoBehaviour, IHrana, IPokret, ISudar
         }
         else
         {
-            if (dijeloviZmije.Count == 0 && glavaZmije.transform.position.x == -40)
+            /*if (dijeloviZmije.Count == 0 && glavaZmije.transform.position.x == -40)
                 FindObjectOfType<Rezultat>().Text.text = "Č E S T I T A M O";
             else
-                FindObjectOfType<Rezultat>().Text.text = "KRAJ IGRE!";
+                FindObjectOfType<Rezultat>().Text.text = "KRAJ IGRE!";*/
+            FindObjectOfType<Rezultat>().displayMenu();
         }
     }
 
@@ -127,7 +128,8 @@ public class ZmijaWeirdMode : MonoBehaviour, IHrana, IPokret, ISudar
         else if (FindObjectOfType<Rezultat>().rezultat > 60) FindObjectOfType<HranaWeirdMode>().dajMinus();
         else FindObjectOfType<HranaWeirdMode>().dajNovu();
 
-        FindObjectOfType<Rezultat>().Text.text = "Obaveze: " + ++FindObjectOfType<Rezultat>().rezultat;
+        // FindObjectOfType<Rezultat>().Text.text = "Obaveze: " + ++FindObjectOfType<Rezultat>().rezultat;
+        FindObjectOfType<Rezultat>().rezultat++;
     }
 
     public void uzmiMinus()

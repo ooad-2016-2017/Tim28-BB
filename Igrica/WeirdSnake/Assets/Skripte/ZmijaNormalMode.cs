@@ -93,7 +93,10 @@ public class ZmijaNormalMode : MonoBehaviour, IHrana, IPokret, ISudar
             }
         }
         else
-            FindObjectOfType<Rezultat>().Text.text = "KRAJ IGRE!";
+        {
+            //FindObjectOfType<Rezultat>().Text.text = "KRAJ IGRE!";
+            FindObjectOfType<Rezultat>().displayMenu();
+        }
     }
 
     public void pomjeriTijeloZmije()
