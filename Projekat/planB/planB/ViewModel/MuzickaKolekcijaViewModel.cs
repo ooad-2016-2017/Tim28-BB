@@ -151,6 +151,10 @@ namespace planB.ViewModel
                 //Poruka = new MessageDialog(e.ToString());
                 //await Poruka.ShowAsync();
             }
+            finally
+            {
+
+            }
 
             foreach (Track track in rezultatWEBPretrage.Tracks)
             {

@@ -1,4 +1,6 @@
-﻿using planB.Models;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using planB.AzureModels;
+using planB.Models;
 using planB.View;
 using System;
 using System.Collections.Generic;
@@ -104,8 +106,30 @@ namespace planB.ViewModel
             ProfilPage.frame.Navigate(typeof(LocationPage));
         }
 
-        private void prikaziPoruke(object parametar)
+        private async void prikaziPoruke(object parametar)
         {
+            using (var DB = new PlanBDbContext())
+            {
+                IMobileServiceTable<PorukaAzure> porukeAzure = App.MobileService.GetTable<PorukaAzure>();
+                int broj = DB.Poruke.Count();
+                List<PorukaAzure> listaPoruke = await porukeAzure.Where(x => x.redniBroj > 0).ToListAsync();
+                if (broj < listaPoruke.Count)
+                {
+                    listaPoruke = await porukeAzure.Where(x => x.redniBroj > broj).ToListAsync();
+
+                    foreach (PorukaAzure o in listaPoruke)
+                    {
+
+                        using (var DB1 = new PlanBDbContext())
+                        {
+                            Poruka poruka = new Poruka(o.tekst, o.datumSlanja, o.posiljaocID, o.primaocID, o.dajStatus());
+                            poruka.idAzure = o.id;
+                            DB1.Poruke.Add(poruka);
+                            DB1.SaveChanges();
+                        }
+                    }
+                }
+            }
             ProfilPage.frame.Navigate(typeof(PorukaPage));
         }
 
@@ -126,8 +150,8 @@ namespace planB.ViewModel
             RezultatiPretrage = new ObservableCollection<Korisnik>(korisnici);
             if (rezultatiPretrage.Count == 0)
             {
-                Poruka = new MessageDialog("Ne postoji korisnik sa unesenim podacima.");
-                await Poruka.ShowAsync();
+                //Poruka = new MessageDialog("Ne postoji korisnik sa unesenim podacima.");
+                //await Poruka.ShowAsync();
             }
         }
 

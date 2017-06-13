@@ -114,6 +114,9 @@ namespace planB.ViewModel
                 stavka.naslov = NaslovTextBox;
                 stavka.sadrzaj = UnosDnevnikaTextBox;
                 stavka.postaviVidljivost(vidljivost);
+                IMobileServiceTable<StavkaDnevnikAzure> azureObaveze = App.MobileService.GetTable<StavkaDnevnikAzure>();
+                List<StavkaDnevnikAzure> listaAzure = await azureObaveze.Where(x => x.id != "").ToListAsync();
+                stavka.redniBroj = listaAzure.Count + 1;
                 await userTableObj.InsertAsync(stavka);
 
                 StavkaDnevnika sd = new StavkaDnevnika(0, DateTime.Now, UnosDnevnikaTextBox, vidljivost, NaslovTextBox, korisnik.idAzure);
